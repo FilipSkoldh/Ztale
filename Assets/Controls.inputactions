@@ -2,11 +2,11 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "New action map",
+            "name": "char",
             "id": "a10c9822-6344-4ffd-8e6b-a39203efa776",
             "actions": [
                 {
-                    "name": "WASD",
+                    "name": "move",
                     "type": "Value",
                     "id": "6e9de3bf-edc0-46f3-ae71-f6431a4b8a41",
                     "expectedControlType": "Vector2",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shift",
+                    "name": "sprint",
                     "type": "Button",
                     "id": "19a5dcb0-32a5-4663-9b07-589bfb58e40e",
                     "expectedControlType": "Button",
@@ -24,16 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Q",
-                    "type": "Button",
-                    "id": "49f2f79a-8f8e-4a40-8550-9814e52a5283",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CTRL",
+                    "name": "crouch",
                     "type": "Button",
                     "id": "5c6c84fe-fa62-461e-bca1-1b4fe49d368e",
                     "expectedControlType": "Button",
@@ -104,7 +95,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -115,7 +106,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -126,7 +117,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -137,7 +128,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -148,7 +139,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -159,7 +150,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -170,7 +161,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -181,7 +172,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -192,7 +183,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -203,7 +194,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -214,7 +205,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -225,18 +216,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c3283c3a-d169-4fe6-b5ea-27a8f8999f96",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Q",
+                    "action": "sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -247,7 +227,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CTRL",
+                    "action": "crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
