@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 346056813}
   - component: {fileID: 346056812}
   - component: {fileID: 346056814}
+  - component: {fileID: 346056815}
   m_Layer: 7
   m_Name: player
   m_TagString: Untagged
@@ -593,6 +594,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  speed: 2
+--- !u!114 &346056815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346056804}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4cbd535a028904493dee39f3e52c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  speed: 2
 --- !u!1 &353184233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1489,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 346056814}
+      - m_Target: {fileID: 346056815}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
