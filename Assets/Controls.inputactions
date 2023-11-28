@@ -2,11 +2,11 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "New action map",
+            "name": "char",
             "id": "a10c9822-6344-4ffd-8e6b-a39203efa776",
             "actions": [
                 {
-                    "name": "WASD",
+                    "name": "move",
                     "type": "Value",
                     "id": "6e9de3bf-edc0-46f3-ae71-f6431a4b8a41",
                     "expectedControlType": "Vector2",
@@ -104,7 +104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -115,7 +115,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -126,7 +126,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -137,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -148,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -159,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -170,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -181,7 +181,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -192,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -203,7 +203,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
