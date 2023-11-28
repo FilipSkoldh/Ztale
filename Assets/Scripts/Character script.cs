@@ -8,7 +8,8 @@ public class Characterscript : MonoBehaviour
     ///Declaring shit
     public float speed = 1;
     public float sprint = 0;
-    public float stamina = ;
+    public float stamina = 10;
+    public float staminacooldown = 1;
     public InputActionAsset actions;
     private InputAction moveaction;
     private InputAction sprintaction;
@@ -37,7 +38,7 @@ public class Characterscript : MonoBehaviour
     {
         Vector2 movevector = moveaction.ReadValue<Vector2>();
         sprint = sprintaction.ReadValue<float>();
-        if (sprint > 0)
+        if (sprint > 0 && stamina > 0 && staminacooldown <= 0)
         {
             speed = 2;
             stamina = stamina - Time.deltaTime * 1;
@@ -45,8 +46,16 @@ public class Characterscript : MonoBehaviour
         else
         {
             speed = 1;
+            if (staminacooldown > 0)
+            {
+                staminacooldown = staminacooldown - Time.deltaTime * 1;
+            }
+            else if (stamina < 10)
+            {
+                stamina = stamina + Time.deltaTime * 1.5f;
+            }
         }
-        Debug.Log(movevector);
+        Debug.Log(stamina);
         rb.velocity = movevector * speed;
     }
 }
