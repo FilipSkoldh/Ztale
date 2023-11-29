@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,9 @@ public class shooting : MonoBehaviour
     private CircleCollider2D cc;
     private Transform t;
     public float speed;
+    private RaycastHit2D[] hits;
+    private SpriteRenderer sr;
+    private Transform hitT;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +51,20 @@ public class shooting : MonoBehaviour
 
         if (shot)
         {
+            hits = Physics2D.CircleCastAll(t.position, 0.02f, Vector2.zero, 0, 256);
+            int sorrtingOrder = -10;
 
+            foreach (RaycastHit2D i in hits)
+            {
+
+                if (i.transform == null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                {
+                    sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                    hitT = i.transform;
+
+                }
+            }
+            hitT.GetComponent<enemyLife>().hit(1);
         }
     }
 }
