@@ -46,25 +46,29 @@ public class shooting : MonoBehaviour
     {
         Vector2 movement = move.ReadValue<Vector2>();
         bool shot = shoot.WasPressedThisFrame();
-        Debug.Log(movement);
         rb.velocity = movement * speed;
 
         if (shot)
         {
+            Debug.Log("shot");
             hits = Physics2D.CircleCastAll(t.position, 0.02f, Vector2.zero, 0, 256);
             int sorrtingOrder = -10;
 
             foreach (RaycastHit2D i in hits)
             {
-
-                if (i.transform == null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
                 {
                     sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
                     hitT = i.transform;
 
                 }
             }
-            hitT.GetComponent<enemyLife>().hit(1);
+            if (hitT != null)
+            {
+                hitT.GetComponent<enemyLife>().hit(1);
+
+            }
+
         }
     }
 }

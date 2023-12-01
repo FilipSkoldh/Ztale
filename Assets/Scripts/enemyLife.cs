@@ -6,16 +6,10 @@ using UnityEngine;
 public class enemyLife : MonoBehaviour
 {
     public int HP;
-    public string scriptName;
-    public Type type;
+    public String playerAction = "";
 
-    public void Awake()
-    {
-        type = Type.GetType(scriptName);
-    }
     public void hit(int damage)
     {
-        HP -= damage;
-        type.hit();
+        playerAction = "HIT" + damage;
     }
 }
