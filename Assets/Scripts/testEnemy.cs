@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class testEnemy : MonoBehaviour
 {
     public enemyLife el;
     int damage = 0;
+    public TextMeshProUGUI text;
 
     public void Start()
     {
@@ -15,10 +17,20 @@ public class testEnemy : MonoBehaviour
 
     public void Update()
     {
-        if (el.playerAction.Contains("HIT"))
+        if (el.playerAction != "")
         {
-            string temp = el.playerAction.Remove(0, 3);
-            damage.Parse(temp);
+            if (el.playerAction.Contains("HIT"))
+            {
+                string temp = el.playerAction.Remove(0, 3);
+                damage = int.Parse(temp);
+                Debug.Log(damage);
+
+                el.playerAction = "";
+            }
+            GameObject tempO = text.transform.parent.gameObject;
+            tempO.SetActive(true);
+
+            
         }
     }
 }
