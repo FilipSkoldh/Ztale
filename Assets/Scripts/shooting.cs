@@ -16,6 +16,7 @@ public class shooting : MonoBehaviour
     private RaycastHit2D[] hits;
     private SpriteRenderer sr;
     private Transform hitT;
+    public Transform enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -65,8 +66,12 @@ public class shooting : MonoBehaviour
             }
             if (hitT != null)
             {
-                hitT.GetComponent<enemyLife>().hit(1);
+                enemies.GetChild(0).GetComponent<enemyLife>().hit(1);
 
+            }
+            else
+            {
+                enemies.GetChild(0).GetComponent<enemyLife>().MISS();
             }
 
         }

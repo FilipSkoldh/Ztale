@@ -12,4 +12,8 @@ public class enemyLife : MonoBehaviour
     {
         playerAction = "HIT" + damage;
     }
+    public void MISS()
+    {
+        playerAction = "MISS";
+    }
 }
