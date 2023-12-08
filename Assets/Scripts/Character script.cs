@@ -88,7 +88,6 @@ public class Characterscript : MonoBehaviour
                 stamina = stamina + Time.deltaTime * 1.5f;
             }
         }
-        Debug.Log(speed);   
         rb.velocity = movevector * speed;
     }
 }
