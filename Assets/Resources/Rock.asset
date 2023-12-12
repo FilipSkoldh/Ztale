@@ -14,14 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NodeLinks:
   - BaseNodeGUID: e899292b-f55a-4ea0-917c-389d248e0614
-    PortName: 
+    PortName: Option 1
     TargetNodeGUID: 9e10eba0-23e3-419e-a186-915bb1041aa7
+  - BaseNodeGUID: e899292b-f55a-4ea0-917c-389d248e0614
+    PortName: Option 2
+    TargetNodeGUID: b461dd9a-befa-421c-9751-398351e8ea5b
   DialogueNodeData:
+  - NodeGUID: b461dd9a-befa-421c-9751-398351e8ea5b
+    DialogueText: Hi i'm choice 2
+    Position: {x: 788, y: 305}
   - NodeGUID: e899292b-f55a-4ea0-917c-389d248e0614
     DialogueText: Hi i'm a Rock
-    Position: {x: 467, y: 246}
+    Position: {x: 385, y: 243}
   - NodeGUID: 9e10eba0-23e3-419e-a186-915bb1041aa7
     DialogueText: Please don't destroy me
-    Position: {x: 932, y: 242}
+    Position: {x: 749, y: 124}
   ExposedProperties: []
   CommentBlockData: []
