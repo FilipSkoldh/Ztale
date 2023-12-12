@@ -16,6 +16,11 @@ public class testEnemy : MonoBehaviour
     private InputAction interact;
     bool interacting = true;
     public shooting shootin;
+    public bullet_hell_controller hell;
+    public Transform player;
+    public GameObject bullet;
+    int attack1 = 10;
+    float time = 0.25f;
     private void OnEnable()
     {
         actions.FindActionMap("char").Enable();
@@ -29,10 +34,13 @@ public class testEnemy : MonoBehaviour
     public void Start()
     {
         el = GetComponent<enemyLife>();
+
     }
 
     public void Update()
     {
+        GameObject tempO = text.transform.parent.gameObject;
+
         interacting = interact.WasPressedThisFrame();
         if (el.playerAction != "")
         {
@@ -41,7 +49,7 @@ public class testEnemy : MonoBehaviour
             {
                 string temp = el.playerAction.Remove(0, 3);
                 damage = int.Parse(temp);
-                Debug.Log(damage);
+
                 responce = "HA! That didn't even tickle!";
             }
             else if (el.playerAction.Contains("MISS"))
@@ -50,18 +58,37 @@ public class testEnemy : MonoBehaviour
             }
             el.playerAction = "";
             shootin.enabled = false;
-            GameObject tempO = text.transform.parent.gameObject;
+
             tempO.SetActive(true);
             text.text = responce;
-            StartCoroutine(Cupdate());
-            Debug.Log("works");
 
 
         }
-    }
-    IEnumerator Cupdate()
-    {
 
-        yield return new WaitUntil(() => interacting);
+
+
+        if (interacting && tempO.activeSelf)
+        { 
+            tempO.SetActive(false);
+            attack1 = 0;
+            hell.enabled = true;
+            player.position = new Vector3(0,-1,0);
+
+        }
+
+        if (attack1 < 10)
+        {
+            if (time < 0) 
+            { 
+                time = 0.25f;
+                Instantiate(bullet, new Vector3(Random.Range(-1f, 1f), -0.1f, 0), new Quaternion(0, 0, 0, 0));
+                attack1++;
+            }
+            else
+            {
+                time -= Time.deltaTime;
+            }
+        }
     }
+
 }

@@ -13335,6 +13335,9 @@ MonoBehaviour:
   text: {fileID: 542916037}
   actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   shootin: {fileID: 346056815}
+  hell: {fileID: 346056814}
+  player: {fileID: 346056806}
+  bullet: {fileID: 2914743265036966539, guid: e9e940d9269c8854093c4c0395cd5f5e, type: 3}
 --- !u!1 &1936672013
 GameObject:
   m_ObjectHideFlags: 0
