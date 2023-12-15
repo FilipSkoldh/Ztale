@@ -19,7 +19,9 @@ public class testEnemy : MonoBehaviour
     public bullet_hell_controller hell;
     public Transform player;
     public GameObject bullet;
+    public box box;
     int attack1 = 10;
+    bool battack1 = false;
     float time = 0.25f;
     private void OnEnable()
     {
@@ -70,23 +72,36 @@ public class testEnemy : MonoBehaviour
         if (interacting && tempO.activeSelf)
         { 
             tempO.SetActive(false);
+            box.height = 2;
+            box.width = 2;
             attack1 = 0;
             hell.enabled = true;
             player.position = new Vector3(0,-1,0);
 
         }
 
-        if (attack1 < 10)
+        if (battack1)
         {
-            if (time < 0) 
-            { 
-                time = 0.25f;
-                Instantiate(bullet, new Vector3(Random.Range(-1f, 1f), -0.1f, 0), new Quaternion(0, 0, 0, 0));
-                attack1++;
+            if (attack1 < 10)
+            {
+                if (time < 0)
+                {
+                    time = 0.25f;
+                    Instantiate(bullet, new Vector3(Random.Range(-1f, 1f), -0.1f, 0), new Quaternion(0, 0, 0, 0));
+                    attack1++;
+                    if (attack1 > 9)
+                    {
+                        time = 2;
+                    }
+                }
+                else
+                {
+                    time -= Time.deltaTime;
+                }
             }
             else
             {
-                time -= Time.deltaTime;
+
             }
         }
     }
