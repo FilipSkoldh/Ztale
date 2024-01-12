@@ -10,7 +10,8 @@ public class enemyLife : MonoBehaviour
 
     public void hit(int damage)
     {
-        playerAction = "HIT" + damage;
+        HP -= damage;
+        playerAction = "HIT";
     }
     public void MISS()
     {

@@ -6,17 +6,20 @@ using UnityEngine.InputSystem;
 
 public class shooting : MonoBehaviour
 {
-    public InputActionAsset actions;
-    private InputAction move;
-    private InputAction shoot;
+    public InputActionProperty move;
+    public InputActionProperty shoot;
+
+    public Transform enemies;
+
     private Rigidbody2D rb;
     private CircleCollider2D cc;
     private Transform t;
+
     public float speed;
+
     private RaycastHit2D[] hits;
     private SpriteRenderer sr;
     private Transform hitT;
-    public Transform enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -26,16 +29,10 @@ public class shooting : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        actions.FindActionMap("char").Enable();
-    }
 
 
     private void Awake()
     {
-        move = actions.FindActionMap("char").FindAction("move");
-        shoot = actions.FindActionMap("char").FindAction("interact");
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         t = GetComponent<Transform>();
@@ -45,8 +42,8 @@ public class shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = move.ReadValue<Vector2>();
-        bool shot = shoot.WasPressedThisFrame();
+        Vector2 movement = move.action.ReadValue<Vector2>();
+        bool shot = shoot.action.WasPressedThisFrame();
         rb.velocity = movement * speed;
 
         if (shot)
@@ -66,12 +63,23 @@ public class shooting : MonoBehaviour
             }
             if (hitT != null)
             {
-                enemies.GetChild(0).GetComponent<enemyLife>().hit(1);
+                hitT.GetComponent<enemyLife>().hit(1);
+
+                for (int i = 0; i < enemies.childCount; i++)
+                {
+                    if (enemies.GetChild(i) != hitT)
+                    {
+                        enemies.GetChild(i).GetComponent<enemyLife>().MISS();
+                    }
+                }
 
             }
             else
             {
-                enemies.GetChild(0).GetComponent<enemyLife>().MISS();
+                for (int i = 0; i < enemies.childCount; i++)
+                {
+                    enemies.GetChild(i).GetComponent<enemyLife>().MISS();
+                }
             }
 
         }

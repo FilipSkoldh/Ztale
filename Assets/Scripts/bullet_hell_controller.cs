@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 
 public class bullet_hell_controller : MonoBehaviour
 {
-    public InputActionAsset actions;
-    private InputAction move;
+    public InputActionProperty move;
     private Rigidbody2D rb;
     private CircleCollider2D cc;
     private Transform t;
@@ -20,15 +19,9 @@ public class bullet_hell_controller : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        actions.FindActionMap("char").Enable();
-    }
-
 
     private void Awake()
     {
-        move = actions.FindActionMap("char").FindAction("move");
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         t = GetComponent<Transform>();
@@ -38,7 +31,7 @@ public class bullet_hell_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = move.ReadValue<Vector2>();
+        Vector2 movement = move.action.ReadValue<Vector2>();
         Debug.Log(movement);
         rb.velocity = movement * speed;
     }

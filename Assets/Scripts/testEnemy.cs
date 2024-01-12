@@ -12,26 +12,19 @@ public class testEnemy : MonoBehaviour
     int damage = 0;
     public TextMeshProUGUI text;
     string responce = "";
-    public InputActionAsset actions;
-    private InputAction interact;
+    public InputActionProperty interact;
     bool interacting = true;
     public shooting shootin;
     public bullet_hell_controller hell;
     public Transform player;
     public GameObject bullet;
     public box box;
+
+
     int attack1 = 10;
     bool battack1 = false;
     float time = 0.25f;
-    private void OnEnable()
-    {
-        actions.FindActionMap("char").Enable();
-    }
 
-    private void Awake()
-    {
-        interact = actions.FindActionMap("char").FindAction("interact");
-    }
 
     public void Start()
     {
@@ -43,15 +36,12 @@ public class testEnemy : MonoBehaviour
     {
         GameObject tempO = text.transform.parent.gameObject;
 
-        interacting = interact.WasPressedThisFrame();
+        interacting = interact.action.WasPressedThisFrame();
         if (el.playerAction != "")
         {
             Debug.Log("sees");
-            if (el.playerAction.Contains("HIT"))
+            if (el.playerAction == "HIT")
             {
-                string temp = el.playerAction.Remove(0, 3);
-                damage = int.Parse(temp);
-
                 responce = "HA! That didn't even tickle!";
             }
             else if (el.playerAction.Contains("MISS"))

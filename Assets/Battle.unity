@@ -635,7 +635,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8ff089c03d7b2479ea94cbcf962247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  move:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 687f3150-6e0d-43ac-89e7-f74e205898c9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   speed: 2
 --- !u!114 &346056815
 MonoBehaviour:
@@ -649,9 +660,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4cbd535a028904493dee39f3e52c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  move:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9c639b12-dcb3-4ff0-8b92-7cbe1d564878
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  shoot:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Shoot
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2245a23d-5a45-419e-a24b-18f2f192587a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  enemies: {fileID: 0}
   speed: 2
-  enemies: {fileID: 73999537}
 --- !u!1 &353184233
 GameObject:
   m_ObjectHideFlags: 0
@@ -13308,7 +13342,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   el: {fileID: 1922966690}
   text: {fileID: 542916037}
-  actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  interact:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Interact
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e7487582-68cf-4157-9681-620242b18232
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   shootin: {fileID: 346056815}
   hell: {fileID: 346056814}
   player: {fileID: 346056806}
