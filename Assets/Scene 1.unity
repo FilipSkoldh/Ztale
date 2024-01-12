@@ -3527,7 +3527,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueContainer: {fileID: 11400000, guid: 06602bfbe9a665849879b6df33d758e1, type: 2}
   Textmesh: {fileID: 1398967583}
-  actions: {fileID: -944628639613478452, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  interact:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Interact
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3621f3ee-3e6f-4902-b10a-6c7416e4d4fe
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  nodelinkss: 0
+  dialognod: 0
 --- !u!1 &1627807966
 GameObject:
   m_ObjectHideFlags: 0
