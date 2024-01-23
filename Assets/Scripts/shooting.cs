@@ -18,7 +18,6 @@ public class shooting : MonoBehaviour
     public float speed;
 
     private RaycastHit2D[] hits;
-    private SpriteRenderer sr;
     private Transform hitT;
 
     // Start is called before the first frame update
