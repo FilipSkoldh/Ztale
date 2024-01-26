@@ -1009,7 +1009,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 8
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3246,6 +3246,7 @@ GameObject:
   - component: {fileID: 1602411655}
   - component: {fileID: 1602411658}
   - component: {fileID: 1602411657}
+  - component: {fileID: 1602411659}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: General
@@ -3376,6 +3377,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.0000002}
   m_Direction: 0
+--- !u!114 &1602411659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602411654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d20a5b03623be4d955cec4d460b058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkAsset: {fileID: 4900000, guid: 27a39223d9de3024cbb621b07f79acd6, type: 3}
+  tmp: {fileID: 1398967583}
+  e:
+    m_UseReference: 1
+    m_Action:
+      m_Name: E
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 61560e6b-06e4-4df2-bd03-72bfa3eb34f7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
 --- !u!1 &1627807966
 GameObject:
   m_ObjectHideFlags: 0
@@ -3621,9 +3648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e957d58a4584a8894329531ec0b096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyText: {fileID: 1398967583}
-  canvas: {fileID: 537730603}
-  buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
 --- !u!1 &1664531226
 GameObject:
   m_ObjectHideFlags: 0
