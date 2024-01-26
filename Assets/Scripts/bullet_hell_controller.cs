@@ -10,6 +10,7 @@ public class bullet_hell_controller : MonoBehaviour
     private CircleCollider2D cc;
     private Transform t;
     public float speed;
+    public int HP;
 
     // Start is called before the first frame update
     void Start()
