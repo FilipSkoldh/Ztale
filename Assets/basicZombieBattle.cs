@@ -7,6 +7,9 @@ public class basicZombieBattle : MonoBehaviour
     public float agro;
     public GameObject slashPrefab;
     public Animator animator;
+    public enemyLife relay;
+    public bullet_hell_controller bulletHell;
+    public box box;
 
 
     private GameObject slash0;
@@ -15,7 +18,7 @@ public class basicZombieBattle : MonoBehaviour
 
     private void Start()
     {
-        animator.speed = 1+(agro-1)*0.1f;
+        animator.speed = agro*0.1f + 0.5f;
     }
     void SlashSpawn()
     {
@@ -28,5 +31,37 @@ public class basicZombieBattle : MonoBehaviour
         slash0.GetComponent<slash>().activate();
         slash1.GetComponent<slash>().activate();
         slash2.GetComponent<slash>().activate();
+    }
+    void SlashTry()
+    {
+        if (Random.Range(0, 100) < agro * 5)
+        {
+            animator.SetTrigger("slash");
+            Debug.Log("y");
+        }
+        else
+        {
+            Debug.Log("n");
+        }
+    }
+    private void Update()
+    {
+        if(relay.playerAction != "")
+        {
+            bulletHell.enabled = true;
+            if(Random.Range(0, 1) == 0)
+            {
+                animator.SetTrigger("slash");
+                box.width = 2;
+                box.height = 2;
+            }
+            else
+            {
+                animator.SetTrigger("cough");
+                box.height = 2;
+                box.width = 2;
+            }
+            relay.playerAction = "";
+        }
     }
 }

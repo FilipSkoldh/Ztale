@@ -1100,6 +1100,9 @@ MonoBehaviour:
   agro: 1
   slashPrefab: {fileID: 8577663229011111592, guid: a1791daee25f30a428f401c5fd04b525, type: 3}
   animator: {fileID: 471193618}
+  relay: {fileID: 471193621}
+  bulletHell: {fileID: 346056814}
+  box: {fileID: 1511145614}
 --- !u!114 &471193621
 MonoBehaviour:
   m_ObjectHideFlags: 0

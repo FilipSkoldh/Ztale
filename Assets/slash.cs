@@ -12,13 +12,13 @@ public class slash : MonoBehaviour
         if (activated)
         {
             timer -= Time.deltaTime;
-            Debug.Log("1");
+
         }
 
         if (timer < 0)
         {
             Destroy(this.gameObject);
-            Debug.Log("2");
+
         }
     }
     public void activate()
