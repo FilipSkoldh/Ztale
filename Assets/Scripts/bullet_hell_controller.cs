@@ -33,7 +33,6 @@ public class bullet_hell_controller : MonoBehaviour
     void Update()
     {
         Vector2 movement = move.action.ReadValue<Vector2>();
-        Debug.Log(movement);
         rb.velocity = movement * speed;
     }
 }

@@ -19,7 +19,7 @@ public class basicZombieBattle : MonoBehaviour
 
     private void Start()
     {
-        animator.speed = agro*0.1f + 0.5f;
+        animator.speed = agro * 0.1f + 0.5f;
     }
     void SlashSpawn()
     {
@@ -68,10 +68,10 @@ public class basicZombieBattle : MonoBehaviour
     }
     private void Update()
     {
-        if(relay.playerAction != "")
+        if (relay.playerAction != "")
         {
             bulletHell.enabled = true;
-            if(Random.Range(0, 1) == 0)
+            if (Random.Range(0, 2) != 1)
             {
                 animator.SetTrigger("slash");
                 box.width = 2;

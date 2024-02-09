@@ -80,7 +80,7 @@ public class shooting : MonoBehaviour
                     enemies.GetChild(i).GetComponent<enemyLife>().MISS();
                 }
             }
-
+            this.enabled = false;
         }
     }
 }
