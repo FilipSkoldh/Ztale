@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.UI;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
@@ -37,21 +40,57 @@ public class BasicInkExample : MonoBehaviour {
 			// Display the text on screen!
 			CreateContentView(text);
 		}
-
+		List<Button> buttons = new List<Button>(); 
 		// Display all the choices, if there are any!
 		if(story.currentChoices.Count > 0) {
 			for (int i = 0; i < story.currentChoices.Count; i++) {
 				Choice choice = story.currentChoices [i];
 				Button button = CreateChoiceView (choice.text.Trim ());
+				buttons.Add (button);
 				// Tell the button what to do when we press it
 				button.onClick.AddListener (delegate {
 					OnClickChoiceButton (choice);
 				});
 			}
 		}
-		// If we've read all the content and there's no choices, the story is finished!
+		if (buttons.Count > 0) 
+		{ 
+			eventSystem.SetSelectedGameObject(buttons[0].gameObject);
+		}
+		else
+		{
+			RemoveChildren () ;
+		}
+		if(story.currentChoices.Count == 1)
+		{
+			if (story.currentChoices[0].text == ".")
+			{
+                buttons[0].transform.localPosition = new Vector3(-2000, 315, 0);
+            }
+			else
+			{
+                buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
+            }
 
-	}
+        }
+        else if (story.currentChoices.Count == 2)
+        {
+            buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
+            buttons[1].transform.localPosition = new Vector3(246, 315, 0);
+        }
+        else if (story.currentChoices.Count == 3)
+        {
+            buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
+            buttons[1].transform.localPosition = new Vector3(-151, 315, 0);
+            buttons[2].transform.localPosition = new Vector3(274, 315, 0);
+        }
+		for (int i = 0; i < buttons.Count; i++)
+		{
+			Debug.Log(buttons[i]);
+		}
+        // If we've read all the content and there's no choices, the story is finished!
+
+    }
 
 	// When we click the choice button, tell the story to choose that choice!
 	void OnClickChoiceButton (Choice choice) {
@@ -93,7 +132,8 @@ public class BasicInkExample : MonoBehaviour {
 
 	[SerializeField]
 	private Canvas canvas = null;
-
+	[SerializeField]
+	private EventSystem eventSystem = null;
 	// UI Prefabs
 	[SerializeField]
 	private GameObject textPrefab = null;

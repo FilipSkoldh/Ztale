@@ -14,6 +14,7 @@ public class characterScript : MonoBehaviour
     public InputActionProperty crouch;
     private Rigidbody2D rb;
     private Transform trans;
+    public Canvas canvas;
 
 
 
@@ -29,50 +30,52 @@ public class characterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (canvas.transform.childCount == 0)
+        {
 
-        trans.localScale = new Vector3(1, 1, 1);
-        speed = 1;
+            trans.localScale = new Vector3(1, 1, 1);
+            speed = 1;
 
-        Vector2 movevector = move.action.ReadValue<Vector2>();
+            Vector2 movevector = move.action.ReadValue<Vector2>();
 
-        Debug.Log(movevector);
-        if (movevector != Vector2.zero)
-        {
-            anim.SetBool("moving", true);
-            anim.SetFloat("x", movevector.x);
-            anim.SetFloat("y", movevector.y);
-        }
-        else
-        {
-            anim.SetBool("moving", false);
-        }
-        if (crouch.action.IsPressed())
-        {
-            trans.localScale = new Vector3(1, 0.4f, 1);
-            speed = 0.5f;
-        }
-
-        if (sprint.action.IsPressed() && !crouch.action.IsPressed() && stamina > 0 && movevector != Vector2.zero && (staminacooldown < 0.1 || sprintLF))
-        {
-            speed = 2;
-            stamina -= Time.deltaTime * 1;
-            staminacooldown = 1;
-            sprintLF = true;
-            anim.speed = speed;
-        }
-        else
-        {
-            anim.speed = speed;
-            if (staminacooldown > 0)
+            if (movevector != Vector2.zero)
             {
-                staminacooldown -= Time.deltaTime * 1;
-                sprintLF = false;
+                anim.SetBool("moving", true);
+                anim.SetFloat("x", movevector.x);
+                anim.SetFloat("y", movevector.y);
             }
-            else if (stamina < 10)
+            else
             {
-                stamina += Time.deltaTime * 1.5f;
+                anim.SetBool("moving", false);
             }
+            if (crouch.action.IsPressed())
+            {
+                trans.localScale = new Vector3(1, 0.4f, 1);
+                speed = 0.5f;
+            }
+
+            if (sprint.action.IsPressed() && !crouch.action.IsPressed() && stamina > 0 && movevector != Vector2.zero && (staminacooldown < 0.1 || sprintLF))
+            {
+                speed = 2;
+                stamina -= Time.deltaTime * 1;
+                staminacooldown = 1;
+                sprintLF = true;
+                anim.speed = speed;
+            }
+            else
+            {
+                anim.speed = speed;
+                if (staminacooldown > 0)
+                {
+                    staminacooldown -= Time.deltaTime * 1;
+                    sprintLF = false;
+                }
+                else if (stamina < 10)
+                {
+                    stamina += Time.deltaTime * 1.5f;
+                }
+            }
+            rb.velocity = movevector * speed;
         }
-        rb.velocity = movevector * speed;
     }
 }
