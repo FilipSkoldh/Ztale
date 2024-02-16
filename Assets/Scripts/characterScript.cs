@@ -4,17 +4,19 @@ using UnityEngine;
 public class characterScript : MonoBehaviour
 {
     ///Declaring shit
-    public float speed = 1;
-    public float stamina = 10;
-    public float staminacooldown = 1;
+    [SerializeField] private float speed = 1;
+    [SerializeField] private float stamina = 10;
+    [SerializeField] private float staminacooldown = 1;
+    [SerializeField] private InputActionProperty move;
+    [SerializeField] private InputActionProperty sprint;
+    [SerializeField] private InputActionProperty crouch;
+    [SerializeField] private InputActionProperty interact;
+    [SerializeField] private Canvas canvas;
     private bool sprintLF = false;
+    private BasicInkExample BasicInkExample;
     private Animator anim;
-    public InputActionProperty move;
-    public InputActionProperty sprint;
-    public InputActionProperty crouch;
     private Rigidbody2D rb;
     private Transform trans;
-    public Canvas canvas;
 
 
 
@@ -24,6 +26,8 @@ public class characterScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         trans = GetComponent<Transform>();
+        BasicInkExample = GetComponent<BasicInkExample>();
+        BasicInkExample.enabled = false;
     }
 
 
@@ -76,6 +80,30 @@ public class characterScript : MonoBehaviour
                 }
             }
             rb.velocity = movevector * speed;
+
+            if (interact.action.WasPressedThisFrame())
+            {
+                Debug.Log("1");
+                Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f),0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")),0.4f, 8).transform;
+                Debug.DrawRay(transform.position, new Vector2(1, 1), Color.gray, 100000);
+
+                if (cast != null)
+                {
+                    Debug.Log("2");
+                    if (cast.GetComponent<simpleInkStorage>() != null)
+                    {
+                        Debug.Log("3");
+                        BasicInkExample.inkJSONAsset = cast.GetComponent<simpleInkStorage>().inkStorage;
+                        BasicInkExample.enabled = true;
+                        anim.SetBool("moving", false);
+                        rb.velocity = Vector3.zero;
+                    }
+                }
+            }
+        }
+        else
+        {
+            BasicInkExample.enabled = false;
         }
     }
 }
