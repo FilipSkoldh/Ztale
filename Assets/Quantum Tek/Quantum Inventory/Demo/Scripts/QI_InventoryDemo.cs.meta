@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 757cf11326d494b218aa4675668175e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inventory: {instanceID: 0}
+  - itemDatabase: {fileID: 11400000, guid: 59dc492437a0c4e0a8ba5acbefee8c14, type: 2}
+  - potionCount: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

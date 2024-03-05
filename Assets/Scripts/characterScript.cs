@@ -11,16 +11,14 @@ public class characterScript : MonoBehaviour
     [SerializeField] private InputActionProperty sprint;
     [SerializeField] private InputActionProperty crouch;
     [SerializeField] private InputActionProperty interact;
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas dialogCanvas;
+    [SerializeField] private GameObject invent;
     private bool sprintLF = false;
     private BasicInkExample BasicInkExample;
     private Animator anim;
     private Rigidbody2D rb;
     private Transform trans;
-
-
-
-
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,11 +28,10 @@ public class characterScript : MonoBehaviour
         BasicInkExample.enabled = false;
     }
 
-
     // Update is called once per frame
     void Update()
     {
-        if (canvas.transform.childCount == 0)
+        if (!(dialogCanvas.transform.childCount != 0 || invent.activeSelf))
         {
 
             trans.localScale = new Vector3(1, 1, 1);
@@ -85,8 +82,6 @@ public class characterScript : MonoBehaviour
             {
                 Debug.Log("1");
                 Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f),0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")),0.4f, 8).transform;
-                Debug.DrawRay(transform.position, new Vector2(1, 1), Color.gray, 100000);
-
                 if (cast != null)
                 {
                     Debug.Log("2");
@@ -95,8 +90,6 @@ public class characterScript : MonoBehaviour
                         Debug.Log("3");
                         BasicInkExample.inkJSONAsset = cast.GetComponent<simpleInkStorage>().inkStorage;
                         BasicInkExample.enabled = true;
-                        anim.SetBool("moving", false);
-                        rb.velocity = Vector3.zero;
                     }
                 }
             }
@@ -104,6 +97,8 @@ public class characterScript : MonoBehaviour
         else
         {
             BasicInkExample.enabled = false;
+            rb.velocity = Vector3.zero;
+            anim.SetBool("moving", false);
         }
     }
 }
