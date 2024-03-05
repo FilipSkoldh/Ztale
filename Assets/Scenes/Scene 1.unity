@@ -1037,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &615524354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1415,7 +1415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &829251245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1629,7 +1629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988259035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2336,7 +2336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1281399487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2765,7 +2765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1453434125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3515,6 +3515,15 @@ MonoBehaviour:
     m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   invGameobj: {fileID: 1434326439}
   eventSystem: {fileID: 895696911}
+  invList:
+  - {fileID: 1945165615}
+  - {fileID: 988259034}
+  - {fileID: 829251244}
+  - {fileID: 1894281224}
+  - {fileID: 1453434124}
+  - {fileID: 615524353}
+  - {fileID: 1886315566}
+  - {fileID: 1281399486}
   inventory: {fileID: 1627807981}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807981
@@ -4132,7 +4141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1886315567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4268,7 +4277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1894281225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4404,7 +4413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1945165616
 RectTransform:
   m_ObjectHideFlags: 0
