@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using QuantumTek.QuantumInventory;
 
 public class characterScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class characterScript : MonoBehaviour
     [SerializeField] private InputActionProperty interact;
     [SerializeField] private Canvas dialogCanvas;
     [SerializeField] private GameObject invent;
+    [SerializeField] private QI_Chest chestScript;
     private bool sprintLF = false;
     private BasicInkExample BasicInkExample;
     private Animator anim;
@@ -80,16 +82,20 @@ public class characterScript : MonoBehaviour
 
             if (interact.action.WasPressedThisFrame())
             {
-                Debug.Log("1");
                 Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f),0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")),0.4f, 8).transform;
                 if (cast != null)
                 {
-                    Debug.Log("2");
                     if (cast.GetComponent<simpleInkStorage>() != null)
                     {
-                        Debug.Log("3");
                         BasicInkExample.inkJSONAsset = cast.GetComponent<simpleInkStorage>().inkStorage;
                         BasicInkExample.enabled = true;
+
+                        if (cast.gameObject.tag == "Chest")
+                        {
+                            
+                        }
+
+
                     }
                 }
             }

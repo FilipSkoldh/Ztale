@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 477761556}
   m_Layer: 3
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3184,6 +3184,7 @@ GameObject:
   - component: {fileID: 1627807976}
   - component: {fileID: 1627807980}
   - component: {fileID: 1627807978}
+  - component: {fileID: 1627807982}
   - component: {fileID: 1627807981}
   - component: {fileID: 1627807973}
   - component: {fileID: 1627807972}
@@ -3397,6 +3398,7 @@ MonoBehaviour:
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   dialogCanvas: {fileID: 254043506}
   invent: {fileID: 1434326439}
+  chestScript: {fileID: 1627807982}
 --- !u!114 &1627807977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3540,6 +3542,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   MaxStacks: 8
+--- !u!114 &1627807982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627807966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1735139350c67c94d9362c561013cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 1627807981}
 --- !u!1 &1681281623
 GameObject:
   m_ObjectHideFlags: 0
