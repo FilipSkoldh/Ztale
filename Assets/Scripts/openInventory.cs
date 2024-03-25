@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Inventory : MonoBehaviour
+public class openInventory : MonoBehaviour
 {
     [SerializeField] private InputActionProperty openInv;
     [SerializeField] private GameObject invGameobj;
