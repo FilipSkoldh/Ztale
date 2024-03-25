@@ -8,13 +8,13 @@ public class enemyLife : MonoBehaviour
     public int HP;
     [NonSerialized]public String playerAction = "";
 
-    public void hit(int damage)
+    public void Hit(int damage)
     {
         HP -= damage;
         playerAction = "HIT";
         Debug.Log(playerAction);
     }
-    public void MISS()
+    public void Miss()
     {
         playerAction = "MISS";
     }

@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 471193619}
   - component: {fileID: 471193618}
   - component: {fileID: 471193617}
+  - component: {fileID: 471193624}
   m_Layer: 8
   m_Name: zombie battle sprite
   m_TagString: Untagged
@@ -1196,6 +1197,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &471193624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471193615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a52fcd3a6d109439eab9a1bf904724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acts: []
+  spareActs: []
+  relay: {fileID: 0}
 --- !u!1 &576189791
 GameObject:
   m_ObjectHideFlags: 0
