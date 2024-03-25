@@ -2,6 +2,7 @@ using QuantumTek.QuantumInventory;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -15,11 +16,18 @@ public class openInventory : MonoBehaviour
     public QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
-    
+    private List<string> itemList = new List<string>();
+
 
     // Start is called before the first frame update
     void Start()
     {
+        itemList = inventory.GetItems();
+
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            items.Add(itemList[i], itemDatabase.GetItem(itemList[i]));
+        }
         items.Add("Shotgun", itemDatabase.GetItem("Shotgun"));
         items.Add("Bandages", itemDatabase.GetItem("Bandages"));
         inventory.AddItem(items["Shotgun"], 1);
@@ -40,15 +48,11 @@ public class openInventory : MonoBehaviour
             {
                 itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
-
-
-
         }
     }
     // Update is called once per frame
     void Update()
     {
-
         if (openInv.action.WasPressedThisFrame())
         {
             if (invGameobj.activeSelf)

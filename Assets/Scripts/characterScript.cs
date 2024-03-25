@@ -15,6 +15,7 @@ public class characterScript : MonoBehaviour
     [SerializeField] private Canvas dialogCanvas;
     [SerializeField] private GameObject invent;
     [SerializeField] private QI_Chest chestScript;
+    [SerializeField] private interactWithChest interactWithChest;
     private bool sprintLF = false;
     private BasicInkExample BasicInkExample;
     private Animator anim;
@@ -92,10 +93,8 @@ public class characterScript : MonoBehaviour
 
                         if (cast.gameObject.tag == "Chest")
                         {
-                            
+
                         }
-
-
                     }
                 }
             }
