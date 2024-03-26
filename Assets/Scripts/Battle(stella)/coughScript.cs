@@ -32,7 +32,7 @@ public class coughScript : MonoBehaviour
         Debug.Log("hit");
         if (collision.gameObject.layer == 512)
         {
-            collision.GetComponent<bullet_hell_controller>().HP -= 1;
+            collision.GetComponent<BulletHellController>().HP -= 1;
             Destroy(this.gameObject);
         }
     }

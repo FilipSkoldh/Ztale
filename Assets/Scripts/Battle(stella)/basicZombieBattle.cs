@@ -8,9 +8,9 @@ public class basicZombieBattle : MonoBehaviour
     public GameObject slashPrefab;
     public GameObject coughPrefab;
     public Animator animator;
-    public enemyLife relay;
-    public bullet_hell_controller bulletHell;
-    public box box;
+    //public enemyLife relay;
+    public BulletHellController bulletHell;
+    public Box box;
 
 
     private GameObject slash0;
@@ -68,6 +68,7 @@ public class basicZombieBattle : MonoBehaviour
     }
     private void Update()
     {
+        /*
         if (relay.playerAction != "")
         {
             bulletHell.enabled = true;
@@ -85,5 +86,6 @@ public class basicZombieBattle : MonoBehaviour
             }
             relay.playerAction = "";
         }
+        */
     }
 }

@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 73999537}
   - component: {fileID: 73999536}
   - component: {fileID: 73999535}
+  - component: {fileID: 73999538}
   m_Layer: 0
   m_Name: enemies
   m_TagString: Untagged
@@ -251,8 +252,22 @@ Transform:
   m_Children:
   - {fileID: 471193616}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &73999538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73999534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5725f9790adcaf8499f235fa9f8bfe43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHell: {fileID: 346056814}
+  box: {fileID: 1511145614}
 --- !u!1 &95715685
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +461,7 @@ Transform:
   - {fileID: 1503015472}
   - {fileID: 1985321669}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &346056807
 Rigidbody2D:
@@ -847,7 +862,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 381156073, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 381156073, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -869,11 +884,10 @@ GameObject:
   - component: {fileID: 471193616}
   - component: {fileID: 471193623}
   - component: {fileID: 471193622}
-  - component: {fileID: 471193621}
-  - component: {fileID: 471193620}
   - component: {fileID: 471193619}
   - component: {fileID: 471193618}
   - component: {fileID: 471193617}
+  - component: {fileID: 471193625}
   - component: {fileID: 471193624}
   m_Layer: 8
   m_Name: zombie battle sprite
@@ -1009,38 +1023,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &471193620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471193615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4b55653c02c824a948455773465473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agro: 50
-  slashPrefab: {fileID: 8577663229011111592, guid: a1791daee25f30a428f401c5fd04b525, type: 3}
-  coughPrefab: {fileID: 5395465615491600791, guid: 3e76254b8c7146549b4a775a1e683443, type: 3}
-  animator: {fileID: 471193618}
-  relay: {fileID: 471193621}
-  bulletHell: {fileID: 346056814}
-  box: {fileID: 1511145614}
---- !u!114 &471193621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471193615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3fd6d9dfe6a48448ce00762b09dda9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 3
 --- !u!50 &471193622
 Rigidbody2D:
   serializedVersion: 4
@@ -1129,12 +1111,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 471193615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38a52fcd3a6d109439eab9a1bf904724, type: 3}
+  m_Script: {fileID: 11500000, guid: 9839dca09e81a674bbe987a78bfad13a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acts: []
-  spareActs: []
-  relay: {fileID: 0}
+  enemyLines:
+  - oww
+  - ha missed
+  - ive just been feeling bad
+  speechBubble: {fileID: 818433624}
+  attacks: {fileID: 73999538}
+  interactAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Interact
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: db80c84e-0872-40c9-be7e-5d7480ccbf43
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+--- !u!114 &471193625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471193615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3fd6d9dfe6a48448ce00762b09dda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10
+  acts:
+  - talk
+  spareActs:
+  - talk
+  - talk
+  - talk
+  talk: {fileID: 471193624}
 --- !u!1 &576189791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606183549
 GameObject:
@@ -1318,7 +1335,7 @@ RectTransform:
   - {fileID: 2060305353}
   - {fileID: 608194587}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6782,7 +6799,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2135619021, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 2135619021, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6909,7 +6926,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1019040839, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: -1019040839, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6937,7 +6954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &818433625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7228,7 +7245,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1295685739, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 1295685739, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7354,7 +7371,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1121566410, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 1121566410, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7479,7 +7496,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1193810438
 GameObject:
@@ -7527,7 +7544,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1193810442
 MonoBehaviour:
@@ -12760,7 +12777,7 @@ Transform:
   m_Children:
   - {fileID: 120108288}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1511145614
 MonoBehaviour:
@@ -12783,7 +12800,7 @@ MonoBehaviour:
   BM: {fileID: 1127337257}
   BR: {fileID: 895228881}
   height: 2
-  width: 2
+  width: 6
   speed: 10
 --- !u!1 &1607788750
 GameObject:
@@ -12899,7 +12916,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715990794
 GameObject:
@@ -12992,75 +13009,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1747699597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1747699600}
-  - component: {fileID: 1747699599}
-  - component: {fileID: 1747699598}
-  m_Layer: 0
-  m_Name: VisualScripting SceneVariables
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1747699598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747699597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765181c9ef4b24d32a4f7cbd2ef370dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1747699599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747699597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[{"name":"enemy
-      turn","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"button","value":{"$content":0,"$type":"System.Int32"},"typeHandle":{"Identification":"System.Int32,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"shoot","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"act","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"item","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"boxheight","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"boxwidth","value":{"$content":6.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"zombie","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"enemies","value":null,"typeHandle":{"Identification":null,"$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!4 &1747699600
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747699597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.97, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784739707
 GameObject:
@@ -13177,7 +13125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1041645503, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 1041645503, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13303,7 +13251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1159719564, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: 1159719564, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13430,7 +13378,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -238527325, guid: b1508f7cde4b2a64c8951d22610f3934, type: 3}
+  m_Sprite: {fileID: -238527325, guid: 08de8910583ff2a4d956e94a6af8cbf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -3,27 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class baseEnemyRelay : MonoBehaviour
+public class BaseEnemyRelay : MonoBehaviour
 {
     public int HP;
-    public List<string> acts = new List<string>();
-    public List<string> spareActs = new List<string>();
+    public List<string> acts = new();
+    public List<string> spareActs = new();
+    public BaseEnemyTalk talk;
 
 
     public void Hit(int damage)
     {
         HP -= damage;
-
+        talk.Talk(0);
     }
     public void Miss()
     {
-
+        talk.Talk(1);
     }
     public void Act(string action)
     {
-        if (action == spareActs[spareActs.Count])
-        {
-
-        }
+        talk.Talk(acts.IndexOf(action) + 2);
     }
 }

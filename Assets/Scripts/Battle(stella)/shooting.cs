@@ -62,13 +62,13 @@ public class shooting : MonoBehaviour
             }
             if (hitT != null)
             {
-                hitT.GetComponent<enemyLife>().Hit(1);
+                hitT.GetComponent<BaseEnemyRelay>().Hit(1);
 
                 for (int i = 0; i < enemies.childCount; i++)
                 {
                     if (enemies.GetChild(i) != hitT)
                     {
-                        enemies.GetChild(i).GetComponent<enemyLife>().Miss();
+                        enemies.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
                     }
                 }
 
@@ -77,7 +77,7 @@ public class shooting : MonoBehaviour
             {
                 for (int i = 0; i < enemies.childCount; i++)
                 {
-                    enemies.GetChild(i).GetComponent<enemyLife>().Miss();
+                    enemies.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
                 }
             }
             this.enabled = false;

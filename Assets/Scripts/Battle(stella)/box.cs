@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class box : MonoBehaviour
+public class Box : MonoBehaviour
 {
-    public Transform TL;
-    public Transform TM;
-    public Transform TR;
-    public Transform ML;
-    public Transform MR;
-    public Transform BL;
-    public Transform BM;
-    public Transform BR;
+    [SerializeField] private Transform TL;
+    [SerializeField] private Transform TM;
+    [SerializeField] private Transform TR;
+    [SerializeField] private Transform ML;
+    [SerializeField] private Transform MR;
+    [SerializeField] private Transform BL;
+    [SerializeField] private Transform BM;
+    [SerializeField] private Transform BR;
     public float height;
     public float width;
     public float speed;

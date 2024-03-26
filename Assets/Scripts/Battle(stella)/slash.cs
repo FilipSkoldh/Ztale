@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class slash : MonoBehaviour
 {
-    public Collider2D collider;
+    public Collider2D collider2d;
     float timer = 0.5f;
     bool activated = false;
     private void Update()
@@ -31,7 +31,7 @@ public class slash : MonoBehaviour
     {
         if (collision.gameObject.layer == 512)
         {
-            collision.GetComponent<bullet_hell_controller>().HP -= 1;
+            collision.GetComponent<BulletHellController>().HP -= 1;
             Destroy(this.gameObject);
         }
     }

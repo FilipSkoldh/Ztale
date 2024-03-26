@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class bullet_hell_controller : MonoBehaviour
+public class BulletHellController : MonoBehaviour
 {
     public InputActionProperty move;
     private Rigidbody2D rb;
