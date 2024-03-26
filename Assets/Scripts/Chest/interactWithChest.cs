@@ -9,7 +9,7 @@ public class interactWithChest : MonoBehaviour
     [SerializeField] private GameObject invGameobj;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private List<GameObject> invList;
-    public QI_Inventory inventory;
+    private QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
 

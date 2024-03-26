@@ -10,6 +10,7 @@ namespace QuantumTek.QuantumInventory
     {
         public string Name;
         public string Description;
+        public string useMessage;
         public float Weight;
         public float Price;
         public Sprite Icon;

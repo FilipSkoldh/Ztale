@@ -1586,7 +1586,6 @@ GameObject:
   - component: {fileID: 477761553}
   - component: {fileID: 477761556}
   - component: {fileID: 477761557}
-  - component: {fileID: 477761558}
   m_Layer: 3
   m_Name: Square
   m_TagString: Chest
@@ -1733,18 +1732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: chest
   MaxStacks: 8
---- !u!114 &477761558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477761552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d570fe962b444e40971a0aeac72ec0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &537730599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,7 +2881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 682847403}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &895696912
@@ -3765,7 +3752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203848670}
   m_Layer: 0
-  m_Name: ChestInventory
+  m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5397,9 +5384,10 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   dialogCanvas: {fileID: 254043506}
-  invent: {fileID: 1434326439}
+  inventoryGUI: {fileID: 1434326439}
   chestScript: {fileID: 1627807982}
   interactWithChest: {fileID: 1627807983}
+  chestGUI: {fileID: 1203848669}
 --- !u!114 &1627807977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5516,7 +5504,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  invGameobj: {fileID: 1434326439}
+  inventoryGUI: {fileID: 1434326439}
   eventSystem: {fileID: 895696911}
   invList:
   - {fileID: 1945165615}
@@ -5570,8 +5558,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invGameobj: {fileID: 1203848669}
   eventSystem: {fileID: 895696911}
-  invList: []
-  inventory: {fileID: 0}
+  invList:
+  - {fileID: 2055104035}
+  - {fileID: 1716660779}
+  - {fileID: 94301361}
+  - {fileID: 168363842}
+  - {fileID: 1002038799}
+  - {fileID: 850083921}
+  - {fileID: 385634036}
+  - {fileID: 637254485}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!1 &1657301634
 GameObject:

@@ -13,15 +13,16 @@ public class characterScript : MonoBehaviour
     [SerializeField] private InputActionProperty crouch;
     [SerializeField] private InputActionProperty interact;
     [SerializeField] private Canvas dialogCanvas;
-    [SerializeField] private GameObject invent;
+    [SerializeField] private GameObject inventoryGUI;
     [SerializeField] private QI_Chest chestScript;
     [SerializeField] private interactWithChest interactWithChest;
+    [SerializeField] private GameObject chestGUI;
     private bool sprintLF = false;
     private BasicInkExample BasicInkExample;
     private Animator anim;
     private Rigidbody2D rb;
     private Transform trans;
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,7 +35,7 @@ public class characterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!(dialogCanvas.transform.childCount != 0 || invent.activeSelf))
+        if (!(dialogCanvas.transform.childCount != 0 || inventoryGUI.activeSelf))
         {
 
             trans.localScale = new Vector3(1, 1, 1);
@@ -83,7 +84,7 @@ public class characterScript : MonoBehaviour
 
             if (interact.action.WasPressedThisFrame())
             {
-                Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f),0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")),0.4f, 8).transform;
+                Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f), 0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")), 0.4f, 8).transform;
                 if (cast != null)
                 {
                     if (cast.GetComponent<simpleInkStorage>() != null)
@@ -93,6 +94,7 @@ public class characterScript : MonoBehaviour
 
                         if (cast.gameObject.tag == "Chest")
                         {
+                            chestGUI.SetActive(true);
 
                         }
                     }

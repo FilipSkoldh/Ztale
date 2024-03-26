@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class openInventory : MonoBehaviour
 {
     [SerializeField] private InputActionProperty openInv;
-    [SerializeField] private GameObject invGameobj;
+    [SerializeField] private GameObject inventoryGUI;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private List<GameObject> invList;
     public QI_Inventory inventory;
@@ -55,19 +55,19 @@ public class openInventory : MonoBehaviour
     {
         if (openInv.action.WasPressedThisFrame())
         {
-            if (invGameobj.activeSelf)
+            if (inventoryGUI.activeSelf)
             {
-                invGameobj.SetActive(false);
+                inventoryGUI.SetActive(false);
             }
             else
             {
-                invGameobj.SetActive(true);
-                if (invGameobj.transform.GetChild(12).gameObject.activeSelf)
-                  eventSystem.SetSelectedGameObject(invGameobj.transform.GetChild(12).GetChild(0).gameObject);
+                inventoryGUI.SetActive(true);
+                if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
+                  eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
                 invRefresh();
             }
         }
-        if (invGameobj.activeSelf)
+        if (inventoryGUI.activeSelf)
         {
 
 

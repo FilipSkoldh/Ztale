@@ -83,29 +83,28 @@ public class BasicInkExample : MonoBehaviour {
             buttons[1].transform.localPosition = new Vector3(-151, 315, 0);
             buttons[2].transform.localPosition = new Vector3(274, 315, 0);
         }
-		for (int i = 0; i < buttons.Count; i++)
-		{
-			Debug.Log(buttons[i]);
-		}
         // If we've read all the content and there's no choices, the story is finished!
 
     }
 
 	// When we click the choice button, tell the story to choose that choice!
-	void OnClickChoiceButton (Choice choice) {
+	void OnClickChoiceButton (Choice choice) 
+	{
 		story.ChooseChoiceIndex (choice.index);
 		RefreshView();
 	}
 
 	// Creates a textbox showing the the line of text
-	void CreateContentView (string text) {
+	void CreateContentView (string text)
+	{
 		GameObject storyText = Instantiate (textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
 		storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
 		storyText.transform.SetParent (canvas.transform, false);
 	}
 
 	// Creates a button showing the choice text
-	Button CreateChoiceView (string text) {
+	Button CreateChoiceView (string text) 
+	{
 		// Creates the button from a prefab
 		Button choice = Instantiate (buttonPrefab, canvas.transform);
 		choice.transform.SetParent (canvas.transform, false);
@@ -118,7 +117,8 @@ public class BasicInkExample : MonoBehaviour {
 	}
 
 	// Destroys all the children of this gameobject (all the UI)
-	void RemoveChildren () {
+	void RemoveChildren () 
+	{
 		int childCount = canvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
 			Destroy (canvas.transform.GetChild (i).gameObject);
