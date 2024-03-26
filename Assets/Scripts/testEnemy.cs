@@ -8,7 +8,6 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class testEnemy : MonoBehaviour
 {
-    public enemyLife el;
     int damage = 0;
     public TextMeshProUGUI text;
     string responce = "";

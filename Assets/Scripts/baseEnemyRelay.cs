@@ -3,19 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyLife : MonoBehaviour
+public class baseEnemyRelay : MonoBehaviour
 {
     public int HP;
-    [NonSerialized]public String playerAction = "";
+    public List<string> acts = new List<string>();
+    public List<string> spareActs = new List<string>();
+
 
     public void Hit(int damage)
     {
         HP -= damage;
-        playerAction = "HIT";
-        Debug.Log(playerAction);
     }
     public void Miss()
     {
-        playerAction = "MISS";
+
+    }
+    public void Act(string action)
+    {
+
     }
 }
