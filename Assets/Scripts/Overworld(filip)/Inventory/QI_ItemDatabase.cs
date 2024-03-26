@@ -23,5 +23,17 @@ namespace QuantumTek.QuantumInventory
                     return item;
             return null;
         }
+
+        public Dictionary<string, QI_ItemData> Getdictionary()
+        {
+            Dictionary<string, QI_ItemData> entireDatabase = new Dictionary<string, QI_ItemData>();
+
+            foreach (var item in Items)
+            {
+                string name = item.Name;
+                entireDatabase.Add(name, item);
+            }
+            return entireDatabase;
+        }
     }
 }

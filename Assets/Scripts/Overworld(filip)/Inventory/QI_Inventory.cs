@@ -95,19 +95,5 @@ namespace QuantumTek.QuantumInventory
                     Stacks.RemoveAt(i);
             }
         }
-
-        /// <summary>
-        /// returns the names of all items in the inventory
-        /// </summary>
-        /// <returns></returns>
-        public List<string> GetItems()
-        {
-            List<string> items = new List<string>();
-            for (int i = 0; i < Stacks.Count; i++)
-            {
-                items[i] = Stacks[i].Item.Name;
-            }
-            return items;
-        }
     }
 }

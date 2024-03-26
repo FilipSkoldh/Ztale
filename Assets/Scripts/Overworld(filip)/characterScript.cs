@@ -91,12 +91,6 @@ public class characterScript : MonoBehaviour
                     {
                         BasicInkExample.inkJSONAsset = cast.GetComponent<simpleInkStorage>().inkStorage;
                         BasicInkExample.enabled = true;
-
-                        if (cast.gameObject.tag == "Chest")
-                        {
-                            chestGUI.SetActive(true);
-
-                        }
                     }
                 }
             }

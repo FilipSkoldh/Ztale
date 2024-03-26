@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &94301362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &168363843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1378,7 +1378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &385634037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1976,7 +1976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &615524354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2112,7 +2112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &637254486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2490,7 +2490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &829251245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2702,7 +2702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &850083922
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2916,7 +2916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &988259035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3052,7 +3052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1002038800
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4004,7 +4004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1281399487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4554,7 +4554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1453434125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5166,13 +5166,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627807971}
-  - component: {fileID: 1627807970}
-  - component: {fileID: 1627807976}
+  - component: {fileID: 1627807984}
   - component: {fileID: 1627807983}
-  - component: {fileID: 1627807980}
-  - component: {fileID: 1627807978}
   - component: {fileID: 1627807982}
   - component: {fileID: 1627807981}
+  - component: {fileID: 1627807980}
+  - component: {fileID: 1627807970}
   - component: {fileID: 1627807973}
   - component: {fileID: 1627807972}
   - component: {fileID: 1627807975}
@@ -5320,74 +5319,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1627807976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627807966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e03c6a20ed498445b54c1a4c1085814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  stamina: 10
-  staminacooldown: 1
-  move:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Move
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 28f1ff35-9c0a-4f1e-9755-a5a3ee5357e2
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  sprint:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Sprint
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 62076767-2105-4204-a265-fb7e1b4ea4f8
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -7656282750879608928, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  crouch:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Crouch
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a617d021-006c-46ba-98a6-c46ebb55c3fe
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 2106455416119078774, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  interact:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Interact
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 9dab409f-9bd9-4d26-9e39-b1a3c9f4fb44
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  dialogCanvas: {fileID: 254043506}
-  inventoryGUI: {fileID: 1434326439}
-  chestScript: {fileID: 1627807982}
-  interactWithChest: {fileID: 1627807983}
-  chestGUI: {fileID: 1203848669}
 --- !u!114 &1627807977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5418,23 +5349,6 @@ MonoBehaviour:
   m_DefaultActionMap: char
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1697314608}
---- !u!114 &1627807978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627807966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e957d58a4584a8894329531ec0b096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inkJSONAsset: {fileID: 0}
-  canvas: {fileID: 254043506}
-  eventSystem: {fileID: 895696911}
-  textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
-  buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
 --- !u!61 &1627807979
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5489,6 +5403,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627807966}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1735139350c67c94d9362c561013cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 0}
+--- !u!114 &1627807981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627807966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6219ea3ac89dbde418bea1d3d3bf10dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invGameobj: {fileID: 1434326439}
+  eventSystem: {fileID: 895696911}
+  invList:
+  - {fileID: 1945165615}
+  - {fileID: 988259034}
+  - {fileID: 829251244}
+  - {fileID: 1894281224}
+  - {fileID: 1453434124}
+  - {fileID: 615524353}
+  - {fileID: 1886315566}
+  - {fileID: 1281399486}
+  itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
+--- !u!114 &1627807982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627807966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e957d58a4584a8894329531ec0b096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkJSONAsset: {fileID: 0}
+  canvas: {fileID: 254043506}
+  eventSystem: {fileID: 895696911}
+  textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
+  buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
+--- !u!114 &1627807983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627807966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82d96d5805371c147971976d98023152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -5498,7 +5466,7 @@ MonoBehaviour:
       m_Name: Open Inv
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: be736c12-6fa6-497f-ac50-cacfa56e8d88
+      m_Id: 21d1121a-a6a4-4617-9baa-c4b0e05dbdbe
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -5515,9 +5483,9 @@ MonoBehaviour:
   - {fileID: 615524353}
   - {fileID: 1886315566}
   - {fileID: 1281399486}
-  inventory: {fileID: 1627807981}
+  inventory: {fileID: 477761557}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
---- !u!114 &1627807981
+--- !u!114 &1627807984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5526,48 +5494,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627807966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76283022cb7ce44a690f2b9bc3e794c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e03c6a20ed498445b54c1a4c1085814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Player
-  MaxStacks: 8
---- !u!114 &1627807982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627807966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1735139350c67c94d9362c561013cfb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Inventory: {fileID: 1627807981}
---- !u!114 &1627807983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627807966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6219ea3ac89dbde418bea1d3d3bf10dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invGameobj: {fileID: 1203848669}
-  eventSystem: {fileID: 895696911}
-  invList:
-  - {fileID: 2055104035}
-  - {fileID: 1716660779}
-  - {fileID: 94301361}
-  - {fileID: 168363842}
-  - {fileID: 1002038799}
-  - {fileID: 850083921}
-  - {fileID: 385634036}
-  - {fileID: 637254485}
-  itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
+  speed: 1
+  stamina: 10
+  staminacooldown: 1
+  move:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 44938ab2-03a1-4721-a521-4693ed98b142
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  sprint:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Sprint
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6143896b-dfb2-4a7a-b2fe-3795c1f3477e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -7656282750879608928, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  crouch:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Crouch
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b794cbf8-c725-4e29-8fc6-db8fe702b050
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2106455416119078774, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  interact:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Interact
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f731c98c-45e1-4a9f-ba2a-dc2272d47390
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  dialogCanvas: {fileID: 254043506}
+  inventoryGUI: {fileID: 1434326439}
+  chestScript: {fileID: 1627807980}
+  interactWithChest: {fileID: 1627807981}
+  chestGUI: {fileID: 1203848669}
 --- !u!1 &1657301634
 GameObject:
   m_ObjectHideFlags: 0
@@ -6024,7 +6009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1716660780
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6575,7 +6560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1886315567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6787,7 +6772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1894281225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7044,7 +7029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1945165616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7180,7 +7165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2055104036
 RectTransform:
   m_ObjectHideFlags: 0

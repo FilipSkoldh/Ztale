@@ -15,8 +15,8 @@ public class interactWithChest : MonoBehaviour
 
     public void Open_Chest(QI_Inventory chestInventory)
     {
-        List<string> itemList = new List<string>();
-        itemList = chestInventory.GetItems();
+        items = itemDatabase.Getdictionary();
+        inventory.AddItem(items["Bandages"], 5);
 
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
