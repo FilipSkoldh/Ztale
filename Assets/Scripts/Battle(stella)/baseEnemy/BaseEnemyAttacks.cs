@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BaseEnemyAttacks : MonoBehaviour
 {
     [SerializeField] private BulletHellController bulletHell;
     [SerializeField] private Box box;
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject attackButton;
+
     private float timer;
     
     public void Attack()
@@ -13,6 +17,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         box.width = 2; 
         box.height = 2;
         bulletHell.enabled = true;
+        bulletHell.Show(new Vector2(0, -1));
         timer = 5;
     }
 
@@ -23,10 +28,12 @@ public class BaseEnemyAttacks : MonoBehaviour
             timer -= Time.deltaTime;
 
         }
-        else
+        else if (timer < 0)
         {
             timer = 0;
+            bulletHell.Hide();
             bulletHell.enabled = false;
+            eventSystem.SetSelectedGameObject(attackButton);
             box.width = 6;
             box.height = 2;
         }

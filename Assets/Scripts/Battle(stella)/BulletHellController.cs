@@ -35,4 +35,15 @@ public class BulletHellController : MonoBehaviour
         Vector2 movement = move.action.ReadValue<Vector2>();
         rb.velocity = movement * speed;
     }
+
+    public void Hide()
+    {
+        rb.velocity = Vector2.zero;
+        t.position = new Vector2(-10, 0);
+    }
+
+    public void Show(Vector2 position)
+    {
+        t.position = position;
+    }
 }

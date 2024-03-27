@@ -28,6 +28,10 @@ public class shooting : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        t.position = new Vector3 (0f, 1f, 0f);
+    }
 
 
     private void Awake()
@@ -80,6 +84,7 @@ public class shooting : MonoBehaviour
                     enemies.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
                 }
             }
+            rb.velocity = Vector2.zero;
             this.enabled = false;
         }
     }
