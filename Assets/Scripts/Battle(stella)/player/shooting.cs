@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class shooting : MonoBehaviour
 {
     public InputActionProperty move;
     public InputActionProperty shoot;
+    public InputActionProperty back;
 
     public Transform enemies;
+    public EventSystem eventSystem;
+    public GameObject shootButton;
 
     private Rigidbody2D rb;
     private CircleCollider2D cc;
@@ -20,17 +25,10 @@ public class shooting : MonoBehaviour
     private RaycastHit2D[] hits;
     private Transform hitT;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        cc.radius = 0.03f;
-        t.position = new Vector3(0f, 1f);
-
-    }
-
     private void OnEnable()
     {
         t.position = new Vector3 (0f, 1f, 0f);
+        cc.radius = 0.03f;
     }
 
 
@@ -47,7 +45,16 @@ public class shooting : MonoBehaviour
     {
         Vector2 movement = move.action.ReadValue<Vector2>();
         bool shot = shoot.action.WasPressedThisFrame();
+        bool backed = back.action.WasPressedThisFrame();
         rb.velocity = movement * speed;
+
+        if (backed)
+        {
+            rb.velocity = Vector2.zero;
+            t.position = new Vector2(-10, 0);
+            eventSystem.SetSelectedGameObject(shootButton);
+            this.enabled = false;
+        }
 
         if (shot)
         {
