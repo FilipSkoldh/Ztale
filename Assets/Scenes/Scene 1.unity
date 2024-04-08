@@ -5432,6 +5432,7 @@ MonoBehaviour:
   - {fileID: 615524353}
   - {fileID: 1886315566}
   - {fileID: 1281399486}
+  saveAndLoad: {fileID: 1627807985}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807982
 MonoBehaviour:
@@ -5567,17 +5568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2740fce42be64797e6bce03bec4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pInventory: {fileID: 1627807986}
-  chest1: {fileID: 477761557}
-  chest2: {fileID: 0}
-  chest3: {fileID: 0}
-  chest4: {fileID: 0}
-  chest5: {fileID: 0}
-  chest6: {fileID: 0}
-  chest7: {fileID: 0}
-  chest8: {fileID: 0}
-  chest9: {fileID: 0}
-  chest10: {fileID: 0}
+  inventories:
+  - {fileID: 1627807986}
+  - {fileID: 477761557}
 --- !u!114 &1627807986
 MonoBehaviour:
   m_ObjectHideFlags: 0
