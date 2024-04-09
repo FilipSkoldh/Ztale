@@ -60,7 +60,7 @@ public class BaseEnemyRelay : MonoBehaviour
             {
                 spareActs.RemoveAt(spareActs.Count - 1);
             }
-            act = acts.Count + spareActs.Count;
+            act = acts.Count + spareActs.Count - 1;
             actingText.text = actDescriptions[acts.Count + spareActs.Count];
         }
         else

@@ -2300,6 +2300,7 @@ MonoBehaviour:
   - spare2Responce
   - spare1Responce
   - spareResponce
+  - test
   speechBubble: {fileID: 818433624}
   attacks: {fileID: 73999538}
   interactAction:
@@ -2338,7 +2339,7 @@ MonoBehaviour:
   - spare2
   - spare1
   - spare
-  spareActs: 020000000200000002000000
+  spareActs: 020000000000000001000000
   talk: {fileID: 471193624}
   actingText: {fileID: 1761098183}
   interactAction:
