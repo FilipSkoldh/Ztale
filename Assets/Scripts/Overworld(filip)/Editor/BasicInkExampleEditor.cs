@@ -3,12 +3,12 @@ using Ink.UnityIntegration;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BasicInkExample))]
+[CustomEditor(typeof(InkScript))]
 [InitializeOnLoad]
 public class BasicInkExampleEditor : Editor {
     static bool storyExpanded;
     static BasicInkExampleEditor () {
-        BasicInkExample.OnCreateStory += OnCreateStory;
+        InkScript.OnCreateStory += OnCreateStory;
     }
 
     static void OnCreateStory (Story story) {
@@ -19,8 +19,8 @@ public class BasicInkExampleEditor : Editor {
 	public override void OnInspectorGUI () {
 		Repaint();
 		base.OnInspectorGUI ();
-		var realTarget = target as BasicInkExample;
-		var story = realTarget.story;
+		var realTarget = target as InkScript;
+		var story = realTarget.inkStory;
 		InkPlayerWindow.DrawStoryPropertyField(story, ref storyExpanded, new GUIContent("Story"));
 	}
 }

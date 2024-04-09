@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using QuantumTek.QuantumInventory;
 
-public class characterScript : MonoBehaviour
+public class CharacterScript : MonoBehaviour
 {
     ///Declaring shit
     [SerializeField] private float speed = 1;
@@ -14,11 +14,8 @@ public class characterScript : MonoBehaviour
     [SerializeField] private InputActionProperty interact;
     [SerializeField] private Canvas dialogCanvas;
     [SerializeField] private GameObject inventoryGUI;
-    [SerializeField] private QI_Chest chestScript;
-    [SerializeField] private interactWithChest interactWithChest;
-    [SerializeField] private GameObject chestGUI;
     private bool sprintLF = false;
-    private BasicInkExample BasicInkExample;
+    private InkScript inkScript;
     private Animator anim;
     private Rigidbody2D rb;
     private Transform trans;
@@ -28,8 +25,8 @@ public class characterScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         trans = GetComponent<Transform>();
-        BasicInkExample = GetComponent<BasicInkExample>();
-        BasicInkExample.enabled = false;
+        inkScript = GetComponent<InkScript>();
+        inkScript.enabled = false;
     }
 
     // Update is called once per frame
@@ -87,17 +84,17 @@ public class characterScript : MonoBehaviour
                 Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f), 0, new Vector2(anim.GetFloat("x"), anim.GetFloat("y")), 0.4f, 8).transform;
                 if (cast != null)
                 {
-                    if (cast.GetComponent<simpleInkStorage>() != null)
+                    if (cast.GetComponent<SimpleInkStorage>() != null)
                     {
-                        BasicInkExample.inkJSONAsset = cast.GetComponent<simpleInkStorage>().inkStorage;
-                        BasicInkExample.enabled = true;
+                        inkScript.inkJSONAsset = cast.GetComponent<SimpleInkStorage>().inkStorage;
+                        inkScript.enabled = true;
                     }
                 }
             }
         }
         else
         {
-            BasicInkExample.enabled = false;
+            inkScript.enabled = false;
             rb.velocity = Vector3.zero;
             anim.SetBool("moving", false);
         }

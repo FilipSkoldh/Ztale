@@ -7,19 +7,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
-public class BasicInkExample : MonoBehaviour {
+public class InkScript: MonoBehaviour {
     public static event Action<Story> OnCreateStory;
 	
     void OnEnable () {
 		// Remove the default message
 		RemoveChildren();
 		StartStory();
-	}
+    }
 
 	// Creates a new Story object with the compiled story which we can then play!
 	void StartStory () {
-		story = new Story (inkJSONAsset.text);
-        if(OnCreateStory != null) OnCreateStory(story);
+		inkStory = new Story (inkJSONAsset.text);
+        if(OnCreateStory != null) OnCreateStory(inkStory);
+        inkStory.BindExternalFunction("OpenChest", (int chestNumber) => { chest.OpenChest(chestNumber); });
 		RefreshView();
 	}
 	
@@ -29,11 +30,13 @@ public class BasicInkExample : MonoBehaviour {
 	void RefreshView () {
 		// Remove all the UI on screen
 		RemoveChildren ();
+
+
 		
 		// Read all the content until we can't continue any more
-		while (story.canContinue) {
+		while (inkStory.canContinue) {
 			// Continue gets the next line of the story
-			string text = story.Continue ();
+			string text = inkStory.Continue ();
 			// This removes any white space from the text.
 			text = text.Trim();
 			// Display the text on screen!
@@ -41,9 +44,9 @@ public class BasicInkExample : MonoBehaviour {
 		}
 		List<Button> buttons = new List<Button>(); 
 		// Display all the choices, if there are any!
-		if(story.currentChoices.Count > 0) {
-			for (int i = 0; i < story.currentChoices.Count; i++) {
-				Choice choice = story.currentChoices [i];
+		if(inkStory.currentChoices.Count > 0) {
+			for (int i = 0; i < inkStory.currentChoices.Count; i++) {
+				Choice choice = inkStory.currentChoices [i];
 				Button button = CreateChoiceView (choice.text.Trim ());
 				buttons.Add (button);
 				// Tell the button what to do when we press it
@@ -60,9 +63,9 @@ public class BasicInkExample : MonoBehaviour {
 		{
 			RemoveChildren () ;
 		}
-		if(story.currentChoices.Count == 1)
+		if(inkStory.currentChoices.Count == 1)
 		{
-			if (story.currentChoices[0].text == ".")
+			if (inkStory.currentChoices[0].text == ".")
 			{
                 buttons[0].transform.localPosition = new Vector3(-2000, 315, 0);
             }
@@ -72,12 +75,12 @@ public class BasicInkExample : MonoBehaviour {
             }
 
         }
-        else if (story.currentChoices.Count == 2)
+        else if (inkStory.currentChoices.Count == 2)
         {
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
             buttons[1].transform.localPosition = new Vector3(246, 315, 0);
         }
-        else if (story.currentChoices.Count == 3)
+        else if (inkStory.currentChoices.Count == 3)
         {
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
             buttons[1].transform.localPosition = new Vector3(-151, 315, 0);
@@ -90,7 +93,7 @@ public class BasicInkExample : MonoBehaviour {
 	// When we click the choice button, tell the story to choose that choice!
 	void OnClickChoiceButton (Choice choice) 
 	{
-		story.ChooseChoiceIndex (choice.index);
+		inkStory.ChooseChoiceIndex (choice.index);
 		RefreshView();
 	}
 
@@ -125,9 +128,11 @@ public class BasicInkExample : MonoBehaviour {
 		}
 	}
 
-	
-	public TextAsset inkJSONAsset = null;
-	public Story story;
+
+
+
+    public TextAsset inkJSONAsset = null;
+	public Story inkStory;
 
 	[SerializeField]
 	private Canvas canvas = null;
@@ -138,4 +143,5 @@ public class BasicInkExample : MonoBehaviour {
 	private GameObject textPrefab = null;
 	[SerializeField]
 	private Button buttonPrefab = null;
+	[SerializeField] private InteractWithChest chest;
 }

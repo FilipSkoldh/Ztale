@@ -1,3 +1,4 @@
+EXTERNAL OpenChest(chestNumber)
 -> yo
 
 
@@ -14,6 +15,8 @@
 *[no] -> yo
 *fuck you
 - fuck you too
+*.
+~ OpenChest(1)
 ->DONE
 
 ==bruh==

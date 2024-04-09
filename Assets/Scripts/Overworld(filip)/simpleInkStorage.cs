@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class simpleInkStorage : MonoBehaviour
+public class SimpleInkStorage : MonoBehaviour
 {
     public TextAsset inkStorage;
 

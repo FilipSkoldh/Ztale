@@ -5421,18 +5421,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6219ea3ac89dbde418bea1d3d3bf10dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invGameobj: {fileID: 1434326439}
+  openInventory: {fileID: 1627807983}
+  chestGameobj: {fileID: 1203848669}
   eventSystem: {fileID: 895696911}
   invList:
-  - {fileID: 1945165615}
-  - {fileID: 988259034}
-  - {fileID: 829251244}
-  - {fileID: 1894281224}
-  - {fileID: 1453434124}
-  - {fileID: 615524353}
-  - {fileID: 1886315566}
-  - {fileID: 1281399486}
+  - {fileID: 2055104035}
+  - {fileID: 1716660779}
+  - {fileID: 94301361}
+  - {fileID: 168363842}
+  - {fileID: 1002038799}
+  - {fileID: 850083921}
+  - {fileID: 385634036}
+  - {fileID: 637254485}
   saveAndLoad: {fileID: 1627807985}
+  inv:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Inv
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 14953bf1-82bd-426d-bd24-9426314f1ba5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  close:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Close
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7822fe90-2452-4e9c-80ab-a714b69cec3e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807982
 MonoBehaviour:
@@ -5451,6 +5476,7 @@ MonoBehaviour:
   eventSystem: {fileID: 895696911}
   textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
+  chest: {fileID: 1627807981}
 --- !u!114 &1627807983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5486,7 +5512,7 @@ MonoBehaviour:
   - {fileID: 615524353}
   - {fileID: 1886315566}
   - {fileID: 1281399486}
-  inventory: {fileID: 477761557}
+  inventory: {fileID: 1627807986}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807984
 MonoBehaviour:
@@ -5553,9 +5579,6 @@ MonoBehaviour:
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   dialogCanvas: {fileID: 254043506}
   inventoryGUI: {fileID: 1434326439}
-  chestScript: {fileID: 1627807980}
-  interactWithChest: {fileID: 1627807981}
-  chestGUI: {fileID: 1203848669}
 --- !u!114 &1627807985
 MonoBehaviour:
   m_ObjectHideFlags: 0

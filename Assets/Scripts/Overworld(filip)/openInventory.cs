@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class openInventory : MonoBehaviour
+public class OpenInventory : MonoBehaviour
 {
     [SerializeField] private InputActionProperty openInv;
     [SerializeField] private GameObject inventoryGUI;
@@ -24,43 +24,41 @@ public class openInventory : MonoBehaviour
         inventory.AddItem(items["Shotgun"], 1);
         inventory.AddItem(items["Bandages"], 5);
     }
-    private void invRefresh()
-    {
-        for (int i = 0; i < inventory.Stacks.Count; i++)
-        {
-            GameObject itemRefresh = invList[i];
-            
-            if (inventory.GetStock(inventory.Stacks[i].Item.Name) != itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack)
-            {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.GetStock(inventory.Stacks[i].Item.Name)}";
-            }
-            else
-            {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
-            }
-        }
-    }
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         if (openInv.action.WasPressedThisFrame())
         {
-            if (inventoryGUI.activeSelf)
-            {
-                inventoryGUI.SetActive(false);
-            }
-            else
-            {
-                inventoryGUI.SetActive(true);
-                if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
-                  eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
-                invRefresh();
-            }
+            OpenInv();
         }
+    }
+
+    public void OpenInv()
+    {
         if (inventoryGUI.activeSelf)
         {
+            inventoryGUI.SetActive(false);
+        }
+        else
+        {
+            inventoryGUI.SetActive(true);
 
+            if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
+                eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
 
+            for (int i = 0; i < inventory.Stacks.Count; i++)
+            {
+                GameObject itemRefresh = invList[i];
+
+                if (inventory.GetStock(inventory.Stacks[i].Item.Name) != itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack)
+                {
+                    itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.GetStock(inventory.Stacks[i].Item.Name)}";
+                }
+                else
+                {
+                    itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
+                }
+            }
         }
     }
 }

@@ -1,25 +1,35 @@
 using QuantumTek.QuantumInventory;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class interactWithChest : MonoBehaviour
+public class InteractWithChest : MonoBehaviour
 {
-    [SerializeField] private GameObject invGameobj;
+    [SerializeField] private OpenInventory openInventory;
+    [SerializeField] private GameObject chestGameobj;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private List<GameObject> invList;
-    [SerializeField] private saveAndLoad saveAndLoad;
+    [SerializeField] private SaveAndLoad saveAndLoad;
+    [SerializeField] private InputActionProperty inv;
+    [SerializeField] private InputActionProperty close;
     private QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
-
-    public void Open_Chest(int inventoryNumber)
+    private void Start()
     {
         items = itemDatabase.Getdictionary();
+    }
+
+    public void OpenChest(int inventoryNumber)
+    {
         inventory = saveAndLoad.inventories[inventoryNumber];
-        
         inventory.AddItem(items["Bandages"], 5);
+        chestGameobj.SetActive(true);
+        openInventory.OpenInv();
+
 
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
@@ -35,8 +45,10 @@ public class interactWithChest : MonoBehaviour
                 itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
         }
+    }
 
-
-
+    private void Update()
+    {
+        
     }
 }
