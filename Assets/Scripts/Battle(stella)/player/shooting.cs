@@ -73,6 +73,7 @@ public class Shooting : MonoBehaviour
             }
             if (hitT != null)
             {
+
                 hitT.GetComponent<BaseEnemyRelay>().Hit(1);
 
                 for (int i = 0; i < enemies.childCount; i++)

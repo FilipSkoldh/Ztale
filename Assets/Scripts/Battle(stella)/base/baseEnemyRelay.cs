@@ -24,12 +24,15 @@ public class BaseEnemyRelay : MonoBehaviour
     public void Hit(int damage)
     {
         HP -= damage;
-        if (spareActs.Count > 0)
+        if (HP <= 0)
         {
-            if (spareActs[spareActs.Count - 1] == 0)
-            {
-                spareActs.RemoveAt(spareActs.Count - 1);
-            }
+            Debug.Log("killed");
+            gameObject.SetActive(false);
+        }
+
+        if (spareActs[spareActs.Count - 1] == 0 && spareActs.Count > 0)
+        {
+            spareActs.RemoveAt(spareActs.Count - 1);
             talk.Talk(2 + acts.Count + spareActs.Count);
         }
         else
@@ -39,12 +42,9 @@ public class BaseEnemyRelay : MonoBehaviour
     }
     public void Miss()
     {
-        if (spareActs.Count > 0)
+        if (spareActs[spareActs.Count - 1] == 1 && spareActs.Count > 0)
         {
-            if (spareActs[spareActs.Count - 1] == 1)
-            {
-                spareActs.RemoveAt(spareActs.Count - 1);
-            }
+            spareActs.RemoveAt(spareActs.Count - 1);
             talk.Talk(2 + acts.Count + spareActs.Count);
         }
         else
@@ -54,13 +54,16 @@ public class BaseEnemyRelay : MonoBehaviour
     }
     public void Act(int action)
     {
-        if (spareActs.Count > 0)
+        if (action == acts.Count)
         {
-            if (spareActs[spareActs.Count - 1] == action + 2)
-            {
-                spareActs.RemoveAt(spareActs.Count - 1);
-            }
-            act = acts.Count + spareActs.Count - 1;
+            Debug.Log("spared");
+            gameObject.SetActive(false);
+        }
+
+        if (spareActs[spareActs.Count - 1] == action + 2 && spareActs.Count > 0)
+        {
+            spareActs.RemoveAt(spareActs.Count - 1);
+            act = acts.Count + spareActs.Count;
             actingText.text = actDescriptions[acts.Count + spareActs.Count];
         }
         else

@@ -84,6 +84,11 @@ public class ActManager : MonoBehaviour
                     buttons[i].gameObject.SetActive(false);
                 }
             }
+            if (selectedEnemy.spareActs.Count == 0)
+            {
+                buttons[numActs].gameObject.SetActive(true);
+                buttons[numActs].GetComponentInChildren<TextMeshProUGUI>().text = "Spare";
+            }
             eventSystem.SetSelectedGameObject(buttons[0]);
         }
         else if (selectingAct)
