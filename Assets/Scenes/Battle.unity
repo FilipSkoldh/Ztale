@@ -2292,11 +2292,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLines:
-  - oww
-  - ha missed
-  - ive just been feeling bad
-  - fuck you
-  - hehe
+  - hitResponce
+  - missResponce
+  - talkResponce
+  - talk1Responce
+  - talk2Responce
+  - spare2Responce
+  - spare1Responce
+  - spareResponce
   speechBubble: {fileID: 818433624}
   attacks: {fileID: 73999538}
   interactAction:
@@ -2332,11 +2335,12 @@ MonoBehaviour:
   - you talk
   - you talk1
   - you talk2
-  spareActs:
-  - talk
-  - talk
-  - talk
+  - spare2
+  - spare1
+  - spare
+  spareActs: 020000000200000002000000
   talk: {fileID: 471193624}
+  actingText: {fileID: 1761098183}
   interactAction:
     m_UseReference: 1
     m_Action:
@@ -2349,7 +2353,6 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  actingText: {fileID: 1761098183}
 --- !u!1 &576189791
 GameObject:
   m_ObjectHideFlags: 0

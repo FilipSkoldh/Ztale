@@ -12,10 +12,10 @@ public class BaseEnemyRelay : MonoBehaviour
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
     public BaseEnemyTalk talk;
+    [SerializeField] private TextMeshProUGUI actingText;
 
     [SerializeField] private InputActionProperty interactAction;
 
-    [SerializeField] private TextMeshProUGUI actingText;
 
     private int act;
     private bool acting;
@@ -24,28 +24,50 @@ public class BaseEnemyRelay : MonoBehaviour
     public void Hit(int damage)
     {
         HP -= damage;
-        if (spareActs[spareActs.Count] == 0)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count);
+            if (spareActs[spareActs.Count - 1] == 0)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+            }
+            talk.Talk(2 + acts.Count + spareActs.Count);
         }
-        talk.Talk(0);
+        else
+        {
+            talk.Talk(0);
+        }
     }
     public void Miss()
     {
-        if (spareActs[spareActs.Count] == 1)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count);
+            if (spareActs[spareActs.Count - 1] == 1)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+            }
+            talk.Talk(2 + acts.Count + spareActs.Count);
         }
-        talk.Talk(1);
+        else
+        {
+            talk.Talk(1);
+        }
     }
     public void Act(int action)
     {
-        if (spareActs[spareActs.Count] == action + 2)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count);
+            if (spareActs[spareActs.Count - 1] == action + 2)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+            }
+            act = acts.Count + spareActs.Count;
+            actingText.text = actDescriptions[acts.Count + spareActs.Count];
         }
-        act = action;
-        actingText.text = actDescriptions[action];
+        else
+        {
+            act = action;
+            actingText.text = actDescriptions[action];
+        }
         acting = true;
     }
     private void Update()

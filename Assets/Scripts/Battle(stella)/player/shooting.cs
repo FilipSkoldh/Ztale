@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class shooting : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     public InputActionProperty move;
     public InputActionProperty shoot;
