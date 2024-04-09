@@ -8,6 +8,7 @@ public class SaveAndLoad : MonoBehaviour
 { 
 
     public QI_Inventory[] inventories = new QI_Inventory[2];
+    public QI_Chest[] chests = new QI_Chest[2];
 
 
 

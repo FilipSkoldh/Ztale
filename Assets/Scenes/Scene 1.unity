@@ -645,7 +645,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 142076155}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &142076155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +778,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 163380184}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &163380184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1047,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 202318955}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &202318955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1180,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 238701834}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &238701834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,6 +1632,7 @@ GameObject:
   - component: {fileID: 477761555}
   - component: {fileID: 477761554}
   - component: {fileID: 477761553}
+  - component: {fileID: 477761558}
   - component: {fileID: 477761556}
   - component: {fileID: 477761557}
   m_Layer: 3
@@ -1732,6 +1781,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: chest
   MaxStacks: 8
+--- !u!114 &477761558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477761552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1735139350c67c94d9362c561013cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 477761557}
 --- !u!1 &537730599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 606276349}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &606276349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2313,7 +2387,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 682847406}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &682847406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,7 +2520,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 826650451}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &826650451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3948,7 +4046,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1249012572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1249012572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4205,7 +4315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1338415856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1338415856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4326,7 +4448,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1365865630}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1365865630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4447,7 +4581,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1430104721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1430104721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4755,7 +4901,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1454728360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1454728360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5408,7 +5566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735139350c67c94d9362c561013cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 0}
+  Inventory: {fileID: 1627807986}
 --- !u!114 &1627807981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5435,7 +5593,7 @@ MonoBehaviour:
   - {fileID: 637254485}
   saveAndLoad: {fileID: 1627807985}
   inv:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Inv
       m_Type: 0
@@ -5445,9 +5603,9 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   close:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Close
       m_Type: 0
@@ -5457,7 +5615,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 8092682780929119201, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  playerChest: {fileID: 1627807980}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807982
 MonoBehaviour:
@@ -5501,6 +5660,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  closeInv:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Close Inv
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8dcbf99e-edcc-47da-85e8-b0ef0b5012cd
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 8092682780929119201, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   inventoryGUI: {fileID: 1434326439}
   eventSystem: {fileID: 895696911}
   invList:
@@ -5512,6 +5683,10 @@ MonoBehaviour:
   - {fileID: 615524353}
   - {fileID: 1886315566}
   - {fileID: 1281399486}
+  chestGUI: {fileID: 1203848669}
+  InteractWithChest: {fileID: 1627807981}
+  chestVendor: {fileID: 477761558}
+  playerChestVendor: {fileID: 1627807980}
   inventory: {fileID: 1627807986}
   itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
 --- !u!114 &1627807984
@@ -5594,6 +5769,9 @@ MonoBehaviour:
   inventories:
   - {fileID: 1627807986}
   - {fileID: 477761557}
+  chests:
+  - {fileID: 1627807980}
+  - {fileID: 477761558}
 --- !u!114 &1627807986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5690,7 +5868,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1657301637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1657301637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6399,7 +6589,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1782521637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1782521637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6559,7 +6761,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1817045599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemInteraction
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1817045599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7028,7 +7242,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1910760735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807981}
+        m_TargetAssemblyTypeName: InteractWithChest, Assembly-CSharp
+        m_MethodName: MoveFromChest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1910760735
 MonoBehaviour:
   m_ObjectHideFlags: 0

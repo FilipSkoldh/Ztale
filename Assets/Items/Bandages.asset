@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bandages
   Description: a narrow and long piece of cloth
+  useMessage: 
   Weight: 0.1
   Price: 1
   Icon: {fileID: 0}
   ItemPrefab: {fileID: 0}
-  MaxStack: 10
+  MaxStack: 20

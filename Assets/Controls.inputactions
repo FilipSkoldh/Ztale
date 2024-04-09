@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left",
+                    "name": "left",
                     "type": "Button",
                     "id": "227942ee-761b-421b-b77f-48089a48315e",
                     "expectedControlType": "Button",
@@ -78,9 +78,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right",
+                    "name": "right",
                     "type": "Button",
                     "id": "307a962b-f054-41b4-9791-ca7cf8ac7598",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "close",
+                    "type": "Button",
+                    "id": "1fa44924-9760-4439-8b80-4855b208a09f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -315,7 +324,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -326,7 +335,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -337,7 +346,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -348,7 +357,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52d9e203-0651-445a-947e-71623419f0aa",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "close",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
