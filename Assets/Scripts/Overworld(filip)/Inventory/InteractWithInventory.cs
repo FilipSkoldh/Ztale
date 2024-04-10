@@ -87,5 +87,9 @@ public class InteractWithInventory : MonoBehaviour
             RefreshInventory();
             InteractWithChest.RefreshChest();
         }
+        else
+        {
+            eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);
+        }
     }
 }
