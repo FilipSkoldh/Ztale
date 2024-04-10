@@ -30,10 +30,17 @@ public class BaseEnemyRelay : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (spareActs[spareActs.Count - 1] == 0 && spareActs.Count > 0)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count - 1);
-            talk.Talk(2 + acts.Count + spareActs.Count);
+            if (spareActs[spareActs.Count - 1] == 0)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+                talk.Talk(2 + acts.Count + spareActs.Count);
+            }
+            else
+            {
+                talk.Talk(0);
+            }
         }
         else
         {
@@ -42,13 +49,20 @@ public class BaseEnemyRelay : MonoBehaviour
     }
     public void Miss()
     {
-        if (spareActs[spareActs.Count - 1] == 1 && spareActs.Count > 0)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count - 1);
-            talk.Talk(2 + acts.Count + spareActs.Count);
+            if (spareActs[spareActs.Count - 1] == 1)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+                talk.Talk(2 + acts.Count + spareActs.Count);
+            }
+            else
+            {
+                talk.Talk(1);
+            }
         }
-        else
-        {
+        else 
+        { 
             talk.Talk(1);
         }
     }
@@ -60,11 +74,19 @@ public class BaseEnemyRelay : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (spareActs[spareActs.Count - 1] == action + 2 && spareActs.Count > 0)
+        if (spareActs.Count > 0)
         {
-            spareActs.RemoveAt(spareActs.Count - 1);
-            act = acts.Count + spareActs.Count;
-            actingText.text = actDescriptions[acts.Count + spareActs.Count];
+            if (spareActs[spareActs.Count - 1] == action + 2)
+            {
+                spareActs.RemoveAt(spareActs.Count - 1);
+                act = acts.Count + spareActs.Count;
+                actingText.text = actDescriptions[acts.Count + spareActs.Count];
+            }
+            else
+            {
+                act = action;
+                actingText.text = actDescriptions[action];
+            }
         }
         else
         {
