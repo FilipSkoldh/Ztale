@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BaseEnemyTalk : MonoBehaviour
-{
+{ 
     [SerializeField] private List<string> enemyLines = new List<string>();
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private BaseEnemyAttacks attacks;
