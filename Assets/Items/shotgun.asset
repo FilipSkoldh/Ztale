@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea18bc8bfb5d7455b95c75307b68ce47, type: 3}
-  m_Name: shotgun
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
   Name: Shotgun
   Description: A hillbilly looking ah fucking sawed off shotgun

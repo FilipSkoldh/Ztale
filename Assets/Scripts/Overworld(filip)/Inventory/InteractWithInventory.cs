@@ -25,7 +25,7 @@ public class InteractWithInventory : MonoBehaviour
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
     private int selectedItem = 0;
-    private bool itemInteracted = false;
+    int wait = 0;
 
 
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class InteractWithInventory : MonoBehaviour
         }
         if (interact.action.WasPressedThisFrame())
         {
-            if (itemInteracted)
+            if (wait > 2 && canvas.transform.childCount != 0)
             {
                 int childCount = canvas.transform.childCount;
                 for (int i = childCount - 1; i >= 0; --i)
@@ -58,6 +58,7 @@ public class InteractWithInventory : MonoBehaviour
                 inventoryGUI.SetActive(true);
             }
         }
+        wait++;
     }
 
     public void OpenInv()
@@ -119,14 +120,20 @@ public class InteractWithInventory : MonoBehaviour
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Stacks[selectedItem].Item.Description;
         storyText.transform.SetParent(canvas.transform, false);
         inventoryGUI.SetActive(false);
+        RefreshInventory();
+        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+        wait = 0;
     }
 
     public void ItemThrow()
     {
         GameObject storyText = Instantiate(textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
-        storyText.GetComponentInChildren<TextMeshProUGUI>().text = $"{inventory.Stacks[selectedItem].Item.name} was thrown away";
+        storyText.GetComponentInChildren<TextMeshProUGUI>().text = $"{inventory.Stacks[selectedItem].Item.Name} was thrown away";
         storyText.transform.SetParent(canvas.transform, false);
-        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.name, 1);
+        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
         inventoryGUI.SetActive(false);
+        RefreshInventory();
+                        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+        wait = 0;
     }
 }

@@ -1,8 +1,6 @@
 using QuantumTek.QuantumInventory;
 using System.Collections.Generic;
-using System.Transactions;
 using TMPro;
-using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
