@@ -5,13 +5,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BaseEnemyTalk : MonoBehaviour
-{ 
+{
     [SerializeField] private List<string> enemyLines = new List<string>();
-    [SerializeField] private GameObject speechBubble;
-    [SerializeField] private BaseEnemyAttacks attacks;
 
-    [SerializeField] private InputActionProperty interactAction;
+    private BattleManager battleManager;
+    private BaseEnemyAttacks attacks;
+    private GameObject speechBubble;
+    private InputActionProperty interactProperty;
 
+    private void Start()
+    {
+        battleManager = transform.parent.GetComponent<BattleManager>();
+        interactProperty = battleManager.interactProperty;
+        attacks = battleManager.GetComponent<BaseEnemyAttacks>();
+        speechBubble = transform.GetChild(0).GetChild(0).gameObject;
+    }
 
     public void Talk(int line)
     {
@@ -22,7 +30,7 @@ public class BaseEnemyTalk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (speechBubble.activeSelf && interactAction.action.WasPressedThisFrame())
+        if (speechBubble.activeSelf && interactProperty.action.WasPressedThisFrame())
         {
             speechBubble.SetActive(false);
             attacks.Attack();

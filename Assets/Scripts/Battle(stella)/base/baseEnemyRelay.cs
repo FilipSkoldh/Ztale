@@ -7,27 +7,35 @@ using UnityEngine.InputSystem;
 
 public class BaseEnemyRelay : MonoBehaviour
 {
+    private BattleManager battleManager;
+    private InputActionProperty interactProperty;
+    private BaseEnemyTalk talk;
+
     public int HP;
     public List<string> acts = new();
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
-    public BaseEnemyTalk talk;
     [SerializeField] private TextMeshProUGUI actingText;
 
-    [SerializeField] private InputActionProperty interactAction;
 
 
     private int act;
     private bool acting;
     private bool acter;
     private bool interactPressedLastFrame;
+
+    private void Start()
+    {
+        battleManager = transform.parent.GetComponent<BattleManager>();
+        interactProperty = battleManager.interactProperty;
+        talk = GetComponent<BaseEnemyTalk>();
+    }
     public void Hit(int damage)
     {
         HP -= damage;
         if (HP <= 0)
         {
-            Debug.Log("killed");
-            gameObject.SetActive(false);
+            transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 1;
         }
 
         if (spareActs.Count > 0)
@@ -70,8 +78,7 @@ public class BaseEnemyRelay : MonoBehaviour
     {
         if (action == acts.Count)
         {
-            Debug.Log("spared");
-            gameObject.SetActive(false);
+            transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 2;
         }
 
         if (spareActs.Count > 0)
@@ -97,7 +104,7 @@ public class BaseEnemyRelay : MonoBehaviour
     }
     private void Update()
     {
-        if (acter && interactAction.action.WasPressedThisFrame())
+        if (acter && interactProperty.action.WasPressedThisFrame())
         {
             acting = false;
             actingText.text = "";

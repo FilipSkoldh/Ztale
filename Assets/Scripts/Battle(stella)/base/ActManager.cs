@@ -8,20 +8,26 @@ using UnityEngine.UI;
 
 public class ActManager : MonoBehaviour
 {
+    private BattleManager battleManager;
+    private InputActionProperty backInput;
+
     [SerializeField] private List<GameObject> buttons = new();
-    [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject actButton;
     [SerializeField] private GameObject noButton;
+
+    [SerializeField] private EventSystem eventSystem;
+
+
     private BaseEnemyRelay selectedEnemy;
 
-    [SerializeField] private InputActionProperty backInput;
 
     private bool selectingEnemy;
     private bool selectingAct;
     // Start is called before the first frame update
     void Start()
     {
-        
+        battleManager = GetComponent<BattleManager>();
+        backInput = battleManager.backProperty;
     }
 
     // Update is called once per frame

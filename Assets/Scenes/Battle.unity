@@ -244,21 +244,9 @@ MonoBehaviour:
   - {fileID: 447763205}
   - {fileID: 829305083}
   - {fileID: 1453291750}
-  eventSystem: {fileID: 1193810440}
   actButton: {fileID: 353184233}
   noButton: {fileID: 608194586}
-  backInput:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Back Input
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: c81c8273-1933-489e-a814-a782620c2720
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  eventSystem: {fileID: 1193810440}
 --- !u!114 &73999540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +259,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc790d9a7cd14142b59e3e9a13ad329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyStates: 00000000
+  interactProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Interact Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ab21a8fc-6135-47b1-95e5-0e88a0aee877
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  backProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Back Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 1cbfdc2a-eace-4852-a3e9-baa132b84255
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
 --- !u!1 &92037608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,20 +2199,6 @@ MonoBehaviour:
   - spare1Responce
   - spareResponce
   - test
-  speechBubble: {fileID: 818433624}
-  attacks: {fileID: 73999538}
-  interactAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Interact
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: db80c84e-0872-40c9-be7e-5d7480ccbf43
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
 --- !u!114 &471193625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2225,20 +2224,7 @@ MonoBehaviour:
   - spare1
   - spare
   spareActs: 020000000200000002000000
-  talk: {fileID: 471193624}
   actingText: {fileID: 1761098183}
-  interactAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Interact
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: ee7996dc-80c5-49f5-bbd0-01a8b368af2e
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
 --- !u!61 &471193626
 BoxCollider2D:
   m_ObjectHideFlags: 0
