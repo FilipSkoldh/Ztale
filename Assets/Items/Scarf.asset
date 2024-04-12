@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93675abe7d63f49639a0f05d57762ace, type: 3}
-  m_Name: Item database
+  m_Script: {fileID: 11500000, guid: 8d829760843196949a82576c3719ee7e, type: 3}
+  m_Name: Scarf
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 11400000, guid: c5b9e3484a9f4404093373b0f9435900, type: 2}
-  - {fileID: 11400000, guid: febf9e3a1b3b2f44a87d4cb2b67f7ca6, type: 2}
+  Name: Scarf
+  Description: Your grandmas red scarf
+  useMessage: You put your grandmas scarf around you
+  Price: 1
+  Icon: {fileID: 0}
+  ItemPrefab: {fileID: 0}
+  MaxStack: 1
+  armour: 1

@@ -7,8 +7,8 @@ using UnityEngine;
 public class SaveAndLoad : MonoBehaviour
 { 
 
-    public QI_Inventory[] inventories = new QI_Inventory[2];
-    public QI_Chest[] chests = new QI_Chest[2];
+    public QI_Inventory[] chests = new QI_Inventory[1];
+    public QI_Chest[] transferChests = new QI_Chest[2];
 
 
 
@@ -19,7 +19,8 @@ public class SaveAndLoad : MonoBehaviour
     }
     public void LoadSave()
     {
-
+        GlobalVariables.MaxHp = 100;
+        GlobalVariables.Hp = 10;
     }
 
 

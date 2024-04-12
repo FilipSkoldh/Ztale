@@ -14,6 +14,7 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] private InputActionProperty interact;
     [SerializeField] private Canvas dialogCanvas;
     [SerializeField] private GameObject inventoryGUI;
+    [SerializeField] private SaveAndLoad saveAndLoad;
     private bool sprintLF = false;
     private InkScript inkScript;
     private Animator anim;
@@ -27,6 +28,7 @@ public class CharacterScript : MonoBehaviour
         trans = GetComponent<Transform>();
         inkScript = GetComponent<InkScript>();
         inkScript.enabled = false;
+        saveAndLoad.LoadSave();
     }
 
     // Update is called once per frame

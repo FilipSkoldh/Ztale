@@ -2520,7 +2520,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 769800326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1627807983}
+        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
+        m_MethodName: ItemUse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &769800326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5874,7 +5886,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 8092682780929119201, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   playerChest: {fileID: 1627807980}
-  itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
 --- !u!114 &1627807982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5962,7 +5974,7 @@ MonoBehaviour:
     Item: {fileID: 0}
     Amount: 0
   inventory: {fileID: 1627807986}
-  itemDatabase: {fileID: 11400000, guid: abb2246c970d4614ba0c462450c10efb, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
 --- !u!114 &1627807984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6028,6 +6040,7 @@ MonoBehaviour:
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   dialogCanvas: {fileID: 254043506}
   inventoryGUI: {fileID: 1434326439}
+  saveAndLoad: {fileID: 1627807985}
 --- !u!114 &1627807985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6040,10 +6053,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2740fce42be64797e6bce03bec4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventories:
-  - {fileID: 1627807986}
-  - {fileID: 477761557}
   chests:
+  - {fileID: 477761557}
+  transferChests:
   - {fileID: 1627807980}
   - {fileID: 477761558}
 --- !u!114 &1627807986
@@ -6873,7 +6885,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: inventory.Stacks[selectedItem].Item.Description
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1745955417

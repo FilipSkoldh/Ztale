@@ -16,7 +16,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_CraftingHandler manages crafting queues of items waiting to be crafted.
     /// </summary>
-    [AddComponentMenu("Quantum Tek/Quantum Inventory/Crafting Handler")]
+    [AddComponentMenu("Quantum Inventory/Crafting Handler")]
     [DisallowMultipleComponent]
     public class QI_CraftingHandler : MonoBehaviour
     {

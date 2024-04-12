@@ -9,17 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9d3a3fe2de9ca84d9fc87d575b5b3c1, type: 3}
-  m_Name: Shotgun
+  m_Script: {fileID: 11500000, guid: 8d829760843196949a82576c3719ee7e, type: 3}
+  m_Name: Chainmail
   m_EditorClassIdentifier: 
-  Name: Shotgun
-  Description: A sawed off hillbilly looking shotgun
-  useMessage: You equipped the shotgun
-  Price: 200
+  Name: Chainmail
+  Description: A heavy shirt made of interlocking metal rings
+  useMessage: You put the chainmail on
+  Price: 100
   Icon: {fileID: 0}
   ItemPrefab: {fileID: 0}
   MaxStack: 1
-  weaponDamage: 50
-  weaponType: 3
-  weaponFireRate: 1
-  weaponSpread: 4
+  armour: 20

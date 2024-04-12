@@ -17,7 +17,7 @@ public class InteractWithChest : MonoBehaviour
     [SerializeField] private QI_Chest playerChest;
     private QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
-    private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
+    private Dictionary<string, QI_ItemData> items = new();
     QI_Chest chestVendor;
     private void Start()
     {
@@ -26,11 +26,13 @@ public class InteractWithChest : MonoBehaviour
 
     public void OpenChest(int inventoryNumber)
     {
-        inventory = saveAndLoad.inventories[inventoryNumber];
+        inventory = saveAndLoad.chests[inventoryNumber];
         inventory.AddItem(items["Bandages"], 5);
+        inventory.AddItem(items["Pistol"], 1);
         chestGameobj.SetActive(true);
         openInventory.OpenInv();
-        chestVendor = saveAndLoad.chests[inventoryNumber];
+        chestVendor = saveAndLoad.transferChests[inventoryNumber+1];
+
         RefreshChest();
     }
 

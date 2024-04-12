@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9d3a3fe2de9ca84d9fc87d575b5b3c1, type: 3}
-  m_Name: Shotgun
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  Name: Shotgun
-  Description: A sawed off hillbilly looking shotgun
-  useMessage: You equipped the shotgun
-  Price: 200
+  Name: Pistol
+  Description: A small handgun
+  useMessage: You equipped the pistol
+  Price: 100
   Icon: {fileID: 0}
   ItemPrefab: {fileID: 0}
   MaxStack: 1
-  weaponDamage: 50
-  weaponType: 3
-  weaponFireRate: 1
-  weaponSpread: 4
+  weaponDamage: 5
+  weaponType: 0
+  weaponFireRate: 2
+  weaponSpread: 1

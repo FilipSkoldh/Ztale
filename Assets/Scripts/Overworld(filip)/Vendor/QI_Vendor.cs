@@ -6,7 +6,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_Vendor handles everything that a vendor would need: currency, items, and the ability to exchange between them.
     /// </summary>
-    [AddComponentMenu("Quantum Tek/Quantum Inventory/Vendor")]
+    [AddComponentMenu("Quantum Inventory/Vendor")]
     [DisallowMultipleComponent]
     public class QI_Vendor : MonoBehaviour
     {

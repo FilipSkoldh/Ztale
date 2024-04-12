@@ -23,9 +23,10 @@ public class InteractWithInventory : MonoBehaviour
     public QI_ItemStack equipped;
     public QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
-    private Dictionary<string, QI_ItemData> items = new Dictionary<string, QI_ItemData>();
+    private Dictionary<string, QI_ItemData> items = new();
     private int selectedItem = 0;
     int wait = 0;
+    bool interacting = false;
 
 
     // Start is called before the first frame update
@@ -48,17 +49,20 @@ public class InteractWithInventory : MonoBehaviour
         }
         if (interact.action.WasPressedThisFrame())
         {
-            if (wait > 2 && canvas.transform.childCount != 0)
+            if (wait > 2 && interacting)
             {
                 int childCount = canvas.transform.childCount;
                 for (int i = childCount - 1; i >= 0; --i)
                 {
                     Destroy(canvas.transform.GetChild(i).gameObject);
                 }
+                RefreshInventory();
                 inventoryGUI.SetActive(true);
+                interacting = false;
             }
         }
         wait++;
+        Debug.Log(GlobalVariables.EquippedWeapon);
     }
 
     public void OpenInv()
@@ -95,6 +99,7 @@ public class InteractWithInventory : MonoBehaviour
             {
                 itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
+            interacting = false;
         }
     }
 
@@ -108,32 +113,53 @@ public class InteractWithInventory : MonoBehaviour
         }
         else
         {
-            eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);
-            selectedItem = button;
+            if (inventory.Stacks.Count > button)
+            {
+                eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);
+                selectedItem = button;
+            }
         }
+    }
+
+    public void ItemUse()
+    {
+        ItemInteracted(inventory.Stacks[selectedItem].Item.useMessage);
+        if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
+        {
+            GlobalVariables.Hp += (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount;
+        }
+        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
+        {
+            if (GlobalVariables.EquippedEquipment != null)
+                inventory.AddItem((GlobalVariables.EquippedWeapon as QI_ItemData), 1);
+
+            GlobalVariables.EquippedWeapon = (inventory.Stacks[selectedItem].Item as QI_Weapons);
+        }
+        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
     }
 
 
     public void ItemInfo()
     {
-        GameObject storyText = Instantiate(textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
-        storyText.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Stacks[selectedItem].Item.Description;
-        storyText.transform.SetParent(canvas.transform, false);
-        inventoryGUI.SetActive(false);
-        RefreshInventory();
-        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
-        wait = 0;
+        ItemInteracted(inventory.Stacks[selectedItem].Item.Description);
     }
 
     public void ItemThrow()
     {
-        GameObject storyText = Instantiate(textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
-        storyText.GetComponentInChildren<TextMeshProUGUI>().text = $"{inventory.Stacks[selectedItem].Item.Name} was thrown away";
-        storyText.transform.SetParent(canvas.transform, false);
+        ItemInteracted($"{inventory.Stacks[selectedItem].Item.Name} was thrown away");
+
         inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
+    }
+
+    public void ItemInteracted(string text)
+    {
+        GameObject storyText = Instantiate(textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
+        storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        storyText.transform.SetParent(canvas.transform, false);
+
+        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
         inventoryGUI.SetActive(false);
-        RefreshInventory();
-                        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
         wait = 0;
+        interacting = true;
     }
 }

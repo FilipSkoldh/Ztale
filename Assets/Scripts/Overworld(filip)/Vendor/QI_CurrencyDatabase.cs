@@ -6,7 +6,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_CurrencyDatabase stores a list of currencies.
     /// </summary>
-    [CreateAssetMenu(menuName = "Quantum Tek/Quantum Inventory/Currency Database")]
+    [CreateAssetMenu(menuName = "Quantum Inventory/Currency Database")]
     public class QI_CurrencyDatabase : ScriptableObject
     {
         public List<QI_Currency> Currencies = new List<QI_Currency>();

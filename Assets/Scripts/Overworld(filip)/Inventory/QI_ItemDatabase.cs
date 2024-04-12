@@ -6,7 +6,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_ItemDatabase stores a list of item data.
     /// </summary>
-    [CreateAssetMenu(menuName = "Quantum Tek/Quantum Inventory/Item Database")]
+    [CreateAssetMenu(menuName = "Quantum Inventory/Item Database")]
     public class QI_ItemDatabase : ScriptableObject
     {
         public List<QI_ItemData> Items = new List<QI_ItemData>();

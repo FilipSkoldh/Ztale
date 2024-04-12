@@ -6,7 +6,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_CraftingRecipe represents a list of crafting ingredients for making an item.
     /// </summary>
-    [CreateAssetMenu(menuName = "Quantum Tek/Quantum Inventory/Crafting Recipe", fileName = "New Crafting Recipe")]
+    [CreateAssetMenu(menuName = "Quantum Inventory/Crafting Recipe", fileName = "New Crafting Recipe")]
     public class QI_CraftingRecipe : ScriptableObject
     {
         public string Name;

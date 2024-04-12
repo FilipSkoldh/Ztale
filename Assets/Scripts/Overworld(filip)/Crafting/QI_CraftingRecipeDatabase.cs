@@ -6,7 +6,7 @@ namespace QuantumTek.QuantumInventory
     /// <summary>
     /// QI_CraftingRecipeDatabase stores a list of crafting recipes.
     /// </summary>
-    [CreateAssetMenu(menuName = "Quantum Tek/Quantum Inventory/Crafting Recipe Database")]
+    [CreateAssetMenu(menuName = "Quantum Inventory/Crafting Recipe Database")]
     public class QI_CraftingRecipeDatabase : ScriptableObject
     {
         public List<QI_CraftingRecipe> CraftingRecipes = new List<QI_CraftingRecipe>();

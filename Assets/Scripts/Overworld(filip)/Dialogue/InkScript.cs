@@ -19,7 +19,10 @@ public class InkScript: MonoBehaviour {
 	// Creates a new Story object with the compiled story which we can then play!
 	void StartStory () {
 		inkStory = new Story (inkJSONAsset.text);
-        if(OnCreateStory != null) OnCreateStory(inkStory);
+        if (OnCreateStory != null)
+		{
+			OnCreateStory(inkStory);
+		}
         inkStory.BindExternalFunction("OpenChest", (int chestNumber) => { chest.OpenChest(chestNumber); });
 		RefreshView();
 	}
@@ -42,7 +45,7 @@ public class InkScript: MonoBehaviour {
 			// Display the text on screen!
 			CreateContentView(text);
 		}
-		List<Button> buttons = new List<Button>(); 
+		List<Button> buttons = new(); 
 		// Display all the choices, if there are any!
 		if(inkStory.currentChoices.Count > 0) {
 			for (int i = 0; i < inkStory.currentChoices.Count; i++) {
