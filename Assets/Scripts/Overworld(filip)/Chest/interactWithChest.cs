@@ -27,7 +27,7 @@ public class InteractWithChest : MonoBehaviour
     public void OpenChest(int inventoryNumber)
     {
         inventory = saveAndLoad.chests[inventoryNumber];
-        inventory.AddItem(items["Bandages"], 5);
+        inventory.AddItem(items["Bandages"], 10);
         inventory.AddItem(items["Pistol"], 1);
         chestGameobj.SetActive(true);
         openInventory.OpenInv();

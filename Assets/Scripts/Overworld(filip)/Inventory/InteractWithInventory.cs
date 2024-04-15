@@ -34,14 +34,17 @@ public class InteractWithInventory : MonoBehaviour
     {
         items = itemDatabase.Getdictionary();
         inventory.AddItem(items["Shotgun"], 1);
-        inventory.AddItem(items["Bandages"], 5);
+        inventory.AddItem(items["Bandages"], 10);
+        inventory.AddItem(items["Chainmail"], 1);
+        inventory.AddItem(items["Scarf"], 1);
     }
 
     private void Update()
     {
         if (openInv.action.WasPressedThisFrame())
         {
-            OpenInv();
+            if (canvas.transform.childCount == 0)
+                OpenInv();
         }
         if (closeInv.action.WasPressedThisFrame())
         {
@@ -62,23 +65,23 @@ public class InteractWithInventory : MonoBehaviour
             }
         }
         wait++;
-        Debug.Log(GlobalVariables.EquippedWeapon);
     }
 
     public void OpenInv()
     {
-        if (inventoryGUI.activeSelf)
-        {
-            inventoryGUI.SetActive(false);
-        }
-        else
-        {
-            inventoryGUI.SetActive(true);
 
-            if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
-                eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
-            RefreshInventory();
-        }
+            if (inventoryGUI.activeSelf)
+            {
+                inventoryGUI.SetActive(false);
+            }
+            else
+            {
+                inventoryGUI.SetActive(true);
+
+                if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
+                    eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+                RefreshInventory();
+            }
     }
     public void RefreshInventory()
     {
@@ -130,10 +133,20 @@ public class InteractWithInventory : MonoBehaviour
         }
         else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
         {
-            if (GlobalVariables.EquippedEquipment != null)
-                inventory.AddItem((GlobalVariables.EquippedWeapon as QI_ItemData), 1);
+            if (GlobalVariables.EquippedWeapon != null)
+            {
+                inventory.AddItem(GlobalVariables.EquippedWeapon, 1);
+            }
 
             GlobalVariables.EquippedWeapon = (inventory.Stacks[selectedItem].Item as QI_Weapons);
+        }
+        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
+        {
+            if (GlobalVariables.EquippedEquipment != null)
+            {
+                inventory.AddItem(GlobalVariables.EquippedEquipment, 1);
+            }
+            GlobalVariables.EquippedEquipment = (inventory.Stacks[selectedItem].Item as QI_Equipment);
         }
         inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
     }
