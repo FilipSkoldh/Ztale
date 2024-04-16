@@ -15,19 +15,19 @@ public class BaseEnemyRelay : MonoBehaviour
     public List<string> acts = new();
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
-    [SerializeField] private TextMeshProUGUI actingText;
+    private TextMeshProUGUI actingText;
 
 
 
     private int act;
     private bool acting;
     private bool acter;
-    private bool interactPressedLastFrame;
 
     private void Start()
     {
         battleManager = transform.parent.GetComponent<BattleManager>();
         interactProperty = battleManager.interactProperty;
+        actingText = battleManager.actingText;
         talk = GetComponent<BaseEnemyTalk>();
     }
     public void Hit(int damage)

@@ -10,17 +10,11 @@ public class ActManager : MonoBehaviour
 {
     private BattleManager battleManager;
     private InputActionProperty backInput;
-
-    [SerializeField] private List<GameObject> buttons = new();
-    [SerializeField] private GameObject actButton;
-    [SerializeField] private GameObject noButton;
-
-    [SerializeField] private EventSystem eventSystem;
-
+    private GameObject actButton;
+    private List<GameObject> buttons = new();
+    private EventSystem eventSystem;
 
     private BaseEnemyRelay selectedEnemy;
-
-
     private bool selectingEnemy;
     private bool selectingAct;
     // Start is called before the first frame update
@@ -28,6 +22,10 @@ public class ActManager : MonoBehaviour
     {
         battleManager = GetComponent<BattleManager>();
         backInput = battleManager.backProperty;
+        actButton = battleManager.buttons[1];
+        buttons = battleManager.buttons;
+        buttons.RemoveRange(0, 3);
+        eventSystem = battleManager.eventSystem;
     }
 
     // Update is called once per frame
@@ -101,7 +99,7 @@ public class ActManager : MonoBehaviour
         {
             selectedEnemy.Act(whichButton);
 
-            eventSystem.SetSelectedGameObject(noButton);
+            eventSystem.SetSelectedGameObject(null);
             for (int i = 0; i < buttons.Count; i++)
             {
                 buttons[i].gameObject.SetActive(false);
