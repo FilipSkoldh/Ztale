@@ -1,4 +1,9 @@
-﻿namespace QuantumTek.QuantumInventory
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
+
+namespace QuantumTek.QuantumInventory
 {
     /// <summary>
     /// QI_ItemStack represents one stack of items in an inventory.

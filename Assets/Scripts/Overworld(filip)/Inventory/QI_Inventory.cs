@@ -26,6 +26,8 @@ namespace QuantumTek.QuantumInventory
             return 0;
         }
 
+
+
         /// <summary>
         /// Attempts to add an item to an existing stack, but otherwise creates a new stack.
         /// </summary>

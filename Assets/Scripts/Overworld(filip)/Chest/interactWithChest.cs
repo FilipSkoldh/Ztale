@@ -61,7 +61,7 @@ public class InteractWithChest : MonoBehaviour
 
     public void MoveFromChest(int button)
     {
-        if (inventory.Stacks.Count >= button)
+        if (inventory.Stacks.Count > button)
         {
             QI_Chest.Transaction(playerChest, chestVendor, inventory.Stacks[button].Item, 1);
             RefreshChest();

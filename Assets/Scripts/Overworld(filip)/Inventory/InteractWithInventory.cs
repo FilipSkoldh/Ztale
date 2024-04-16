@@ -70,18 +70,18 @@ public class InteractWithInventory : MonoBehaviour
     public void OpenInv()
     {
 
-            if (inventoryGUI.activeSelf)
-            {
-                inventoryGUI.SetActive(false);
-            }
-            else
-            {
-                inventoryGUI.SetActive(true);
+        if (inventoryGUI.activeSelf)
+        {
+            inventoryGUI.SetActive(false);
+        }
+        else
+        {
+            inventoryGUI.SetActive(true);
 
-                if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
-                    eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
-                RefreshInventory();
-            }
+            if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
+                eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+            RefreshInventory();
+        }
     }
     public void RefreshInventory()
     {
@@ -89,14 +89,16 @@ public class InteractWithInventory : MonoBehaviour
         {
             item.GetComponent<TextMeshProUGUI>().text = "-";
         }
+        inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
+
 
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
             GameObject itemRefresh = invList[i];
 
-            if (inventory.GetStock(inventory.Stacks[i].Item.Name) != itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack)
+            if (itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack != 1)
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.GetStock(inventory.Stacks[i].Item.Name)}";
+                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.Stacks[i].Amount}";
             }
             else
             {
@@ -108,15 +110,15 @@ public class InteractWithInventory : MonoBehaviour
 
     public void ItemInteraction(int button)
     {
-        if (chestGUI.activeSelf)
+        if (inventory.Stacks.Count > button)
         {
-            QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
-            RefreshInventory();
-            InteractWithChest.RefreshChest();
-        }
-        else
-        {
-            if (inventory.Stacks.Count > button)
+            if (chestGUI.activeSelf)
+            {
+                QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
+                RefreshInventory();
+                InteractWithChest.RefreshChest();
+            }
+            else
             {
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);
                 selectedItem = button;

@@ -10,4 +10,9 @@ public static class GlobalVariables
     public static int Hp { get; set; }
     public static QI_Weapons EquippedWeapon { get; set; }
     public static QI_Equipment EquippedEquipment { get; set; }
+    public static int LightAmmo { get; set; }
+    public static int MediumAmmo { get; set;}
+    public static int ShotgunAmmo { get;set; }
+    public static int Encounter { get; set ; }
+
 }
