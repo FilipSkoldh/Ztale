@@ -6568,7 +6568,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8092682780929119201, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   playerChest: {fileID: 1627807980}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
 --- !u!114 &1627807982
@@ -6624,7 +6624,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8092682780929119201, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   interact:
     m_UseReference: 1
     m_Action:
