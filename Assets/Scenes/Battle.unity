@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 73999537}
   - component: {fileID: 73999535}
-  - component: {fileID: 73999538}
+  - component: {fileID: 73999541}
   - component: {fileID: 73999539}
   - component: {fileID: 73999540}
   m_Layer: 0
@@ -203,22 +203,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73999538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73999534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5725f9790adcaf8499f235fa9f8bfe43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletHell: {fileID: 346056814}
-  box: {fileID: 1511145614}
-  eventSystem: {fileID: 1193810440}
-  attackButton: {fileID: 620511206}
 --- !u!114 &73999539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +270,22 @@ MonoBehaviour:
   - {fileID: 829305083}
   - {fileID: 1453291750}
   eventSystem: {fileID: 1193810440}
+--- !u!114 &73999541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73999534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a850d42453a684642be935e2c96c2839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHell: {fileID: 346056814}
+  box: {fileID: 1511145614}
+  eventSystem: {fileID: 1193810440}
+  attackButton: {fileID: 620511206}
 --- !u!1 &92037608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,19 +2188,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 471193615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9839dca09e81a674bbe987a78bfad13a, type: 3}
+  m_Script: {fileID: 11500000, guid: bcc6f13eb6b1dde49941986278315a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLines:
-  - hitResponce
-  - missResponce
-  - talkResponce
-  - talk1Responce
-  - talk2Responce
-  - spare2Responce
-  - spare1Responce
-  - spareResponce
-  - test
+  - grrrr
+  - gar
 --- !u!114 &471193625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2210,22 +2203,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 471193615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3fd6d9dfe6a48448ce00762b09dda9, type: 3}
+  m_Script: {fileID: 11500000, guid: f828b0aa3beafe64db9c8689561888d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 1
-  acts:
-  - talk
-  - talk1
-  - talk2
-  actDescriptions:
-  - you talk
-  - you talk1
-  - you talk2
-  - spare2
-  - spare1
-  - spare
-  spareActs: 020000000200000002000000
+  HP: 10
+  acts: []
+  actDescriptions: []
+  spareActs: 
 --- !u!61 &471193626
 BoxCollider2D:
   m_ObjectHideFlags: 0

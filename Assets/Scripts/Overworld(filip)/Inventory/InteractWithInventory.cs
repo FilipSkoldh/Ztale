@@ -20,6 +20,13 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private QI_Chest playerChestVendor;
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private TextMeshProUGUI uiHp;
+    [SerializeField] private TextMeshProUGUI uiFood;
+    [SerializeField] private TextMeshProUGUI uiWeapon;
+    [SerializeField] private TextMeshProUGUI uiEquipment;
+    [SerializeField] private TextMeshProUGUI uiLightAmmo;
+    [SerializeField] private TextMeshProUGUI uiMediumAmmo;
+    [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
     public QI_ItemStack equipped;
     public QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
@@ -106,6 +113,7 @@ public class InteractWithInventory : MonoBehaviour
             }
             interacting = false;
         }
+        
     }
 
     public void ItemInteraction(int button)

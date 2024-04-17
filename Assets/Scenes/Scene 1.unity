@@ -1480,7 +1480,7 @@ GameObject:
   - component: {fileID: 282208584}
   - component: {fileID: 282208583}
   m_Layer: 0
-  m_Name: Light ammo (1)
+  m_Name: Light ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3393,7 +3393,7 @@ GameObject:
   - component: {fileID: 879573825}
   - component: {fileID: 879573824}
   m_Layer: 0
-  m_Name: Medium ammo (1)
+  m_Name: dium ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6144,7 +6144,7 @@ GameObject:
   - component: {fileID: 1576362279}
   - component: {fileID: 1576362278}
   m_Layer: 0
-  m_Name: Shotgun Ammo (1)
+  m_Name: Shotgun Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6654,6 +6654,13 @@ MonoBehaviour:
   playerChestVendor: {fileID: 1627807980}
   textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   canvas: {fileID: 254043506}
+  uiHp: {fileID: 2074213075}
+  uiFood: {fileID: 696776430}
+  uiWeapon: {fileID: 1934679198}
+  uiEquipment: {fileID: 232951537}
+  uiLightAmmo: {fileID: 282208583}
+  uiMediumAmmo: {fileID: 879573824}
+  uiShotgunAmmo: {fileID: 1576362278}
   equipped:
     Item: {fileID: 0}
     Amount: 0
