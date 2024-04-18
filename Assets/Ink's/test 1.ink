@@ -1,4 +1,5 @@
 EXTERNAL OpenChest(chestNumber)
+EXTERNAL StartEncounter(encounter)
 -> yo
 
 
@@ -7,6 +8,8 @@ EXTERNAL OpenChest(chestNumber)
 *[yes]
 *[no] -> cancer
 - good you're a human
+*.
+~OpenChest(0)
 -> DONE
 
 ==cancer==
@@ -16,7 +19,7 @@ EXTERNAL OpenChest(chestNumber)
 *fuck you
 - fuck you too
 *.
-~ OpenChest(0)
+~ StartEncounter(0)
 ->DONE
 
 ==bruh==

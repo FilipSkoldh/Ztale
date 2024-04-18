@@ -27,7 +27,6 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiLightAmmo;
     [SerializeField] private TextMeshProUGUI uiMediumAmmo;
     [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
-    public QI_ItemStack equipped;
     public QI_Inventory inventory;
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new();
@@ -44,6 +43,7 @@ public class InteractWithInventory : MonoBehaviour
         inventory.AddItem(items["Bandages"], 10);
         inventory.AddItem(items["Chainmail"], 1);
         inventory.AddItem(items["Scarf"], 1);
+        
     }
 
     private void Update()
@@ -98,6 +98,17 @@ public class InteractWithInventory : MonoBehaviour
         }
         inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
 
+        uiHp.text = $"Hp: {GlobalVariables.Hp.ToString()}/{GlobalVariables.MaxHp}";
+        uiFood.text = $"Food: n/a";
+        if (GlobalVariables.EquippedWeapon != null)
+            uiWeapon.text = $"Weapon: {GlobalVariables.EquippedWeapon.name}";
+    
+        if (GlobalVariables.EquippedEquipment != null)
+            uiEquipment.text = $"Equipment: {GlobalVariables.EquippedEquipment.name}";
+
+        uiLightAmmo.text = $":{GlobalVariables.LightAmmo}";
+        uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
+        uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
 
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
@@ -139,7 +150,7 @@ public class InteractWithInventory : MonoBehaviour
         ItemInteracted(inventory.Stacks[selectedItem].Item.useMessage);
         if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
         {
-            GlobalVariables.Hp += (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount;
+            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
         }
         else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
         {

@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -112.760956, w: 0}
+  m_margin: {x: 0, y: 0, z: -384.2577, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2667,7 +2667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 180, y: 100}
   m_SizeDelta: {x: 72.1672, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696776430
@@ -2753,7 +2753,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -112.760956, w: 0}
+  m_margin: {x: 0, y: 0, z: -173.52454, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6661,9 +6661,6 @@ MonoBehaviour:
   uiLightAmmo: {fileID: 282208583}
   uiMediumAmmo: {fileID: 879573824}
   uiShotgunAmmo: {fileID: 1576362278}
-  equipped:
-    Item: {fileID: 0}
-    Amount: 0
   inventory: {fileID: 1627807986}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
 --- !u!114 &1627807984
@@ -8485,7 +8482,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -112.760956, w: 0}
+  m_margin: {x: 0, y: 0, z: -389.4291, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8968,7 +8965,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -88.32945, w: 0}
+  m_margin: {x: 0, y: 0, z: -104.38805, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

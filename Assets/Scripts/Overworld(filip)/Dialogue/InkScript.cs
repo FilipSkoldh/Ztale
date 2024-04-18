@@ -4,6 +4,7 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
@@ -23,7 +24,8 @@ public class InkScript: MonoBehaviour {
 		{
 			OnCreateStory(inkStory);
 		}
-        inkStory.BindExternalFunction("OpenChest", (int chestNumber) => { chest.OpenChest(chestNumber); });
+        inkStory.BindExternalFunction("OpenChest", (int chestNumber) => {chest.OpenChest(chestNumber); });
+		inkStory.BindExternalFunction("StartEncounter", (int encounter) => { StartEncounter(encounter); });
 		RefreshView();
 	}
 	
@@ -131,6 +133,11 @@ public class InkScript: MonoBehaviour {
 		}
 	}
 
+	void StartEncounter(int encounter)
+	{
+		GlobalVariables.Encounter = encounter;
+		SceneManager.LoadScene("Battle");
+	}
 
 
 

@@ -28,7 +28,7 @@ public class BattleManager : MonoBehaviour
         if (winning && interactProperty.action.WasPressedThisFrame())
         {
             Debug.Log("load");
-            SceneManager.LoadScene("Scene 1");
+            SceneManager.LoadScene("Overworld");
         }
         if (EnemiesDefeated())
         {

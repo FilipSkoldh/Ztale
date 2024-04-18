@@ -21,6 +21,9 @@ public class SaveAndLoad : MonoBehaviour
     {
         GlobalVariables.MaxHp = 100;
         GlobalVariables.Hp = 10;
+        GlobalVariables.LightAmmo = 20;
+        GlobalVariables.MediumAmmo = 15;
+        GlobalVariables.ShotgunAmmo = 10;
     }
 
 
