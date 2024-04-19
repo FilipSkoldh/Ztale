@@ -6,23 +6,26 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class ActManager : MonoBehaviour
+public class ActNItemManager : MonoBehaviour
 {
     private BattleManager battleManager;
     private InputActionProperty backInput;
     private GameObject actButton;
+    private GameObject itemButton;
     private List<GameObject> buttons = new();
     private EventSystem eventSystem;
 
     private BaseEnemyRelay selectedEnemy;
     private bool selectingEnemy;
     private bool selectingAct;
+    private bool selectingItem;
     // Start is called before the first frame update
     void Start()
     {
         battleManager = GetComponent<BattleManager>();
         backInput = battleManager.backProperty;
         actButton = battleManager.buttons[1];
+        itemButton = battleManager.buttons[2];
         buttons = battleManager.buttons;
         buttons.RemoveRange(0, 3);
         eventSystem = battleManager.eventSystem;
@@ -40,6 +43,16 @@ public class ActManager : MonoBehaviour
 
             }
             selectingEnemy = false;
+        }
+        if (selectingItem && backInput.action.WasPressedThisFrame())
+        {
+            eventSystem.SetSelectedGameObject(itemButton);
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].gameObject.SetActive(false);
+
+            }
+            selectingItem = false;
         }
 
         if (selectingAct && backInput.action.WasPressedThisFrame())
@@ -59,6 +72,25 @@ public class ActManager : MonoBehaviour
             {
                 buttons[i].gameObject.SetActive(true);
                 buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = transform.GetChild(i).name;
+            }
+            else
+            {
+                buttons[i].gameObject.SetActive(false);
+            }
+        }
+        eventSystem.SetSelectedGameObject(buttons[0]);
+    }
+    public void ItemSelect()
+    {
+        selectingItem = true;
+
+        int numStacks = GlobalVariables.PlayerInventory.Stacks.Count;
+        for(int i = 0;i < buttons.Count; i++)
+        {
+            if (i < numStacks)
+            {
+                buttons[i].gameObject.SetActive(true);
+                buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory.Stacks[i].Item.name} x{GlobalVariables.PlayerInventory.Stacks[i].Amount}";
             }
             else
             {
@@ -104,6 +136,7 @@ public class ActManager : MonoBehaviour
             {
                 buttons[i].gameObject.SetActive(false);
             }
+            selectingAct = false;
         }
     }
 }

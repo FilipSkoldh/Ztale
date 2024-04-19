@@ -17,7 +17,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         box.width = 2; 
         box.height = 2;
         bulletHell.enabled = true;
-        bulletHell.Show(new Vector2(0, -1));
+        bulletHell.transform.position = new Vector2(0, -1);
         timer = 5;
     }
 
