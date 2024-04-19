@@ -6649,9 +6649,7 @@ MonoBehaviour:
   - {fileID: 1886315566}
   - {fileID: 1281399486}
   chestGUI: {fileID: 1203848669}
-  InteractWithChest: {fileID: 1627807981}
   chestVendor: {fileID: 477761558}
-  playerChestVendor: {fileID: 1627807980}
   textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   canvas: {fileID: 254043506}
   uiHp: {fileID: 2074213075}
@@ -6661,7 +6659,6 @@ MonoBehaviour:
   uiLightAmmo: {fileID: 282208583}
   uiMediumAmmo: {fileID: 879573824}
   uiShotgunAmmo: {fileID: 1576362278}
-  inventory: {fileID: 1627807986}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
 --- !u!114 &1627807984
 MonoBehaviour:
@@ -6677,7 +6674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   stamina: 10
-  staminacooldown: 1
+  sprintCooldown: 1
   move:
     m_UseReference: 1
     m_Action:
@@ -6726,7 +6723,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  dialogCanvas: {fileID: 254043506}
+  textboxCanvas: {fileID: 254043506}
   inventoryGUI: {fileID: 1434326439}
   saveAndLoad: {fileID: 1627807985}
 --- !u!114 &1627807985

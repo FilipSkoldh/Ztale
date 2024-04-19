@@ -11,14 +11,8 @@ using UnityEngine.UI;
 public class InkScript: MonoBehaviour {
     public static event Action<Story> OnCreateStory;
 	
-    void OnEnable () {
-		// Remove the default message
-		RemoveChildren();
-		StartStory();
-    }
-
 	// Creates a new Story object with the compiled story which we can then play!
-	void StartStory () {
+	public void StartStory () {
 		inkStory = new Story (inkJSONAsset.text);
         if (OnCreateStory != null)
 		{
@@ -136,6 +130,7 @@ public class InkScript: MonoBehaviour {
 	void StartEncounter(int encounter)
 	{
 		GlobalVariables.Encounter = encounter;
+
 		SceneManager.LoadScene("Battle");
 	}
 

@@ -8,16 +8,23 @@ using UnityEngine.InputSystem;
 
 public class InteractWithInventory : MonoBehaviour
 {
+    //Declares variables
+    //All inputs needed
     [SerializeField] private InputActionProperty openInv;
     [SerializeField] private InputActionProperty closeInv;
     [SerializeField] private InputActionProperty interact;
+    //Inventory and chest GUI
     [SerializeField] private GameObject inventoryGUI;
-    [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private List<GameObject> invList;
     [SerializeField] private GameObject chestGUI;
-    [SerializeField] private InteractWithChest InteractWithChest;
+    //the buttons behind every item in the inventory GUI and the eventsystem to control it
+    [SerializeField] private List<GameObject> invList;
+    [SerializeField] private EventSystem eventSystem;
+
+    //The QI_Chest scripts on the chest and 
     [SerializeField] private QI_Chest chestVendor;
-    [SerializeField] private QI_Chest playerChestVendor;
+    private QI_Chest playerChestVendor;
+    private InteractWithChest InteractWithChest;
+
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private Canvas canvas;
     [SerializeField] private TextMeshProUGUI uiHp;
@@ -27,22 +34,26 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiLightAmmo;
     [SerializeField] private TextMeshProUGUI uiMediumAmmo;
     [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
-    public QI_Inventory inventory;
-    public QI_ItemDatabase itemDatabase;
+    [SerializeField] private QI_ItemDatabase itemDatabase;
+
     private Dictionary<string, QI_ItemData> items = new();
     private int selectedItem = 0;
-    int wait = 0;
-    bool interacting = false;
+    private int wait = 0;
+    private bool interacting = false;
 
-
+    private void Awake()
+    {
+        playerChestVendor = GetComponent<QI_Chest>();
+        InteractWithChest = GetComponent<InteractWithChest>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         items = itemDatabase.Getdictionary();
-        inventory.AddItem(items["Shotgun"], 1);
-        inventory.AddItem(items["Bandages"], 10);
-        inventory.AddItem(items["Chainmail"], 1);
-        inventory.AddItem(items["Scarf"], 1);
+        GlobalVariables.PlayerInventory.AddItem(items["Shotgun"], 1);
+        GlobalVariables.PlayerInventory.AddItem(items["Bandages"], 10);
+        GlobalVariables.PlayerInventory.AddItem(items["Chainmail"], 1);
+        GlobalVariables.PlayerInventory.AddItem(items["Scarf"], 1);
         
     }
 
@@ -96,7 +107,7 @@ public class InteractWithInventory : MonoBehaviour
         {
             item.GetComponent<TextMeshProUGUI>().text = "-";
         }
-        inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
+        GlobalVariables.PlayerInventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
 
         uiHp.text = $"Hp: {GlobalVariables.Hp.ToString()}/{GlobalVariables.MaxHp}";
         uiFood.text = $"Food: n/a";
@@ -110,30 +121,30 @@ public class InteractWithInventory : MonoBehaviour
         uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
         uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
 
-        for (int i = 0; i < inventory.Stacks.Count; i++)
+        GlobalVariables.PlayerInventory = GlobalVariables.PlayerInventory;
+        for (int i = 0; i < GlobalVariables.PlayerInventory.Stacks.Count; i++)
         {
             GameObject itemRefresh = invList[i];
 
-            if (itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack != 1)
+            if (itemDatabase.GetItem(GlobalVariables.PlayerInventory.Stacks[i].Item.Name).MaxStack != 1)
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.Stacks[i].Amount}";
+                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {GlobalVariables.PlayerInventory.Stacks[i].Item.Name} x{GlobalVariables.PlayerInventory.Stacks[i].Amount}";
             }
             else
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
+                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {GlobalVariables.PlayerInventory.Stacks[i].Item.Name}";
             }
             interacting = false;
         }
-        
     }
 
     public void ItemInteraction(int button)
     {
-        if (inventory.Stacks.Count > button)
+        if (GlobalVariables.PlayerInventory.Stacks.Count > button)
         {
             if (chestGUI.activeSelf)
             {
-                QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
+                QI_Chest.Transaction(chestVendor, playerChestVendor, GlobalVariables.PlayerInventory.Stacks[button].Item, 1);
                 RefreshInventory();
                 InteractWithChest.RefreshChest();
             }
@@ -147,42 +158,42 @@ public class InteractWithInventory : MonoBehaviour
 
     public void ItemUse()
     {
-        ItemInteracted(inventory.Stacks[selectedItem].Item.useMessage);
-        if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
+        ItemInteracted(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.useMessage);
+        if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
         {
-            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
+            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
         }
-        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
+        else if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
         {
             if (GlobalVariables.EquippedWeapon != null)
             {
-                inventory.AddItem(GlobalVariables.EquippedWeapon, 1);
+                GlobalVariables.PlayerInventory.AddItem(GlobalVariables.EquippedWeapon, 1);
             }
 
-            GlobalVariables.EquippedWeapon = (inventory.Stacks[selectedItem].Item as QI_Weapons);
+            GlobalVariables.EquippedWeapon = (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Weapons);
         }
-        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
+        else if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
         {
             if (GlobalVariables.EquippedEquipment != null)
             {
-                inventory.AddItem(GlobalVariables.EquippedEquipment, 1);
+                GlobalVariables.PlayerInventory.AddItem(GlobalVariables.EquippedEquipment, 1);
             }
-            GlobalVariables.EquippedEquipment = (inventory.Stacks[selectedItem].Item as QI_Equipment);
+            GlobalVariables.EquippedEquipment = (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Equipment);
         }
-        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
+        GlobalVariables.PlayerInventory.RemoveItem(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name, 1);
     }
 
 
     public void ItemInfo()
     {
-        ItemInteracted(inventory.Stacks[selectedItem].Item.Description);
+        ItemInteracted(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Description);
     }
 
     public void ItemThrow()
     {
-        ItemInteracted($"{inventory.Stacks[selectedItem].Item.Name} was thrown away");
+        ItemInteracted($"{GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name} was thrown away");
 
-        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
+        GlobalVariables.PlayerInventory.RemoveItem(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name, 1);
     }
 
     public void ItemInteracted(string text)

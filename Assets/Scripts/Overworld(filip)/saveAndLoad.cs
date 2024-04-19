@@ -12,7 +12,6 @@ public class SaveAndLoad : MonoBehaviour
 
 
 
-    
     public void Save()
     {
 
