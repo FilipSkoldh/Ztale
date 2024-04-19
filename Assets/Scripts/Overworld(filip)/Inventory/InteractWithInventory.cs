@@ -36,6 +36,7 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
     [SerializeField] private QI_ItemDatabase itemDatabase;
 
+    private QI_Inventory inventory;
     private Dictionary<string, QI_ItemData> items = new();
     private int selectedItem = 0;
     private int wait = 0;
@@ -43,6 +44,9 @@ public class InteractWithInventory : MonoBehaviour
 
     private void Awake()
     {
+        if (GlobalVariables.PlayerInventory != null)
+        inventory.Stacks = GlobalVariables.PlayerInventory;
+        inventory = GetComponent<QI_Inventory>();
         playerChestVendor = GetComponent<QI_Chest>();
         InteractWithChest = GetComponent<InteractWithChest>();
     }
@@ -50,10 +54,10 @@ public class InteractWithInventory : MonoBehaviour
     void Start()
     {
         items = itemDatabase.Getdictionary();
-        GlobalVariables.PlayerInventory.AddItem(items["Shotgun"], 1);
-        GlobalVariables.PlayerInventory.AddItem(items["Bandages"], 10);
-        GlobalVariables.PlayerInventory.AddItem(items["Chainmail"], 1);
-        GlobalVariables.PlayerInventory.AddItem(items["Scarf"], 1);
+        inventory.AddItem(items["Shotgun"], 1);
+        inventory.AddItem(items["Bandages"], 10);
+        inventory.AddItem(items["Chainmail"], 1);
+        inventory.AddItem(items["Scarf"], 1);
         
     }
 
@@ -64,10 +68,12 @@ public class InteractWithInventory : MonoBehaviour
             if (canvas.transform.childCount == 0)
                 OpenInv();
         }
+
         if (closeInv.action.WasPressedThisFrame())
         {
             inventoryGUI.SetActive(false);
         }
+
         if (interact.action.WasPressedThisFrame())
         {
             if (wait > 2 && interacting)
@@ -94,8 +100,8 @@ public class InteractWithInventory : MonoBehaviour
         }
         else
         {
-            inventoryGUI.SetActive(true);
 
+            inventoryGUI.SetActive(true);
             if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
             RefreshInventory();
@@ -107,7 +113,7 @@ public class InteractWithInventory : MonoBehaviour
         {
             item.GetComponent<TextMeshProUGUI>().text = "-";
         }
-        GlobalVariables.PlayerInventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
+        inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
 
         uiHp.text = $"Hp: {GlobalVariables.Hp.ToString()}/{GlobalVariables.MaxHp}";
         uiFood.text = $"Food: n/a";
@@ -121,18 +127,17 @@ public class InteractWithInventory : MonoBehaviour
         uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
         uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
 
-        GlobalVariables.PlayerInventory = GlobalVariables.PlayerInventory;
-        for (int i = 0; i < GlobalVariables.PlayerInventory.Stacks.Count; i++)
+        for (int i = 0; i < inventory.Stacks.Count; i++)
         {
             GameObject itemRefresh = invList[i];
 
-            if (itemDatabase.GetItem(GlobalVariables.PlayerInventory.Stacks[i].Item.Name).MaxStack != 1)
+            if (itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack != 1)
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {GlobalVariables.PlayerInventory.Stacks[i].Item.Name} x{GlobalVariables.PlayerInventory.Stacks[i].Amount}";
+                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.Stacks[i].Amount}";
             }
             else
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {GlobalVariables.PlayerInventory.Stacks[i].Item.Name}";
+                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
             interacting = false;
         }
@@ -140,11 +145,11 @@ public class InteractWithInventory : MonoBehaviour
 
     public void ItemInteraction(int button)
     {
-        if (GlobalVariables.PlayerInventory.Stacks.Count > button)
+        if (inventory.Stacks.Count > button)
         {
             if (chestGUI.activeSelf)
             {
-                QI_Chest.Transaction(chestVendor, playerChestVendor, GlobalVariables.PlayerInventory.Stacks[button].Item, 1);
+                QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
                 RefreshInventory();
                 InteractWithChest.RefreshChest();
             }
@@ -158,42 +163,42 @@ public class InteractWithInventory : MonoBehaviour
 
     public void ItemUse()
     {
-        ItemInteracted(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.useMessage);
-        if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
+        ItemInteracted(inventory.Stacks[selectedItem].Item.useMessage);
+        if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
         {
-            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
+            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
         }
-        else if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
+        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
         {
             if (GlobalVariables.EquippedWeapon != null)
             {
-                GlobalVariables.PlayerInventory.AddItem(GlobalVariables.EquippedWeapon, 1);
+                inventory.AddItem(GlobalVariables.EquippedWeapon, 1);
             }
 
-            GlobalVariables.EquippedWeapon = (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Weapons);
+            GlobalVariables.EquippedWeapon = (inventory.Stacks[selectedItem].Item as QI_Weapons);
         }
-        else if (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
+        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
         {
             if (GlobalVariables.EquippedEquipment != null)
             {
-                GlobalVariables.PlayerInventory.AddItem(GlobalVariables.EquippedEquipment, 1);
+                inventory.AddItem(GlobalVariables.EquippedEquipment, 1);
             }
-            GlobalVariables.EquippedEquipment = (GlobalVariables.PlayerInventory.Stacks[selectedItem].Item as QI_Equipment);
+            GlobalVariables.EquippedEquipment = (inventory.Stacks[selectedItem].Item as QI_Equipment);
         }
-        GlobalVariables.PlayerInventory.RemoveItem(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name, 1);
+        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
     }
 
 
     public void ItemInfo()
     {
-        ItemInteracted(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Description);
+        ItemInteracted(inventory.Stacks[selectedItem].Item.Description);
     }
 
     public void ItemThrow()
     {
-        ItemInteracted($"{GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name} was thrown away");
+        ItemInteracted($"{inventory.Stacks[selectedItem].Item.Name} was thrown away");
 
-        GlobalVariables.PlayerInventory.RemoveItem(GlobalVariables.PlayerInventory.Stacks[selectedItem].Item.Name, 1);
+        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
     }
 
     public void ItemInteracted(string text)

@@ -84,13 +84,13 @@ public class ActNItemManager : MonoBehaviour
     {
         selectingItem = true;
 
-        int numStacks = GlobalVariables.PlayerInventory.Stacks.Count;
+        int numStacks = GlobalVariables.PlayerInventory.Count;
         for(int i = 0;i < buttons.Count; i++)
         {
             if (i < numStacks)
             {
                 buttons[i].gameObject.SetActive(true);
-                buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory.Stacks[i].Item.name} x{GlobalVariables.PlayerInventory.Stacks[i].Amount}";
+                buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name} x{GlobalVariables.PlayerInventory[i].Amount}";
             }
             else
             {

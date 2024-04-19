@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ink.Runtime;
+using QuantumTek.QuantumInventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -130,8 +131,8 @@ public class InkScript: MonoBehaviour {
 	void StartEncounter(int encounter)
 	{
 		GlobalVariables.Encounter = encounter;
-
-		SceneManager.LoadScene("Battle");
+        GlobalVariables.PlayerInventory = inventory.Stacks;
+        SceneManager.LoadScene("Battle");
 	}
 
 
@@ -149,4 +150,5 @@ public class InkScript: MonoBehaviour {
 	[SerializeField]
 	private Button buttonPrefab = null;
 	[SerializeField] private InteractWithChest chest;
+	[SerializeField] private QI_Inventory inventory;
 }

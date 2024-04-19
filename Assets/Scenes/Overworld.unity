@@ -6589,6 +6589,7 @@ MonoBehaviour:
   textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
   chest: {fileID: 1627807981}
+  inventory: {fileID: 1627807986}
 --- !u!114 &1627807983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6638,7 +6639,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   inventoryGUI: {fileID: 1434326439}
-  eventSystem: {fileID: 895696911}
+  chestGUI: {fileID: 1203848669}
   invList:
   - {fileID: 1945165615}
   - {fileID: 988259034}
@@ -6648,7 +6649,7 @@ MonoBehaviour:
   - {fileID: 615524353}
   - {fileID: 1886315566}
   - {fileID: 1281399486}
-  chestGUI: {fileID: 1203848669}
+  eventSystem: {fileID: 895696911}
   chestVendor: {fileID: 477761558}
   textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   canvas: {fileID: 254043506}

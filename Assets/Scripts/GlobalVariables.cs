@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GlobalVariables
-{ 
-    public static QI_Inventory PlayerInventory { get; set; }
+{
+    public static List<QI_ItemStack> PlayerInventory { get; set; }
+
     public static int MaxHp { get; set; }
     public static int Hp { get; set; }
     public static QI_Weapons EquippedWeapon { get; set; }
