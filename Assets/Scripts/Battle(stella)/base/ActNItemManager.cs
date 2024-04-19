@@ -90,7 +90,10 @@ public class ActNItemManager : MonoBehaviour
             if (i < numStacks)
             {
                 buttons[i].gameObject.SetActive(true);
-                buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name} x{GlobalVariables.PlayerInventory[i].Amount}";
+                if (GlobalVariables.PlayerInventory[i].Amount > 1)
+                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name} x{GlobalVariables.PlayerInventory[i].Amount}";
+                else
+                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name}";
             }
             else
             {

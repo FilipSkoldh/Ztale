@@ -55,7 +55,7 @@ public class InteractWithInventory : MonoBehaviour
     {
         items = itemDatabase.Getdictionary();
         inventory.AddItem(items["Shotgun"], 1);
-        inventory.AddItem(items["Bandages"], 10);
+        inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Chainmail"], 1);
         inventory.AddItem(items["Scarf"], 1);
         
