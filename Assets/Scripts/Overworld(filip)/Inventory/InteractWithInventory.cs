@@ -9,13 +9,16 @@ using UnityEngine.InputSystem;
 public class InteractWithInventory : MonoBehaviour
 {
     //Declares variables
+
     //All inputs needed
     [SerializeField] private InputActionProperty openInv;
     [SerializeField] private InputActionProperty closeInv;
     [SerializeField] private InputActionProperty interact;
+
     //Inventory and chest GUI
     [SerializeField] private GameObject inventoryGUI;
     [SerializeField] private GameObject chestGUI;
+
     //the buttons behind every item in the inventory GUI and the eventsystem to control it
     [SerializeField] private List<GameObject> invList;
     [SerializeField] private EventSystem eventSystem;
@@ -25,8 +28,9 @@ public class InteractWithInventory : MonoBehaviour
     private QI_Chest playerChestVendor;
     private InteractWithChest InteractWithChest;
 
-    [SerializeField] private GameObject textPrefab;
-    [SerializeField] private Canvas canvas;
+    //the rest of the GUI
+    [SerializeField] private GameObject textboxPrefab;
+    [SerializeField] private Canvas textboxCanvas;
     [SerializeField] private TextMeshProUGUI uiHp;
     [SerializeField] private TextMeshProUGUI uiFood;
     [SerializeField] private TextMeshProUGUI uiWeapon;
@@ -34,10 +38,15 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiLightAmmo;
     [SerializeField] private TextMeshProUGUI uiMediumAmmo;
     [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
+
+    //the database with all item info
     [SerializeField] private QI_ItemDatabase itemDatabase;
 
+    //The inventory and the dictionary with names to all itemdata
     private QI_Inventory inventory;
     private Dictionary<string, QI_ItemData> items = new();
+
+    //
     private int selectedItem = 0;
     private int wait = 0;
     private bool interacting = false;
@@ -45,8 +54,10 @@ public class InteractWithInventory : MonoBehaviour
     private void Awake()
     {
         if (GlobalVariables.PlayerInventory != null)
-        inventory.Stacks = GlobalVariables.PlayerInventory;
-        inventory = GetComponent<QI_Inventory>();
+            inventory.Stacks = GlobalVariables.PlayerInventory;
+        else
+            inventory = GetComponent<QI_Inventory>();
+
         playerChestVendor = GetComponent<QI_Chest>();
         InteractWithChest = GetComponent<InteractWithChest>();
     }
@@ -55,7 +66,7 @@ public class InteractWithInventory : MonoBehaviour
     {
         items = itemDatabase.Getdictionary();
         inventory.AddItem(items["Shotgun"], 1);
-        inventory.AddItem(items["Bandages"], 10);
+        inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Chainmail"], 1);
         inventory.AddItem(items["Scarf"], 1);
         
@@ -65,7 +76,7 @@ public class InteractWithInventory : MonoBehaviour
     {
         if (openInv.action.WasPressedThisFrame())
         {
-            if (canvas.transform.childCount == 0)
+            if (textboxCanvas.transform.childCount == 0)
                 OpenInv();
         }
 
@@ -78,10 +89,10 @@ public class InteractWithInventory : MonoBehaviour
         {
             if (wait > 2 && interacting)
             {
-                int childCount = canvas.transform.childCount;
+                int childCount = textboxCanvas.transform.childCount;
                 for (int i = childCount - 1; i >= 0; --i)
                 {
-                    Destroy(canvas.transform.GetChild(i).gameObject);
+                    Destroy(textboxCanvas.transform.GetChild(i).gameObject);
                 }
                 RefreshInventory();
                 inventoryGUI.SetActive(true);
@@ -203,9 +214,9 @@ public class InteractWithInventory : MonoBehaviour
 
     public void ItemInteracted(string text)
     {
-        GameObject storyText = Instantiate(textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
+        GameObject storyText = Instantiate(textboxPrefab, textboxCanvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, textboxCanvas.transform);
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
-        storyText.transform.SetParent(canvas.transform, false);
+        storyText.transform.SetParent(textboxCanvas.transform, false);
 
         eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
         inventoryGUI.SetActive(false);

@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// This is a super bare bones example of how to play and display a ink story in Unity.
 public class InkScript: MonoBehaviour {
     public static event Action<Story> OnCreateStory;
 	
