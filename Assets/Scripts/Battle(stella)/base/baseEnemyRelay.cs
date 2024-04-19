@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -79,28 +80,31 @@ public class BaseEnemyRelay : MonoBehaviour
         if (action == acts.Count)
         {
             transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 2;
-        }
 
-        if (spareActs.Count > 0)
+        }
+        else
         {
-            if (spareActs[spareActs.Count - 1] == action + 2)
+            if (spareActs.Count != 0)
             {
-                spareActs.RemoveAt(spareActs.Count - 1);
-                act = acts.Count + spareActs.Count;
-                actingText.text = actDescriptions[acts.Count + spareActs.Count];
+                if (spareActs[spareActs.Count - 1] == action + 2)
+                {
+                    spareActs.RemoveAt(spareActs.Count - 1);
+                    act = acts.Count + spareActs.Count;
+                    actingText.text = actDescriptions[acts.Count + spareActs.Count];
+                }
+                else
+                {
+                    act = action;
+                    actingText.text = actDescriptions[action];
+                }
             }
             else
             {
                 act = action;
                 actingText.text = actDescriptions[action];
             }
+            acting = true;
         }
-        else
-        {
-            act = action;
-            actingText.text = actDescriptions[action];
-        }
-        acting = true;
     }
     private void Update()
     {
