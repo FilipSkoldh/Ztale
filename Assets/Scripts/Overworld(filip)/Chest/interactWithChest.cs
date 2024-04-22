@@ -30,7 +30,7 @@ public class InteractWithChest : MonoBehaviour
         inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Pistol"], 1);
         chestGameobj.SetActive(true);
-        openInventory.OpenInv();
+        openInventory.OpenOrCloseInventory();
         chestVendor = saveAndLoad.transferChests[inventoryNumber+1];
 
         RefreshChest();

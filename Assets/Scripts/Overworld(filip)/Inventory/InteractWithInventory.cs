@@ -12,7 +12,7 @@ public class InteractWithInventory : MonoBehaviour
 
     //All inputs needed
     [SerializeField] private InputActionProperty openInv;
-    [SerializeField] private InputActionProperty closeInv;
+    [SerializeField] private InputActionProperty close;
     [SerializeField] private InputActionProperty interact;
 
     //Inventory and chest GUI
@@ -46,25 +46,30 @@ public class InteractWithInventory : MonoBehaviour
     private QI_Inventory inventory;
     private Dictionary<string, QI_ItemData> items = new();
 
-    //
+    //variables for inventory
     private int selectedItem = 0;
     private int wait = 0;
     private bool interacting = false;
 
     private void Awake()
     {
-        if (GlobalVariables.PlayerInventory != null)
-            inventory.Stacks = GlobalVariables.PlayerInventory;
-        else
-            inventory = GetComponent<QI_Inventory>();
-
+        //Finds components on the player
+        inventory = GetComponent<QI_Inventory>();
         playerChestVendor = GetComponent<QI_Chest>();
         InteractWithChest = GetComponent<InteractWithChest>();
+
+        //If there's a inventory saved globally load it
+        if (GlobalVariables.PlayerInventory != null)
+            inventory.Stacks = GlobalVariables.PlayerInventory;
+        
+
     }
     // Start is called before the first frame update
     void Start()
     {
+        //Get full Itemdatabase with all item info and add to dictionary
         items = itemDatabase.Getdictionary();
+        //use the dictionary to add items easily to the inventory
         inventory.AddItem(items["Shotgun"], 1);
         inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Chainmail"], 1);
@@ -74,59 +79,72 @@ public class InteractWithInventory : MonoBehaviour
 
     private void Update()
     {
+        //if the inventory button was pressed and the textbox isn't up open the inventory
         if (openInv.action.WasPressedThisFrame())
         {
             if (textboxCanvas.transform.childCount == 0)
-                OpenInv();
+                OpenOrCloseInventory();
         }
-
-        if (closeInv.action.WasPressedThisFrame())
+        //if the close button was pressed close the inventory
+        if (close.action.WasPressedThisFrame())
         {
+            //Hides the inventory GUI
             inventoryGUI.SetActive(false);
         }
-
+        //If the interact button was pressed, the wait is over 2 and i've interacted with an item close the textbox
         if (interact.action.WasPressedThisFrame())
         {
             if (wait > 2 && interacting)
             {
-                int childCount = textboxCanvas.transform.childCount;
-                for (int i = childCount - 1; i >= 0; --i)
-                {
+                //Destroy all children in the textboxcanvas to remove the textbox
+                for (int i = textboxCanvas.transform.childCount - 1; i >= 0; --i)
                     Destroy(textboxCanvas.transform.GetChild(i).gameObject);
-                }
-                RefreshInventory();
-                inventoryGUI.SetActive(true);
+
+                //resets "interacting" and reopenes the inventory
                 interacting = false;
+                OpenOrCloseInventory();
             }
         }
+        //The wait prevents you from closing the textbox the same frame as you use the item
         wait++;
     }
 
-    public void OpenInv()
+    /// <summary>
+    /// Refresh inventoru GUI and make it visible
+    /// </summary>
+    public void OpenOrCloseInventory()
     {
-
+        //If the inventory is active, close it but making the GUI inactive
         if (inventoryGUI.activeSelf)
         {
             inventoryGUI.SetActive(false);
         }
+        //Else make the GUI active, set the first item as selected and refresh inventory
         else
         {
-
             inventoryGUI.SetActive(true);
             if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+
             RefreshInventory();
         }
     }
+
+    /// <summary>
+    /// Refreshes inventory GUI
+    /// </summary>
     public void RefreshInventory()
     {
+        //Resets all textboxes in the inventory GUI
         foreach (var item in invList)
         {
             item.GetComponent<TextMeshProUGUI>().text = "-";
         }
+        //Sorts the inventory in alphabetical order
         inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
 
-        uiHp.text = $"Hp: {GlobalVariables.Hp.ToString()}/{GlobalVariables.MaxHp}";
+        //Sets the GUI hp, food, weapon, equipment and all ammo to their 
+        uiHp.text = $"Hp: {GlobalVariables.Hp}/{GlobalVariables.MaxHp}";
         uiFood.text = $"Food: n/a";
         if (GlobalVariables.EquippedWeapon != null)
             uiWeapon.text = $"Weapon: {GlobalVariables.EquippedWeapon.name}";
@@ -138,32 +156,43 @@ public class InteractWithInventory : MonoBehaviour
         uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
         uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
 
+        //Reads the inventory and puts it in the corresponding positions in the inventory GUI
+        //for every stack in the inventory
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
-            GameObject itemRefresh = invList[i];
-
+            //If the item is stackable write out the name of the item and the amount
             if (itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack != 1)
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.Stacks[i].Amount}";
+                invList[i].GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name} x{inventory.Stacks[i].Amount}";
             }
+            //Else write out only the name
             else
             {
-                itemRefresh.GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
+                invList[i].GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
+            //Set interacting to false since you aren't interacting with an item in the inventory when u open it
             interacting = false;
         }
     }
 
-    public void ItemInteraction(int button)
+    /// <summary>
+    /// Selects an item from the inventory
+    /// </summary>
+    /// <param name="button">The slot in the inventory to be selected</param>
+    public void ItemSelected(int button)
     {
+        //Checks that you didn't press on an empty inventory slot
         if (inventory.Stacks.Count > button)
         {
+            //If you're in the chest move the item to the chest
             if (chestGUI.activeSelf)
             {
+                //Using QI_Chest moves the selected item to the opened chest then refreshes both the inventory and chest GUI
                 QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
                 RefreshInventory();
                 InteractWithChest.RefreshChest();
             }
+            //If you're not in a chest go down to the use/info/throw row and set "selectedItem" to the selected item
             else
             {
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);

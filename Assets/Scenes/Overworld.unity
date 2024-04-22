@@ -6651,8 +6651,8 @@ MonoBehaviour:
   - {fileID: 1281399486}
   eventSystem: {fileID: 895696911}
   chestVendor: {fileID: 477761558}
-  textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
-  canvas: {fileID: 254043506}
+  textboxPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
+  textboxCanvas: {fileID: 254043506}
   uiHp: {fileID: 2074213075}
   uiFood: {fileID: 696776430}
   uiWeapon: {fileID: 1934679198}
