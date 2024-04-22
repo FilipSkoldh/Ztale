@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 73999541}
   - component: {fileID: 73999539}
   - component: {fileID: 73999540}
+  - component: {fileID: 73999542}
   m_Layer: 0
   m_Name: enemies
   m_TagString: Untagged
@@ -270,6 +271,9 @@ MonoBehaviour:
   - {fileID: 829305083}
   - {fileID: 1453291750}
   eventSystem: {fileID: 1193810440}
+  bulletHell: {fileID: 346056814}
+  box: {fileID: 1511145614}
+  inventory: {fileID: 73999542}
 --- !u!114 &73999541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,10 +286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a850d42453a684642be935e2c96c2839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletHell: {fileID: 346056814}
-  box: {fileID: 1511145614}
-  eventSystem: {fileID: 1193810440}
-  attackButton: {fileID: 620511206}
+--- !u!114 &73999542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73999534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76283022cb7ce44a690f2b9bc3e794c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Player
+  MaxStacks: 8
 --- !u!1 &92037608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346056804}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd8ff089c03d7b2479ea94cbcf962247, type: 3}
   m_Name: 
@@ -1144,6 +1158,8 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   speed: 2
+  eventSystem: {fileID: 1193810440}
+  shootbutton: {fileID: 620511206}
 --- !u!114 &346056815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,8 +2451,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1761098182}
   - {fileID: 620511207}
+  - {fileID: 1761098182}
   - {fileID: 353184234}
   - {fileID: 2060305353}
   - {fileID: 718483682}

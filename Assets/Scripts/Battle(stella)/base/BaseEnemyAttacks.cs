@@ -5,35 +5,42 @@ using UnityEngine.EventSystems;
 
 public class BaseEnemyAttacks : MonoBehaviour
 {
-    [SerializeField] private BulletHellController bulletHell;
-    [SerializeField] private Box box;
-    [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private GameObject attackButton;
+    private BattleManager battleManager;
+    private BulletHellController bulletHell;
+    private Box box;
 
     private float timer;
-    
+
+    private void Awake()
+    {
+        battleManager = GetComponent<BattleManager>();
+        bulletHell = battleManager.bulletHell;
+        box = battleManager.box;
+    }
+
     public void Attack()
     {
         box.width = 2; 
         box.height = 2;
-        bulletHell.enabled = true;
-        bulletHell.transform.position = new Vector2(0, -1);
+        bulletHell.StartBulletHell(new Vector2(0, -1));
         timer = 5;
     }
 
     private void Update()
     {
+        Timer(Time.deltaTime);
+    }
+
+    private void Timer(float deltaTime)
+    {
         if (timer > 0)
         {
-            timer -= Time.deltaTime;
-
+            timer -= deltaTime;
         }
         else if (timer < 0)
         {
             timer = 0;
-            bulletHell.Hide();
-            bulletHell.enabled = false;
-            eventSystem.SetSelectedGameObject(attackButton);
+            bulletHell.StopBulletHell();
             box.width = 6;
             box.height = 2;
         }

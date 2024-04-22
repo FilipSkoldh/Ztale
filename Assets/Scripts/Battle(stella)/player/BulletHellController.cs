@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class BulletHellController : MonoBehaviour
@@ -11,10 +12,14 @@ public class BulletHellController : MonoBehaviour
     private Transform t;
     public float speed;
 
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject shootbutton;
+
+    private bool moveable = false;
     // Start is called before the first frame update
     private void OnEnable()
     {
-        cc.radius = 0.14f;
+
     }
 
     private void Awake()
@@ -28,13 +33,23 @@ public class BulletHellController : MonoBehaviour
     void Update()
     {
         Vector2 movement = move.action.ReadValue<Vector2>();
-        rb.velocity = movement * speed;
+        if (moveable)
+            rb.velocity = movement * speed;
     }
 
-    public void Hide()
+    public void StopBulletHell()
     {
         rb.velocity = Vector2.zero;
         t.position = new Vector2(-10, 0);
+        eventSystem.SetSelectedGameObject(shootbutton);
+        moveable = false;
+    }
+    public void StartBulletHell(Vector2 position)
+    {
+        cc.radius = 0.14f;
+        t.position = position;
+        eventSystem.SetSelectedGameObject(null);
+        moveable = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

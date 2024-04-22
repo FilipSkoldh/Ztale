@@ -1,3 +1,4 @@
+using QuantumTek.QuantumInventory;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,11 +16,15 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI actingText;
     public List<GameObject> buttons;
     public EventSystem eventSystem;
+    public BulletHellController bulletHell;
+    public Box box;
+    public QI_Inventory inventory;
 
     private bool winning = false;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        inventory.Stacks = GlobalVariables.PlayerInventory;
     }
 
     // Update is called once per frame

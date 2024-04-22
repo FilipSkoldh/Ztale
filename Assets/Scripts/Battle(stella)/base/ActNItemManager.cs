@@ -1,3 +1,4 @@
+using QuantumTek.QuantumInventory;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,7 @@ public class ActNItemManager : MonoBehaviour
     private GameObject itemButton;
     private List<GameObject> buttons = new();
     private EventSystem eventSystem;
+    private QI_Inventory inventory;
 
     private BaseEnemyRelay selectedEnemy;
     private bool selectingEnemy;
@@ -29,6 +31,7 @@ public class ActNItemManager : MonoBehaviour
         buttons = battleManager.buttons;
         buttons.RemoveRange(0, 3);
         eventSystem = battleManager.eventSystem;
+        inventory = battleManager.inventory;
     }
 
     // Update is called once per frame
@@ -82,25 +85,28 @@ public class ActNItemManager : MonoBehaviour
     }
     public void ItemSelect()
     {
-        selectingItem = true;
-
-        int numStacks = GlobalVariables.PlayerInventory.Count;
-        for(int i = 0;i < buttons.Count; i++)
+        if (inventory.Stacks.Count != 0)
         {
-            if (i < numStacks)
+            selectingItem = true;
+
+            int numStacks = GlobalVariables.PlayerInventory.Count;
+            for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].gameObject.SetActive(true);
-                if (GlobalVariables.PlayerInventory[i].Amount > 1)
-                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name} x{GlobalVariables.PlayerInventory[i].Amount}";
+                if (i < numStacks)
+                {
+                    buttons[i].SetActive(true);
+                    if (inventory.Stacks[i].Amount > 1)
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{inventory.Stacks[i].Item.name} x{inventory.Stacks[i].Amount}";
+                    else
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{inventory.Stacks[i].Item.name}";
+                }
                 else
-                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = $"{GlobalVariables.PlayerInventory[i].Item.name}";
+                {
+                    buttons[i].SetActive(false);
+                }
             }
-            else
-            {
-                buttons[i].gameObject.SetActive(false);
-            }
+            eventSystem.SetSelectedGameObject(buttons[0]);
         }
-        eventSystem.SetSelectedGameObject(buttons[0]);
     }
 
     public void ButtonPress(int whichButton)
@@ -140,6 +146,10 @@ public class ActNItemManager : MonoBehaviour
                 buttons[i].gameObject.SetActive(false);
             }
             selectingAct = false;
+        }
+        else if (selectingItem)
+        {
+            if (inventory.Stacks[whichButton].GetType().ToString() == "")
         }
     }
 }
