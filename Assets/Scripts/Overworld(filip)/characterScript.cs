@@ -44,7 +44,6 @@ public class CharacterScript : MonoBehaviour
         saveAndLoad = GetComponent<SaveAndLoad>();
 
         //for now loads the variables like hp and max hp
-        saveAndLoad.LoadSave();
     }
 
     // Update is called once per frame

@@ -539,11 +539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnDown: {fileID: 606276348}
+    m_SelectOnLeft: {fileID: 682847405}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -672,12 +672,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 682847405}
+    m_SelectOnDown: {fileID: 1782521636}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 606276348}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -705,7 +705,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -974,7 +974,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2020,7 +2020,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1681281626}
   - {fileID: 1434326440}
   - {fileID: 1203848670}
   m_Father: {fileID: 1697314609}
@@ -2146,11 +2145,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 142076154}
+    m_SelectOnDown: {fileID: 1910760734}
+    m_SelectOnLeft: {fileID: 163380183}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -2584,7 +2583,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2985,7 +2984,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4616,7 +4615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203848669}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -293, y: 190, z: -10}
+  m_LocalPosition: {x: -293, y: 276, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5203,7 +5202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5303,12 +5302,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1782521636}
+    m_SelectOnDown: {fileID: 1365865629}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1657301636}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -5336,7 +5335,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6568,9 +6567,7 @@ MonoBehaviour:
   - {fileID: 637254485}
   eventSystem: {fileID: 895696911}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
-  openInventory: {fileID: 1627807983}
   saveAndLoad: {fileID: 1627807985}
-  playerChestVendor: {fileID: 0}
 --- !u!114 &1627807982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6584,9 +6581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJSONAsset: {fileID: 0}
-  canvas: {fileID: 254043506}
+  textboxCanvas: {fileID: 254043506}
   eventSystem: {fileID: 895696911}
-  textPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
+  textboxPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
   buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
   chest: {fileID: 1627807981}
   inventory: {fileID: 1627807986}
@@ -6615,7 +6612,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   close:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Close
       m_Type: 0
@@ -6625,7 +6622,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   interact:
     m_UseReference: 1
     m_Action:
@@ -6738,8 +6735,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2740fce42be64797e6bce03bec4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
   chests:
   - {fileID: 477761557}
+  FilledInventories:
+  - {fileID: 11400000, guid: db20cb859265b70448f6f052c36170c5, type: 2}
+  - {fileID: 11400000, guid: 694a76af5d421d34dbd782d23e40b90b, type: 2}
   transferChests:
   - {fileID: 1627807980}
   - {fileID: 477761558}
@@ -6809,11 +6810,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 1910760734}
+    m_SelectOnDown: {fileID: 1338415855}
+    m_SelectOnLeft: {fileID: 1430104720}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -6966,82 +6967,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662902350}
   m_CullTransparentMesh: 1
---- !u!1 &1681281623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1681281626}
-  - component: {fileID: 1681281625}
-  - component: {fileID: 1681281624}
-  m_Layer: 5
-  m_Name: Crosshair
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1681281624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681281623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d935dc6451eabd74cb7efe9d630fc5a6, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1681281625
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681281623}
-  m_CullTransparentMesh: 1
---- !u!224 &1681281626
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681281623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 537730600}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -505, y: 353}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1697314606
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,12 +7588,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 163380183}
+    m_SelectOnDown: {fileID: 1430104720}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1910760734}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -7696,7 +7621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7829,7 +7754,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627807983}
         m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemInteraction
+        m_MethodName: ItemSelected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8277,11 +8202,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 606276348}
+    m_SelectOnDown: {fileID: 1657301636}
+    m_SelectOnLeft: {fileID: 1782521636}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:

@@ -22,24 +22,21 @@ public class InteractWithChest : MonoBehaviour
 
     //Chests inventory and chest moving script
     private QI_Inventory inventory;
-    QI_Chest chestVendor;
+    private QI_Chest chestVendor;
 
     //The database and dictionary with all item info
     public QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new();
 
     //Other scripts
-    [SerializeField] private InteractWithInventory openInventory;
+    private InteractWithInventory openInventory;
     [SerializeField] private SaveAndLoad saveAndLoad;
-    [SerializeField] private QI_Chest playerChestVendor;
+    private QI_Chest playerChestVendor;
 
-    private void Awake()
+    private void Start()
     {
-        //Get full Itemdatabase with all item info and add to dictionary
-        items = itemDatabase.Getdictionary();
-        //Use the dictionary to add items easily to the chests inventory
-        inventory.AddItem(items["Bandage"], 10);
-        inventory.AddItem(items["Pistol"], 1);        
+        playerChestVendor = GetComponent<QI_Chest>();
+        openInventory = GetComponent<InteractWithInventory>();
     }
 
     /// <summary>
@@ -97,6 +94,8 @@ public class InteractWithChest : MonoBehaviour
         //Checks that you didn't press on an empty inventory slot
         if (inventory.Stacks.Count > button)
         {
+            Debug.Log(button);
+            Debug.Log($"{playerChestVendor}  {chestVendor}   {inventory.Stacks[button].Item}");
             //Using QI_Chest moves the selected item to the player inventory then refreshes both the player inventory GUI and chest GUI
             QI_Chest.Transaction(playerChestVendor, chestVendor, inventory.Stacks[button].Item, 1);
             openInventory.RefreshInventory();

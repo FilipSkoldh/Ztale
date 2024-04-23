@@ -37,12 +37,12 @@ public class InteractWithInventory : MonoBehaviour
 
     //the database and dictionary with all item info
     [SerializeField] private QI_ItemDatabase itemDatabase;
-    private Dictionary<string, QI_ItemData> items = new();
 
     //Other scripts
     [SerializeField] private QI_Chest chestVendor;
     private QI_Chest playerChestVendor;
     private InteractWithChest InteractWithChest;
+    private SaveAndLoad saveAndLoad;
 
     //variables for inventory
     private QI_ItemData selectedItem;
@@ -51,6 +51,8 @@ public class InteractWithInventory : MonoBehaviour
 
     private void Awake()
     {
+        saveAndLoad = GetComponent<SaveAndLoad>();
+        saveAndLoad.LoadSave();
         //Finds components on the player
         inventory = GetComponent<QI_Inventory>();
         playerChestVendor = GetComponent<QI_Chest>();
@@ -59,15 +61,6 @@ public class InteractWithInventory : MonoBehaviour
         //If there's a inventory saved globally load it
         if (GlobalVariables.PlayerInventory != null)
             inventory.Stacks = GlobalVariables.PlayerInventory;
-
-
-        //Get full Itemdatabase with all item info and add to dictionary
-        items = itemDatabase.Getdictionary();
-        //use the dictionary to add items easily to the inventory
-        inventory.AddItem(items["Shotgun"], 1);
-        inventory.AddItem(items["Bandage"], 10);
-        inventory.AddItem(items["Chainmail"], 1);
-        inventory.AddItem(items["Scarf"], 1);
     }
 
     private void Update()
@@ -183,6 +176,9 @@ public class InteractWithInventory : MonoBehaviour
             if (chestGUI.activeSelf)
             {
                 //Using QI_Chest moves the selected item to the opened chest then refreshes both the inventory and chest GUI
+
+                Debug.Log(button);
+                Debug.Log($"  {chestVendor}   {playerChestVendor}  {inventory.Stacks[button].Item}");
                 QI_Chest.Transaction(chestVendor, playerChestVendor, inventory.Stacks[button].Item, 1);
                 RefreshInventory();
                 InteractWithChest.RefreshChest();

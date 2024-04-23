@@ -68,6 +68,7 @@ namespace QuantumTek.QuantumInventory
         public bool CanSell(string itemName, int amount)
         {
             int stock = Inventory.GetStock(itemName);
+            Debug.Log($"amount:{amount} stock:{stock}");
 
             return stock >= amount;
         }
