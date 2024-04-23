@@ -16,12 +16,7 @@ public class BulletHellController : MonoBehaviour
     [SerializeField] private GameObject shootbutton;
 
     private bool moveable = false;
-    // Start is called before the first frame update
-    private void OnEnable()
-    {
-
-    }
-
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +36,6 @@ public class BulletHellController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         t.position = new Vector2(-10, 0);
-        eventSystem.SetSelectedGameObject(shootbutton);
         moveable = false;
     }
     public void StartBulletHell(Vector2 position)

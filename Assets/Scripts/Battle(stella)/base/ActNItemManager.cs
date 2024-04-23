@@ -15,7 +15,7 @@ public class ActNItemManager : MonoBehaviour
     private InputActionProperty interactProperty;
     private GameObject actButton;
     private GameObject itemButton;
-    private List<GameObject> buttons = new();
+    private GameObject[] buttons;
     private EventSystem eventSystem;
     private QI_Inventory inventory;
     private TextMeshProUGUI actingText;
@@ -32,10 +32,9 @@ public class ActNItemManager : MonoBehaviour
         battleManager = GetComponent<BattleManager>();
         backProperty = battleManager.backProperty;
         interactProperty = battleManager.interactProperty;
-        actButton = battleManager.buttons[1];
-        itemButton = battleManager.buttons[2];
+        actButton = battleManager.actButton;
+        itemButton = battleManager.itemButton;
         buttons = battleManager.buttons;
-        buttons.RemoveRange(0, 3);
         eventSystem = battleManager.eventSystem;
         inventory = battleManager.inventory;
         actingText = battleManager.actingText;
@@ -48,7 +47,7 @@ public class ActNItemManager : MonoBehaviour
         if (selectingEnemy && backProperty.action.WasPressedThisFrame())
         {
             eventSystem.SetSelectedGameObject(actButton);
-            for (int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].gameObject.SetActive(false);
 
@@ -58,7 +57,7 @@ public class ActNItemManager : MonoBehaviour
         if (selectingItem && backProperty.action.WasPressedThisFrame())
         {
             eventSystem.SetSelectedGameObject(itemButton);
-            for (int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].gameObject.SetActive(false);
 
@@ -82,7 +81,7 @@ public class ActNItemManager : MonoBehaviour
     {
         selectingEnemy = true;
         int numEnemies = transform.childCount;
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < buttons.Length; i++)
         {
             if(i < numEnemies)
             {
@@ -103,7 +102,7 @@ public class ActNItemManager : MonoBehaviour
             selectingItem = true;
 
             int numStacks = GlobalVariables.PlayerInventory.Count;
-            for (int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 if (i < numStacks)
                 {
@@ -130,7 +129,7 @@ public class ActNItemManager : MonoBehaviour
             selectingEnemy = false;
             selectedEnemy = transform.GetChild(whichButton).GetComponent<BaseEnemyRelay>();
             int numActs = selectedEnemy.acts.Count;
-            for (int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 if (i < numActs)
                 {
@@ -154,7 +153,7 @@ public class ActNItemManager : MonoBehaviour
             selectedEnemy.Act(whichButton);
 
             eventSystem.SetSelectedGameObject(null);
-            for (int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].SetActive(false);
             }
@@ -186,8 +185,8 @@ public class ActNItemManager : MonoBehaviour
                 }
                 GlobalVariables.EquippedEquipment = (item as QI_Equipment);
             }
-            actingText.text = item.Description;
-            for (int i = 0; i < buttons.Count; i++)
+            actingText.text = item.useMessage;
+            for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].SetActive(false);
             }

@@ -40,7 +40,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         else if (timer < 0)
         {
             timer = 0;
-            bulletHell.StopBulletHell();
+            battleManager.EndAttack();
             box.width = 6;
             box.height = 2;
         }

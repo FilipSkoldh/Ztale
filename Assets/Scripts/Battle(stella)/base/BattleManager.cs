@@ -14,11 +14,16 @@ public class BattleManager : MonoBehaviour
     public InputActionProperty interactProperty;
     public InputActionProperty backProperty;
     public TextMeshProUGUI actingText;
-    public List<GameObject> buttons;
+    public GameObject shootButton;
+    public GameObject actButton;
+    public GameObject itemButton;
+    public GameObject[] buttons;
     public EventSystem eventSystem;
     public BulletHellController bulletHell;
     public Box box;
     public QI_Inventory inventory;
+
+    public int useTime;
 
     private bool winning = false;
 
@@ -55,5 +60,11 @@ public class BattleManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void EndAttack()
+    {
+        bulletHell.StopBulletHell();
+        eventSystem.SetSelectedGameObject(buttons[0]);
     }
 }
