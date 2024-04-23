@@ -6,38 +6,46 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ActNItemManager : MonoBehaviour
 {
     private BattleManager battleManager;
-    private InputActionProperty backInput;
+    private InputActionProperty backProperty;
+    private InputActionProperty interactProperty;
     private GameObject actButton;
     private GameObject itemButton;
     private List<GameObject> buttons = new();
     private EventSystem eventSystem;
     private QI_Inventory inventory;
+    private TextMeshProUGUI actingText;
+    private BaseEnemyAttacks attacks;
 
     private BaseEnemyRelay selectedEnemy;
     private bool selectingEnemy;
     private bool selectingAct;
     private bool selectingItem;
+    private bool usingItem;
     // Start is called before the first frame update
     void Start()
     {
         battleManager = GetComponent<BattleManager>();
-        backInput = battleManager.backProperty;
+        backProperty = battleManager.backProperty;
+        interactProperty = battleManager.interactProperty;
         actButton = battleManager.buttons[1];
         itemButton = battleManager.buttons[2];
         buttons = battleManager.buttons;
         buttons.RemoveRange(0, 3);
         eventSystem = battleManager.eventSystem;
         inventory = battleManager.inventory;
+        actingText = battleManager.actingText;
+        attacks = GetComponent<BaseEnemyAttacks>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (selectingEnemy && backInput.action.WasPressedThisFrame())
+        if (selectingEnemy && backProperty.action.WasPressedThisFrame())
         {
             eventSystem.SetSelectedGameObject(actButton);
             for (int i = 0; i < buttons.Count; i++)
@@ -47,7 +55,7 @@ public class ActNItemManager : MonoBehaviour
             }
             selectingEnemy = false;
         }
-        if (selectingItem && backInput.action.WasPressedThisFrame())
+        if (selectingItem && backProperty.action.WasPressedThisFrame())
         {
             eventSystem.SetSelectedGameObject(itemButton);
             for (int i = 0; i < buttons.Count; i++)
@@ -57,12 +65,17 @@ public class ActNItemManager : MonoBehaviour
             }
             selectingItem = false;
         }
-
-        if (selectingAct && backInput.action.WasPressedThisFrame())
+        if (selectingAct && backProperty.action.WasPressedThisFrame())
         {
             selectingAct = false;
             EnemySelect();
         }
+        if(usingItem && interactProperty.action.WasPressedThisFrame())
+        {
+            actingText.text = "";
+            attacks.Attack();
+        }
+        usingItem = actingText.text != "";
     }
 
     public void EnemySelect()
@@ -143,13 +156,41 @@ public class ActNItemManager : MonoBehaviour
             eventSystem.SetSelectedGameObject(null);
             for (int i = 0; i < buttons.Count; i++)
             {
-                buttons[i].gameObject.SetActive(false);
+                buttons[i].SetActive(false);
             }
             selectingAct = false;
         }
         else if (selectingItem)
         {
-            if (inventory.Stacks[whichButton].GetType().ToString() == "")
+            QI_ItemData item = inventory.Stacks[whichButton].Item;
+            inventory.RemoveItem(item.Name, 1);
+
+            if (item.GetType().ToString() == "QI_Healing")
+            {
+                GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (item as QI_Healing).healingAmount,0,GlobalVariables.MaxHp);
+            }
+            else if (item.GetType().ToString() == "QI_Weapons")
+            {
+                if (GlobalVariables.EquippedWeapon != null)
+                {
+                    inventory.AddItem(GlobalVariables.EquippedWeapon, 1);
+                }
+
+                GlobalVariables.EquippedWeapon = (item as QI_Weapons);
+            }
+            else if (item.GetType().ToString() == "QI_Equipment")
+            {
+                if (GlobalVariables.EquippedEquipment != null)
+                {
+                    inventory.AddItem(GlobalVariables.EquippedEquipment, 1);
+                }
+                GlobalVariables.EquippedEquipment = (item as QI_Equipment);
+            }
+            actingText.text = item.Description;
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].SetActive(false);
+            }
         }
     }
 }
