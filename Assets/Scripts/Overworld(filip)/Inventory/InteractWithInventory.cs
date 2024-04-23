@@ -15,20 +15,9 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private InputActionProperty close;
     [SerializeField] private InputActionProperty interact;
 
-    //Inventory and chest GUI
+    //All GUI
     [SerializeField] private GameObject inventoryGUI;
     [SerializeField] private GameObject chestGUI;
-
-    //the buttons behind every item in the inventory GUI and the eventsystem to control it
-    [SerializeField] private List<GameObject> invList;
-    [SerializeField] private EventSystem eventSystem;
-
-    //The QI_Chest scripts on the chest and 
-    [SerializeField] private QI_Chest chestVendor;
-    private QI_Chest playerChestVendor;
-    private InteractWithChest InteractWithChest;
-
-    //the rest of the GUI
     [SerializeField] private GameObject textboxPrefab;
     [SerializeField] private Canvas textboxCanvas;
     [SerializeField] private TextMeshProUGUI uiHp;
@@ -39,15 +28,24 @@ public class InteractWithInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiMediumAmmo;
     [SerializeField] private TextMeshProUGUI uiShotgunAmmo;
 
-    //the database with all item info
-    [SerializeField] private QI_ItemDatabase itemDatabase;
+    //The inventory slots and the EventSystem
+    [SerializeField] private List<GameObject> invList;
+    [SerializeField] private EventSystem eventSystem;
 
-    //The inventory and the dictionary with names to all itemdata
+    //The players inventory
     private QI_Inventory inventory;
+
+    //the database and dictionary with all item info
+    [SerializeField] private QI_ItemDatabase itemDatabase;
     private Dictionary<string, QI_ItemData> items = new();
 
+    //Other scripts
+    [SerializeField] private QI_Chest chestVendor;
+    private QI_Chest playerChestVendor;
+    private InteractWithChest InteractWithChest;
+
     //variables for inventory
-    private int selectedItem = 0;
+    private QI_ItemData selectedItem;
     private int wait = 0;
     private bool interacting = false;
 
@@ -61,12 +59,8 @@ public class InteractWithInventory : MonoBehaviour
         //If there's a inventory saved globally load it
         if (GlobalVariables.PlayerInventory != null)
             inventory.Stacks = GlobalVariables.PlayerInventory;
-        
 
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+
         //Get full Itemdatabase with all item info and add to dictionary
         items = itemDatabase.Getdictionary();
         //use the dictionary to add items easily to the inventory
@@ -74,7 +68,6 @@ public class InteractWithInventory : MonoBehaviour
         inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Chainmail"], 1);
         inventory.AddItem(items["Scarf"], 1);
-        
     }
 
     private void Update()
@@ -143,19 +136,6 @@ public class InteractWithInventory : MonoBehaviour
         //Sorts the inventory in alphabetical order
         inventory.Stacks.Sort((p1, p2) => { return string.Compare(p1.Item.name, p2.Item.name); });
 
-        //Sets the GUI hp, food, weapon, equipment and all ammo to their 
-        uiHp.text = $"Hp: {GlobalVariables.Hp}/{GlobalVariables.MaxHp}";
-        uiFood.text = $"Food: n/a";
-        if (GlobalVariables.EquippedWeapon != null)
-            uiWeapon.text = $"Weapon: {GlobalVariables.EquippedWeapon.name}";
-    
-        if (GlobalVariables.EquippedEquipment != null)
-            uiEquipment.text = $"Equipment: {GlobalVariables.EquippedEquipment.name}";
-
-        uiLightAmmo.text = $":{GlobalVariables.LightAmmo}";
-        uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
-        uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
-
         //Reads the inventory and puts it in the corresponding positions in the inventory GUI
         //for every stack in the inventory
         for (int i = 0; i < inventory.Stacks.Count; i++)
@@ -170,9 +150,24 @@ public class InteractWithInventory : MonoBehaviour
             {
                 invList[i].GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
-            //Set interacting to false since you aren't interacting with an item in the inventory when u open it
-            interacting = false;
         }
+
+        //Sets the GUI hp, food, weapon, equipment and all ammo to their 
+        uiHp.text = $"Hp: {GlobalVariables.Hp}/{GlobalVariables.MaxHp}";
+        uiFood.text = $"Food: n/a";
+
+        if (GlobalVariables.EquippedWeapon != null)
+            uiWeapon.text = $"Weapon: {GlobalVariables.EquippedWeapon.name}";
+
+        if (GlobalVariables.EquippedEquipment != null)
+            uiEquipment.text = $"Equipment: {GlobalVariables.EquippedEquipment.name}";
+
+        uiLightAmmo.text = $":{GlobalVariables.LightAmmo}";
+        uiMediumAmmo.text = $":{GlobalVariables.MediumAmmo}";
+        uiShotgunAmmo.text = $":{GlobalVariables.ShotgunAmmo}";
+
+        //Set interacting to false since you aren't interacting with an item in the inventory when u open it
+        interacting = false;
     }
 
     /// <summary>
@@ -196,58 +191,82 @@ public class InteractWithInventory : MonoBehaviour
             else
             {
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(9).GetChild(0).gameObject);
-                selectedItem = button;
+                selectedItem = inventory.Stacks[button].Item;
             }
         }
     }
 
+    /// <summary>
+    /// Uses the selected item in it's intended way
+    /// </summary>
     public void ItemUse()
     {
-        ItemInteracted(inventory.Stacks[selectedItem].Item.useMessage);
-        if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Healing")
+        //removes the selected item from the inventory
+        inventory.RemoveItem(selectedItem.Name, 1);
+
+        //Gets the items use message and displays it in the textbox
+        ItemInteracted(selectedItem.useMessage);
+
+        //Checks what item type it is
+        //Healing heals the player
+        if (selectedItem.GetType().ToString() == "QI_Healing")
         {
-            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (inventory.Stacks[selectedItem].Item as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
+            //heales the amount it is supposed to
+            GlobalVariables.Hp = Mathf.Clamp(GlobalVariables.Hp + (selectedItem as QI_Healing).healingAmount, 0, GlobalVariables.MaxHp);
         }
-        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Weapons")
+        //Weapons are equipped
+        else if (selectedItem.GetType().ToString() == "QI_Weapons")
         {
+            //If you had a weapon equipped already it's added back to the inventory
             if (GlobalVariables.EquippedWeapon != null)
             {
                 inventory.AddItem(GlobalVariables.EquippedWeapon, 1);
             }
-
-            GlobalVariables.EquippedWeapon = (inventory.Stacks[selectedItem].Item as QI_Weapons);
+            //Changing the equipped weapon to the weapon you selected
+            GlobalVariables.EquippedWeapon = (selectedItem as QI_Weapons);
         }
-        else if (inventory.Stacks[selectedItem].Item.GetType().ToString() == "QI_Equipment")
+        //Equipment are equipped
+        else if (selectedItem.GetType().ToString() == "QI_Equipment")
         {
+            //If you hade equipment equipped already it's added back to the inventory
             if (GlobalVariables.EquippedEquipment != null)
             {
                 inventory.AddItem(GlobalVariables.EquippedEquipment, 1);
             }
-            GlobalVariables.EquippedEquipment = (inventory.Stacks[selectedItem].Item as QI_Equipment);
+            //Changing the equipped equipment to the equipment you selected
+            GlobalVariables.EquippedEquipment = (selectedItem as QI_Equipment);
         }
-        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
     }
 
-
+    /// <summary>
+    /// Displays the selected items description
+    /// </summary>
     public void ItemInfo()
     {
-        ItemInteracted(inventory.Stacks[selectedItem].Item.Description);
+        ItemInteracted(selectedItem.Description);
     }
 
+    /// <summary>
+    /// Deletes the selected item
+    /// </summary>
     public void ItemThrow()
     {
-        ItemInteracted($"{inventory.Stacks[selectedItem].Item.Name} was thrown away");
-
-        inventory.RemoveItem(inventory.Stacks[selectedItem].Item.Name, 1);
+        ItemInteracted($"{selectedItem.Name} was thrown away");
+        inventory.RemoveItem(selectedItem.Name, 1);
     }
 
+    /// <summary>
+    /// Displays a single line in the textbox
+    /// </summary>
+    /// <param name="text">The text that is going to be displayed</param>
     public void ItemInteracted(string text)
     {
+        //spawn the textbox prefab
         GameObject storyText = Instantiate(textboxPrefab, textboxCanvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, textboxCanvas.transform);
+        //text the TextmeshproUGUI to "text"
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
-        storyText.transform.SetParent(textboxCanvas.transform, false);
 
-        eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
+        //deactivates the inventory GUI, resets "wait" so the textbox isn't closed on the same frame
         inventoryGUI.SetActive(false);
         wait = 0;
         interacting = true;

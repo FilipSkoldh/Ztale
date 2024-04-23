@@ -6532,19 +6532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6219ea3ac89dbde418bea1d3d3bf10dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openInventory: {fileID: 1627807983}
-  chestGameobj: {fileID: 1203848669}
-  eventSystem: {fileID: 895696911}
-  invList:
-  - {fileID: 2055104035}
-  - {fileID: 1716660779}
-  - {fileID: 94301361}
-  - {fileID: 168363842}
-  - {fileID: 1002038799}
-  - {fileID: 850083921}
-  - {fileID: 385634036}
-  - {fileID: 637254485}
-  saveAndLoad: {fileID: 1627807985}
   inv:
     m_UseReference: 1
     m_Action:
@@ -6569,8 +6556,21 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  playerChest: {fileID: 1627807980}
+  chestGameobj: {fileID: 1203848669}
+  invList:
+  - {fileID: 2055104035}
+  - {fileID: 1716660779}
+  - {fileID: 94301361}
+  - {fileID: 168363842}
+  - {fileID: 1002038799}
+  - {fileID: 850083921}
+  - {fileID: 385634036}
+  - {fileID: 637254485}
+  eventSystem: {fileID: 895696911}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
+  openInventory: {fileID: 1627807983}
+  saveAndLoad: {fileID: 1627807985}
+  playerChestVendor: {fileID: 0}
 --- !u!114 &1627807982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6614,18 +6614,18 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  closeInv:
-    m_UseReference: 1
+  close:
+    m_UseReference: 0
     m_Action:
-      m_Name: Close Inv
+      m_Name: Close
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 8dcbf99e-edcc-47da-85e8-b0ef0b5012cd
+      m_Id: 177736ea-e55c-4e77-831a-432b49bd583b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+    m_Reference: {fileID: 0}
   interact:
     m_UseReference: 1
     m_Action:
@@ -6640,6 +6640,15 @@ MonoBehaviour:
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   inventoryGUI: {fileID: 1434326439}
   chestGUI: {fileID: 1203848669}
+  textboxPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
+  textboxCanvas: {fileID: 254043506}
+  uiHp: {fileID: 2074213075}
+  uiFood: {fileID: 696776430}
+  uiWeapon: {fileID: 1934679198}
+  uiEquipment: {fileID: 232951537}
+  uiLightAmmo: {fileID: 282208583}
+  uiMediumAmmo: {fileID: 879573824}
+  uiShotgunAmmo: {fileID: 1576362278}
   invList:
   - {fileID: 1945165615}
   - {fileID: 988259034}
@@ -6650,17 +6659,8 @@ MonoBehaviour:
   - {fileID: 1886315566}
   - {fileID: 1281399486}
   eventSystem: {fileID: 895696911}
-  chestVendor: {fileID: 477761558}
-  textboxPrefab: {fileID: 2298362844546004093, guid: 20d207a07bb96014fb29212ae29d41f4, type: 3}
-  textboxCanvas: {fileID: 254043506}
-  uiHp: {fileID: 2074213075}
-  uiFood: {fileID: 696776430}
-  uiWeapon: {fileID: 1934679198}
-  uiEquipment: {fileID: 232951537}
-  uiLightAmmo: {fileID: 282208583}
-  uiMediumAmmo: {fileID: 879573824}
-  uiShotgunAmmo: {fileID: 1576362278}
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
+  chestVendor: {fileID: 477761558}
 --- !u!114 &1627807984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6726,7 +6726,6 @@ MonoBehaviour:
     m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   textboxCanvas: {fileID: 254043506}
   inventoryGUI: {fileID: 1434326439}
-  saveAndLoad: {fileID: 1627807985}
 --- !u!114 &1627807985
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,25 +5,29 @@ using QuantumTek.QuantumInventory;
 public class CharacterScript : MonoBehaviour
 {
     //Declaring variables
-    //Floats needed to make sprinting and crouching+
+    //Floats needed to make sprinting and crouching
     [SerializeField] private float speed = 1;
     [SerializeField] private float stamina = 10;
     [SerializeField] private float sprintCooldown = 1;
+
     //All different inputs
     [SerializeField] private InputActionProperty move;
     [SerializeField] private InputActionProperty sprint;
     [SerializeField] private InputActionProperty crouch;
     [SerializeField] private InputActionProperty interact;
-    //The canvas the textbox appears in
+
+    //The canvas the textbox appears in and the inventory GUI
     [SerializeField] private Canvas textboxCanvas;
     [SerializeField] private GameObject inventoryGUI;
-    //The save and load script so i can call functions
-    [SerializeField] private SaveAndLoad saveAndLoad;
-    //Did i sprint last frame?
-    private bool printedLastFrame = false;
-    //The script that reads and outputs text from INK
+
+    //Other scripts
+    private SaveAndLoad saveAndLoad;
     private InkScript inkScript;
-    //The players animator, rigidbody and transform
+
+    //Did i sprint last frame?
+    private bool sprintedLastFrame = false;
+
+    //Duhhh
     private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private Transform playerTransform;
@@ -37,6 +41,7 @@ public class CharacterScript : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerTransform = GetComponent<Transform>();
         inkScript = GetComponent<InkScript>();
+        saveAndLoad = GetComponent<SaveAndLoad>();
 
         //for now loads the variables like hp and max hp
         saveAndLoad.LoadSave();
@@ -76,13 +81,13 @@ public class CharacterScript : MonoBehaviour
             }
 
             //Sprint only if the sprint button is pressed, the crouch button isn't, you have over 0 stamina, u are moving, and there isn't a cooldown except when you were sprinting last frame then it ignores the cooldown
-            if (sprint.action.IsPressed() && !crouch.action.IsPressed() && stamina > 0 && movevector != Vector2.zero && (sprintCooldown < 0.1 || printedLastFrame))
+            if (sprint.action.IsPressed() && !crouch.action.IsPressed() && stamina > 0 && movevector != Vector2.zero && (sprintCooldown < 0.1 || sprintedLastFrame))
             {
                 //Sprints by setting the speed to 2, consuming 1 stamina per second, setting the cooldown to 1 and setting the sprinted last frame to true
                 speed = 2;
                 stamina -= Time.deltaTime * 1;
                 sprintCooldown = 1;
-                printedLastFrame = true;
+                sprintedLastFrame = true;
             }
             //If the character isn't sprinting regen stamina and and count down the cooldown
             else
@@ -91,7 +96,7 @@ public class CharacterScript : MonoBehaviour
                 if (sprintCooldown > 0)
                 {
                     sprintCooldown -= Time.deltaTime * 1;
-                    printedLastFrame = false;
+                    sprintedLastFrame = false;
                 }
                 //If the cooldown is gone begin regenerating stamina
                 else if (stamina < 10)

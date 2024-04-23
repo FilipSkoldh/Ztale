@@ -23,15 +23,14 @@ public class InkScript: MonoBehaviour {
 		RefreshView();
 	}
 	
-	// This is the main function called every time the story changes. It does a few things:
-	// Destroys all the old content and choices.
-	// Continues over all the lines of text, then displays all the choices. If there are no choices, the story is finished!
-	void RefreshView () {
-		// Remove all the UI on screen
+	/// <summary>
+	/// Destroy old text and choices the continues the story and displays all choices, if there are none the story is finished
+	/// </summary>
+	void RefreshView () 
+	{
+
 		RemoveChildren ();
 
-
-		
 		// Read all the content until we can't continue any more
 		while (inkStory.canContinue) {
 			// Continue gets the next line of the story
@@ -41,6 +40,8 @@ public class InkScript: MonoBehaviour {
 			// Display the text on screen!
 			CreateContentView(text);
 		}
+
+
 		List<Button> buttons = new(); 
 		// Display all the choices, if there are any!
 		if(inkStory.currentChoices.Count > 0) {
@@ -54,6 +55,7 @@ public class InkScript: MonoBehaviour {
 				});
 			}
 		}
+
 		if (buttons.Count > 0) 
 		{ 
 			eventSystem.SetSelectedGameObject(buttons[0].gameObject);
@@ -77,13 +79,13 @@ public class InkScript: MonoBehaviour {
         else if (inkStory.currentChoices.Count == 2)
         {
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
-            buttons[1].transform.localPosition = new Vector3(246, 315, 0);
+            buttons[1].transform.localPosition = new Vector3(250, 315, 0);
         }
         else if (inkStory.currentChoices.Count == 3)
         {
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
-            buttons[1].transform.localPosition = new Vector3(-151, 315, 0);
-            buttons[2].transform.localPosition = new Vector3(274, 315, 0);
+            buttons[1].transform.localPosition = new Vector3(-150, 315, 0);
+            buttons[2].transform.localPosition = new Vector3(270, 315, 0);
         }
         // If we've read all the content and there's no choices, the story is finished!
 
