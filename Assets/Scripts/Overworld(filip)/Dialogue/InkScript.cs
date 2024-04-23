@@ -41,35 +41,36 @@ public class InkScript: MonoBehaviour {
 			CreateContentView(text);
 		}
 
-
+		//A list with the Choice buttons
 		List<Button> buttons = new(); 
+
 		// Display all the choices, if there are any!
 		if(inkStory.currentChoices.Count > 0) {
 			for (int i = 0; i < inkStory.currentChoices.Count; i++) {
 				Choice choice = inkStory.currentChoices [i];
 				Button button = CreateChoiceView (choice.text.Trim ());
+				//Adds the current choice button to the list
 				buttons.Add (button);
 				// Tell the button what to do when we press it
-				button.onClick.AddListener (delegate {
-					OnClickChoiceButton (choice);
-				});
+				button.onClick.AddListener (delegate {OnClickChoiceButton (choice);});
 			}
 		}
 
+		//if there are any choices at all select the first button
 		if (buttons.Count > 0) 
-		{ 
 			eventSystem.SetSelectedGameObject(buttons[0].gameObject);
-		}
 		else
-		{
 			RemoveChildren () ;
-		}
+
+		//Where to place the choice buttons depending on how many choices there are
 		if(inkStory.currentChoices.Count == 1)
 		{
+			//If there is only one choice and that is a "." that is just so you have to click to further the dialoge so place the "." choice outside the screen
 			if (inkStory.currentChoices[0].text == ".")
 			{
                 buttons[0].transform.localPosition = new Vector3(-2000, 315, 0);
             }
+			//Else place the button at the specified location
 			else
 			{
                 buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
@@ -78,40 +79,52 @@ public class InkScript: MonoBehaviour {
         }
         else if (inkStory.currentChoices.Count == 2)
         {
+			//where to place buttons when there are two choices
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
             buttons[1].transform.localPosition = new Vector3(250, 315, 0);
         }
         else if (inkStory.currentChoices.Count == 3)
         {
+			//where to place buttons when there are three choices
             buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
             buttons[1].transform.localPosition = new Vector3(-150, 315, 0);
             buttons[2].transform.localPosition = new Vector3(270, 315, 0);
         }
         // If we've read all the content and there's no choices, the story is finished!
-
     }
 
-	// When we click the choice button, tell the story to choose that choice!
+	/// <summary>
+	/// Tells story which choice was chosen
+	/// </summary>
+	/// <param name="choice">The choice to tell Story</param>
 	void OnClickChoiceButton (Choice choice) 
 	{
 		inkStory.ChooseChoiceIndex (choice.index);
 		RefreshView();
 	}
 
-	// Creates a textbox showing the the line of text
-	void CreateContentView (string text)
+    /// <summary>
+    /// Creates a textbox showing the the line of text
+    /// </summary>
+    /// <param name="text">The text to be displayed</param>
+    void CreateContentView (string text)
 	{
-		GameObject storyText = Instantiate (textPrefab, canvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, canvas.transform);
-		storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
-		storyText.transform.SetParent (canvas.transform, false);
-	}
+        //spawn the textbox prefab
+        GameObject storyText = Instantiate(textboxPrefab, textboxCanvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, textboxCanvas.transform);
+        //text the TextmeshproUGUI to "text"
+        storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+    }
 
-	// Creates a button showing the choice text
+	/// <summary>
+	/// Creates a button showing the choice text
+	/// </summary>
+	/// <param name="text">The choice text</param>
+	/// <returns></returns>
 	Button CreateChoiceView (string text) 
 	{
 		// Creates the button from a prefab
-		Button choice = Instantiate (buttonPrefab, canvas.transform);
-		choice.transform.SetParent (canvas.transform, false);
+		Button choice = Instantiate (buttonPrefab, textboxCanvas.transform);
+		choice.transform.SetParent (textboxCanvas.transform, false);
 		
 		// Gets the text from the button prefab
 		TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI> ();
@@ -120,19 +133,26 @@ public class InkScript: MonoBehaviour {
 		return choice;
 	}
 
-	// Destroys all the children of this gameobject (all the UI)
+	/// <summary>
+	/// Destroys all UI gameobjects
+	/// </summary>
 	void RemoveChildren () 
 	{
-		int childCount = canvas.transform.childCount;
-		for (int i = childCount - 1; i >= 0; --i) {
-			Destroy (canvas.transform.GetChild (i).gameObject);
-		}
+        //Destroy all children in the textboxcanvas to remove the textbox and choices
+        for (int i = textboxCanvas.transform.childCount - 1; i >= 0; --i) 
+			Destroy (textboxCanvas.transform.GetChild (i).gameObject);
 	}
 
+	/// <summary>
+	/// Starts a battle encounter
+	/// </summary>
+	/// <param name="encounter">The encounter to be started</param>
 	void StartEncounter(int encounter)
 	{
+		//Tells the other scene which encounter to start and the players inventory
 		GlobalVariables.Encounter = encounter;
         GlobalVariables.PlayerInventory = inventory.Stacks;
+		//switches scenes
         SceneManager.LoadScene("Battle");
 	}
 
@@ -142,12 +162,12 @@ public class InkScript: MonoBehaviour {
 	public Story inkStory;
 
 	[SerializeField]
-	private Canvas canvas = null;
+	private Canvas textboxCanvas = null;
 	[SerializeField]
 	private EventSystem eventSystem = null;
 	// UI Prefabs
 	[SerializeField]
-	private GameObject textPrefab = null;
+	private GameObject textboxPrefab = null;
 	[SerializeField]
 	private Button buttonPrefab = null;
 	[SerializeField] private InteractWithChest chest;
