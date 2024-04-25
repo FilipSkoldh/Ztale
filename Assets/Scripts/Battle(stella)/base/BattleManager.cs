@@ -41,7 +41,7 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemiesDefeated())
         {
-            actingText.text = $"You win!";
+            actingText.text = "You win!";
             winning = true;
         }
     }
@@ -65,6 +65,6 @@ public class BattleManager : MonoBehaviour
     public void EndAttack()
     {
         bulletHell.StopBulletHell();
-        eventSystem.SetSelectedGameObject(buttons[0]);
+        eventSystem.SetSelectedGameObject(shootButton);
     }
 }
