@@ -26,11 +26,16 @@ public class Shooting : MonoBehaviour
     private Transform hitT;
     private bool shooting = false;
 
+    [SerializeField] private List<Transform> bullets = new();
+
     public void StartShooting()
     {
-        t.position = new Vector3 (0f, 1f, 0f);
-        cc.radius = 0.03f;
-        shooting = true;
+        if (GlobalVariables.EquippedWeapon != null)
+        {
+            t.position = new Vector3(0f, 1f, 0f);
+            cc.radius = 0.03f;
+            shooting = true;
+        }
     }
 
 
@@ -48,20 +53,19 @@ public class Shooting : MonoBehaviour
         if (shooting)
         {
             Vector2 movement = move.action.ReadValue<Vector2>();
-            bool shot = shoot.action.WasPressedThisFrame();
-            bool backed = back.action.WasPressedThisFrame();
             rb.velocity = movement * speed;
 
-            if (backed)
+            if (back.action.WasPressedThisFrame())
             {
                 rb.velocity = Vector2.zero;
-                t.position = new Vector2(-10, 0);
+                transform.position = new Vector3(0, 10, 0);
+                shooting = false;
                 eventSystem.SetSelectedGameObject(shootButton);
-                this.enabled = false;
             }
 
-            if (shot)
+            if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null)
             {
+
                 Debug.Log("shot");
                 hits = Physics2D.CircleCastAll(t.position, 0.02f, Vector2.zero, 0, 256);
                 int sorrtingOrder = -10;
@@ -72,7 +76,6 @@ public class Shooting : MonoBehaviour
                     {
                         sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
                         hitT = i.transform;
-
                     }
                 }
                 if (hitT != null)
@@ -84,9 +87,10 @@ public class Shooting : MonoBehaviour
 
                 }
                 rb.velocity = Vector2.zero;
-                transform.position = new Vector3(0,10,0);
+                transform.position = new Vector3(0, 10, 0);
                 shooting = false;
             }
+            eventSystem.SetSelectedGameObject(null);
         }
     }
 }
