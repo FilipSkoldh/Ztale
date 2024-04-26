@@ -46,8 +46,8 @@ public class InteractWithChest : MonoBehaviour
     public void OpenChest(int inventoryNumber)
     {
         //Gets the chests chests inventory and chest moving script
-        chestVendor = saveAndLoad.transferChests[inventoryNumber+1];
-        inventory = saveAndLoad.chests[inventoryNumber];
+        chestVendor = saveAndLoad.transferChests[inventoryNumber];
+        inventory = saveAndLoad.Inventories[inventoryNumber];
         //Activates the chest GUI and openes the players inventory
         chestGameobj.SetActive(true);
         openInventory.OpenOrCloseInventory();

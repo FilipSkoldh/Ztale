@@ -3,40 +3,94 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
+
+
 
 public class SaveAndLoad : MonoBehaviour
 {
     [SerializeField] private QI_ItemDatabase itemDatabase;
-    private Dictionary<string, QI_ItemData> items = new();
-
-    public QI_Inventory[] chests = new QI_Inventory[1];
-    public QI_FilledInventory[] FilledInventories = new QI_FilledInventory[2];
+    public QI_Inventory[] Inventories = new QI_Inventory[2];
     public QI_Chest[] transferChests = new QI_Chest[2];
+    public Dictionary<string, QI_ItemData> items = new();
 
-
-
-    public void Save()
+    private void Awake()
     {
-
+        items = itemDatabase.Getdictionary();
     }
+    
+
+    string savefilePath = "C:\\temp\\PlayerData.json";
+    Savefile savefile = new();
+
+
+    public void Save(int saveLocation)
+    {
+        savefile.saveLocation = saveLocation;
+        savefile.maxHp = GlobalVariables.MaxHp;
+        savefile.hp = GlobalVariables.Hp;
+        savefile.lightAmmo = GlobalVariables.LightAmmo;
+        savefile.mediumAmmo = GlobalVariables.MediumAmmo;
+        savefile.shoutgunAmmo = GlobalVariables.ShotgunAmmo;
+        savefile.equippedEquipment = GlobalVariables.EquippedEquipment;
+        savefile.equippedWeapon = GlobalVariables.EquippedWeapon;
+
+        savefile.player = Inventories[0].Stacks;
+        savefile.chest = Inventories[1].Stacks;
+
+        for (int i = 0; i < savefile.Stacks.Count; i++)
+        {
+            savefile.Stacks[i] = Inventories[i].Stacks;
+        }
+
+        string json = JsonConvert.SerializeObject(savefile);
+        
+
+        File.WriteAllText(savefilePath, json);
+    }
+
     public void LoadSave()
     {
-        GlobalVariables.MaxHp = 100;
-        GlobalVariables.Hp = 10;
-        GlobalVariables.LightAmmo = 20;
-        GlobalVariables.MediumAmmo = 15;
-        GlobalVariables.ShotgunAmmo = 10;
-        
-        GlobalVariables.PlayerInventory = FilledInventories[0].Stacks;
-        for (int i = 1; i < FilledInventories.Length; i++)
+        string saveData = File.ReadAllText(savefilePath);
+        Debug.Log(saveData);
+        savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
+
+        GlobalVariables.MaxHp = savefile.maxHp;
+        GlobalVariables.Hp = savefile.hp;
+        GlobalVariables.LightAmmo = savefile.lightAmmo;
+        GlobalVariables.MediumAmmo = savefile.mediumAmmo;
+        GlobalVariables.ShotgunAmmo = savefile.shoutgunAmmo;
+        GlobalVariables.EquippedEquipment = savefile.equippedEquipment;
+        GlobalVariables.EquippedWeapon = savefile.equippedWeapon;
+
+        for (int i = 0; i < savefile.Stacks.Count; i++)
         {
-            chests[i-1].Stacks = FilledInventories[i].Stacks;
+            if (savefile.Stacks[i] != null)
+                Inventories[i].Stacks = savefile.Stacks[i];
         }
-        
+
+        GlobalVariables.PlayerInventory = Inventories[0].Stacks;
+
+    }
+
+    public void FillInventories()
+    {
+        for (int i = 0; i < Inventories.Length; i++)
+        {
+            Inventories[i].Stacks.Clear();
+        }
+        Inventories[0].AddItem(items["Shotgun"], 1);
+        Inventories[0].AddItem(items["Scarf"], 1);
+        Inventories[0].AddItem(items["Chainmail"], 1);
+        Inventories[0].AddItem(items["Bandage"], 10);
+        Inventories[1].AddItem(items["Bandage"], 10);
+        Inventories[1].AddItem(items["Pistol"], 1);
+
     }
 
     public void NewSave()
     {
-        
+
     }
 }

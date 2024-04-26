@@ -1,4 +1,4 @@
-EXTERNAL saveGame(savespot)
+EXTERNAL SaveGame(savespot)
 
 -> start
 
@@ -9,4 +9,5 @@ EXTERNAL saveGame(savespot)
 *yes -> hi
 *no-> DONE  
 ==hi==
+~SaveGame(1)
 ->DONE

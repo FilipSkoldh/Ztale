@@ -20,6 +20,8 @@ public class InkScript: MonoBehaviour {
 		}
         inkStory.BindExternalFunction("OpenChest", (int chestNumber) => {chest.OpenChest(chestNumber); });
 		inkStory.BindExternalFunction("StartEncounter", (int encounter) => { StartEncounter(encounter); });
+		inkStory.BindExternalFunction("SaveGame", (int savelocation) => { saveAndLoad.Save(savelocation); });
+		inkStory.BindExternalFunction("FillInventory", () => { saveAndLoad.FillInventories();});
 		RefreshView();
 	}
 	
@@ -172,4 +174,5 @@ public class InkScript: MonoBehaviour {
 	private Button buttonPrefab = null;
 	[SerializeField] private InteractWithChest chest;
 	[SerializeField] private QI_Inventory inventory;
+	[SerializeField] private SaveAndLoad saveAndLoad;
 }

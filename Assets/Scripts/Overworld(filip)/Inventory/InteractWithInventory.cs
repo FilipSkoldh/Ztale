@@ -58,9 +58,6 @@ public class InteractWithInventory : MonoBehaviour
         playerChestVendor = GetComponent<QI_Chest>();
         InteractWithChest = GetComponent<InteractWithChest>();
 
-        //If there's a inventory saved globally load it
-        if (GlobalVariables.PlayerInventory != null)
-            inventory.Stacks = GlobalVariables.PlayerInventory;
     }
 
     private void Update()
@@ -108,6 +105,12 @@ public class InteractWithInventory : MonoBehaviour
         //Else make the GUI active, set the first item as selected and refresh inventory
         else
         {
+            //If there's a inventory saved globally load it else load the one on the player
+            if (GlobalVariables.PlayerInventory != null)
+                inventory.Stacks = GlobalVariables.PlayerInventory;
+            else
+                inventory = GetComponent<QI_Inventory>();
+
             inventoryGUI.SetActive(true);
             if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
                 eventSystem.SetSelectedGameObject(inventoryGUI.transform.GetChild(12).GetChild(0).gameObject);
@@ -121,6 +124,8 @@ public class InteractWithInventory : MonoBehaviour
     /// </summary>
     public void RefreshInventory()
     {
+
+
         //Resets all textboxes in the inventory GUI
         foreach (var item in invList)
         {
@@ -144,6 +149,7 @@ public class InteractWithInventory : MonoBehaviour
                 invList[i].GetComponent<TextMeshProUGUI>().text = $"- {inventory.Stacks[i].Item.Name}";
             }
         }
+
 
         //Sets the GUI hp, food, weapon, equipment and all ammo to their 
         uiHp.text = $"Hp: {GlobalVariables.Hp}/{GlobalVariables.MaxHp}";

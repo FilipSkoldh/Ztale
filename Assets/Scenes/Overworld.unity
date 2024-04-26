@@ -6587,6 +6587,7 @@ MonoBehaviour:
   buttonPrefab: {fileID: 1004341207097974569, guid: ee1faaf935f88fe48a546907dca48c26, type: 3}
   chest: {fileID: 1627807981}
   inventory: {fileID: 1627807986}
+  saveAndLoad: {fileID: 1627807985}
 --- !u!114 &1627807983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6736,7 +6737,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
-  chests:
+  Inventories:
+  - {fileID: 1627807986}
   - {fileID: 477761557}
   FilledInventories:
   - {fileID: 11400000, guid: db20cb859265b70448f6f052c36170c5, type: 2}

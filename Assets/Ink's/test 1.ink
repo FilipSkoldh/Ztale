@@ -1,5 +1,6 @@
 EXTERNAL OpenChest(chestNumber)
 EXTERNAL StartEncounter(encounter)
+EXTERNAL FillInventory()
 -> yo
 
 
@@ -9,7 +10,7 @@ EXTERNAL StartEncounter(encounter)
 *[no] -> cancer
 - good you're a human
 *.
-~OpenChest(0)
+~OpenChest(1)
 -> DONE
 
 ==cancer==
@@ -26,4 +27,6 @@ EXTERNAL StartEncounter(encounter)
 -go to hell
 *.
 -bitch
+*.
+~FillInventory()
 ->DONE

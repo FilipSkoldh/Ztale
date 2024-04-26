@@ -11,7 +11,6 @@ namespace QuantumTek.QuantumInventory
     {
         public string Name;
         public List<QI_ItemStack> Stacks { get; set; } = new List<QI_ItemStack>();
-        public Dictionary<string, int> Stock { get; set; } = new Dictionary<string, int>();
         public int MaxStacks;
 
         /// <summary>
@@ -21,9 +20,16 @@ namespace QuantumTek.QuantumInventory
         /// <returns></returns>
         public int GetStock(string name)
         {
-            if (Stock.ContainsKey(name))
-                return Stock[name];
-            return 0;
+            int amount = 0;
+            for (int i = 0; i < Stacks.Count; i++)
+            {
+                if (Stacks[i].Item.Name == name)
+                {
+                    amount += Stacks[i].Amount;
+                }
+            }
+            return amount;
+
         }
 
 
@@ -50,8 +56,6 @@ namespace QuantumTek.QuantumInventory
                 stack.Amount += amountAdded;
                 amount -= amountAdded;
 
-                if (Stock.ContainsKey(item.Name))
-                    Stock[item.Name] += amountAdded;
 
                 Stacks[i] = stack;
             }
@@ -60,10 +64,7 @@ namespace QuantumTek.QuantumInventory
             {
                 int amountAdded = item.MaxStack == 0 ? amount : Mathf.Min(item.MaxStack, amount);
                 Stacks.Add(new QI_ItemStack { Item = item, Amount = amountAdded });
-                if (Stock.ContainsKey(item.Name))
-                    Stock[item.Name] += amountAdded;
-                else
-                    Stock.Add(item.Name, amountAdded);
+
                 amount -= amountAdded;
             }
         }
@@ -88,8 +89,6 @@ namespace QuantumTek.QuantumInventory
 
                 stack.Amount -= amountRemoved;
                 amount -= amountRemoved;
-                if (Stock.ContainsKey(name))
-                    Stock[name] -= amountRemoved;
 
                 Stacks[i] = stack;
 
