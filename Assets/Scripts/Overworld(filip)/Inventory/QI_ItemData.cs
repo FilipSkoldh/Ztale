@@ -12,8 +12,6 @@ namespace QuantumTek.QuantumInventory
         public string Description;
         public string useMessage;
         public float Price;
-        public Sprite Icon;
-        public Transform ItemPrefab;
         public int MaxStack;
     }
 }

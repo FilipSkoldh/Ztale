@@ -14,11 +14,9 @@ public class Savefile
     public int mediumAmmo;
     public int shoutgunAmmo;
     public int saveLocation;
-    public QI_Weapons equippedWeapon;
-    public QI_Equipment equippedEquipment;
-    public List<QI_ItemStack> player = new List<QI_ItemStack>();
-    public List<QI_ItemStack> chest = new List<QI_ItemStack>();
+    public string equippedWeapon;
+    public string equippedEquipment;
 
-    public List<List<QI_ItemStack>> Stacks = new();
+    public Dictionary<string, int>[] inventories = new Dictionary<string, int>[2];
 
 }

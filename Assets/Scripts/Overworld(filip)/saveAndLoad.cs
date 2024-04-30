@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
+using System.Linq;
+using Unity.VisualScripting;
 
 
 
@@ -18,6 +20,7 @@ public class SaveAndLoad : MonoBehaviour
     private void Awake()
     {
         items = itemDatabase.Getdictionary();
+        LoadSave();
     }
 
     //string savefilePath = "C:\\Users\\22skofil\\Documents\\My Games\\Ztale\\Saves\\PlayerData.json";
@@ -33,18 +36,29 @@ public class SaveAndLoad : MonoBehaviour
         savefile.lightAmmo = GlobalVariables.LightAmmo;
         savefile.mediumAmmo = GlobalVariables.MediumAmmo;
         savefile.shoutgunAmmo = GlobalVariables.ShotgunAmmo;
-        savefile.equippedEquipment = GlobalVariables.EquippedEquipment;
-        savefile.equippedWeapon = GlobalVariables.EquippedWeapon;
+        
+        if (GlobalVariables.EquippedWeapon != null)
+            savefile.equippedWeapon = GlobalVariables.EquippedWeapon.name;
 
-        savefile.player = Inventories[0].Stacks;
-        savefile.chest = Inventories[1].Stacks;
+        if (GlobalVariables.EquippedEquipment != null)
+            savefile.equippedEquipment = GlobalVariables.EquippedEquipment.name;
 
-        for (int i = 0; i < savefile.Stacks.Count; i++)
+        
+        for (int i = 0; i < Inventories.Length; i++)
         {
-            savefile.Stacks[i] = Inventories[i].Stacks;
-        }
+            if (Inventories[i] == null)
+                return;
 
+            savefile.inventories[i] = new Dictionary<string, int>();
+            for (int j = 0; j < Inventories[i].Stacks.Count; j++)
+            {
+                Debug.Log($"{Inventories[i].Stacks[j].Item.name} + {Inventories[i].Stacks[j].Amount} + {savefile.inventories[i].ToString()}");                
+                savefile.inventories[i].Add(Inventories[i].Stacks[j].Item.name, Inventories[i].Stacks[j].Amount);
+            }
+        }
+        Debug.Log(savefile.inventories[0].Count);
         string json = JsonConvert.SerializeObject(savefile);
+        Debug.Log(json);
         
 
         File.WriteAllText(savefilePath, json);
@@ -61,25 +75,28 @@ public class SaveAndLoad : MonoBehaviour
         GlobalVariables.LightAmmo = savefile.lightAmmo;
         GlobalVariables.MediumAmmo = savefile.mediumAmmo;
         GlobalVariables.ShotgunAmmo = savefile.shoutgunAmmo;
-        GlobalVariables.EquippedEquipment = savefile.equippedEquipment;
-        GlobalVariables.EquippedWeapon = savefile.equippedWeapon;
 
-        for (int i = 0; i < savefile.Stacks.Count; i++)
+        if (savefile.equippedEquipment != null )
+            GlobalVariables.EquippedEquipment = (items[savefile.equippedEquipment])as QI_Equipment;
+
+        if (savefile.equippedWeapon != null )
+            GlobalVariables.EquippedWeapon = (items[savefile.equippedWeapon] as QI_Weapons);
+
+
+        for (int i = 0; i < savefile.inventories.Length; i++)
         {
-            if (savefile.Stacks[i] != null)
-                Inventories[i].Stacks = savefile.Stacks[i];
-          
+            if (savefile.inventories[i] == null)
+                return;
 
-            for (int j = 0; j < savefile.Stacks[i].Count; j++)
+            Inventories[i].Stacks.Clear();
+            for (int j = 0; j < savefile.inventories[i].Count; j++)
             {
-                if (savefile.Stacks[i][j].Item.name == null)
-                {
-                    savefile.Stacks[i].RemoveAt(j);
-                }
+                Debug.Log(savefile.inventories[i].Count);
+                Debug.Log(j);
+                Inventories[i].AddItem(items[savefile.inventories[i].ElementAt(j).Key], savefile.inventories[i][savefile.inventories[i].ElementAt(j).Key]);
             }
         }
 
-        GlobalVariables.PlayerInventory = Inventories[0].Stacks;
 
     }
 

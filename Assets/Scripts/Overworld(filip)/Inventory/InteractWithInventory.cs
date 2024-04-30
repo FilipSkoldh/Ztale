@@ -53,7 +53,6 @@ public class InteractWithInventory : MonoBehaviour
     private void Awake()
     {
         saveAndLoad = GetComponent<SaveAndLoad>();
-        saveAndLoad.LoadSave();
         //Finds components on the player
         inventory = GetComponent<QI_Inventory>();
         playerChestVendor = GetComponent<QI_Chest>();
