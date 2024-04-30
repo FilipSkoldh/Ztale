@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class BattleManager : MonoBehaviour
 {
     public List<int> enemyStates = new();
+    public List<bool> enemyAttacking = new();
 
     public InputActionProperty interactProperty;
     public InputActionProperty backProperty;
@@ -23,6 +24,8 @@ public class BattleManager : MonoBehaviour
     public Box box;
     public QI_Inventory inventory;
 
+    public BaseEnemyAttacks enemyAttacks;
+
     public int useTime;
 
     private bool winning = false;
@@ -30,6 +33,14 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         inventory.Stacks = GlobalVariables.PlayerInventory;
+
+        enemyAttacks = gameObject.AddComponent<BaseEnemyAttacks>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            enemyStates.Add(0);
+            enemyAttacking.Add(false);
+        }
     }
 
     // Update is called once per frame
@@ -46,10 +57,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void SelectNothing()
-    {
-        eventSystem.SetSelectedGameObject(null);
-    }
     private bool EnemiesDefeated()
     {
         foreach (int state in enemyStates)
@@ -66,5 +73,22 @@ public class BattleManager : MonoBehaviour
     {
         bulletHell.StopBulletHell();
         eventSystem.SetSelectedGameObject(shootButton);
+    }
+
+    public void StartAttack()
+    {
+        bool attack = true;
+        foreach(bool bol in enemyAttacking)
+        {
+            if (!bol)
+            {
+                attack = false;
+            }
+        }
+
+        if (attack)
+        {
+            enemyAttacks.Attack();
+        }
     }
 }

@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 73999537}
   - component: {fileID: 73999535}
-  - component: {fileID: 73999541}
   - component: {fileID: 73999539}
   - component: {fileID: 73999540}
   - component: {fileID: 73999542}
@@ -228,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc790d9a7cd14142b59e3e9a13ad329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStates: 00000000
+  enemyStates: 
+  enemyAttacking: 
   interactProperty:
     m_UseReference: 1
     m_Action:
@@ -274,19 +274,8 @@ MonoBehaviour:
   bulletHell: {fileID: 346056814}
   box: {fileID: 1511145614}
   inventory: {fileID: 73999542}
+  enemyAttacks: {fileID: 0}
   useTime: 0
---- !u!114 &73999541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73999534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a850d42453a684642be935e2c96c2839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &73999542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1198,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  enemies: {fileID: 73999537}
+  battleManager: {fileID: 73999540}
   eventSystem: {fileID: 1193810440}
   shootButton: {fileID: 620511206}
   speed: 2
@@ -2380,6 +2369,10 @@ MonoBehaviour:
   - grrrr
   - gar
   - 0
+  - spare1
+  - spare2
+  - spare3
+  - spare3
 --- !u!114 &471193625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,7 +2390,7 @@ MonoBehaviour:
   - 0
   actDescriptions:
   - 0
-  spareActs: 
+  spareActs: 020000000100000002000000
 --- !u!61 &471193626
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class Shooting : MonoBehaviour
     public InputActionProperty shoot;
     public InputActionProperty back;
 
-    public Transform enemies;
+    public BattleManager battleManager;
     public EventSystem eventSystem;
     public GameObject shootButton;
 
@@ -67,7 +67,7 @@ public class Shooting : MonoBehaviour
             {
 
                 Debug.Log("shot");
-                hits = Physics2D.CircleCastAll(t.position, 0.02f, Vector2.zero, 0, 256);
+                hits = Physics2D.CircleCastAll(t.position, 0.02f, new Vector2(0,1), 0, 256);
                 int sorrtingOrder = -10;
 
                 foreach (RaycastHit2D i in hits)
@@ -81,10 +81,15 @@ public class Shooting : MonoBehaviour
                 if (hitT != null)
                 {
                     hitT.GetComponent<BaseEnemyRelay>().Hit(GlobalVariables.EquippedWeapon.weaponDamage);
+                    Debug.Log("hit");
                 }
-                else
-                {
 
+                for (int i = 0; i < battleManager.transform.childCount; i++)
+                {
+                    if (battleManager.transform.GetChild(i) != hitT)
+                    {
+                        battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
+                    }
                 }
                 rb.velocity = Vector2.zero;
                 transform.position = new Vector3(0, 10, 0);

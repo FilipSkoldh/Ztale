@@ -24,7 +24,7 @@ public class BaseEnemyRelay : MonoBehaviour
     private bool acting;
     private bool acter;
 
-    private void Start()
+    private void Awake()
     {
         battleManager = transform.parent.GetComponent<BattleManager>();
         interactProperty = battleManager.interactProperty;
@@ -37,23 +37,27 @@ public class BaseEnemyRelay : MonoBehaviour
         if (HP <= 0)
         {
             transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 1;
-        }
 
-        if (spareActs.Count > 0)
+        }
+        else
         {
-            if (spareActs[spareActs.Count - 1] == 0)
+            if (spareActs.Count > 0)
             {
-                spareActs.RemoveAt(spareActs.Count - 1);
-                talk.Talk(2 + acts.Count + spareActs.Count);
+                if (spareActs[spareActs.Count - 1] == 0)
+                {
+                    spareActs.RemoveAt(spareActs.Count - 1);
+        Debug.Log("hit");
+                    talk.Talk(2 + acts.Count + spareActs.Count);
+                }
+                else
+                {
+                    talk.Talk(0);
+                }
             }
             else
             {
                 talk.Talk(0);
             }
-        }
-        else
-        {
-            talk.Talk(0);
         }
     }
     public void Miss()
