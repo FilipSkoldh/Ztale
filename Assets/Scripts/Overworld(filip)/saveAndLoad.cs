@@ -19,8 +19,8 @@ public class SaveAndLoad : MonoBehaviour
     {
         items = itemDatabase.Getdictionary();
     }
-    
 
+    //string savefilePath = "C:\\Users\\22skofil\\Documents\\My Games\\Ztale\\Saves\\PlayerData.json";
     string savefilePath = "C:\\temp\\PlayerData.json";
     Savefile savefile = new();
 
@@ -68,6 +68,15 @@ public class SaveAndLoad : MonoBehaviour
         {
             if (savefile.Stacks[i] != null)
                 Inventories[i].Stacks = savefile.Stacks[i];
+          
+
+            for (int j = 0; j < savefile.Stacks[i].Count; j++)
+            {
+                if (savefile.Stacks[i][j].Item.name == null)
+                {
+                    savefile.Stacks[i].RemoveAt(j);
+                }
+            }
         }
 
         GlobalVariables.PlayerInventory = Inventories[0].Stacks;

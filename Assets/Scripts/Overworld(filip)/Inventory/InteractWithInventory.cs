@@ -2,6 +2,7 @@ using QuantumTek.QuantumInventory;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -83,6 +84,7 @@ public class InteractWithInventory : MonoBehaviour
                 for (int i = textboxCanvas.transform.childCount - 1; i >= 0; --i)
                     Destroy(textboxCanvas.transform.GetChild(i).gameObject);
 
+
                 //resets "interacting" and reopenes the inventory
                 interacting = false;
                 OpenOrCloseInventory();
@@ -105,11 +107,6 @@ public class InteractWithInventory : MonoBehaviour
         //Else make the GUI active, set the first item as selected and refresh inventory
         else
         {
-            //If there's a inventory saved globally load it else load the one on the player
-            if (GlobalVariables.PlayerInventory != null)
-                inventory.Stacks = GlobalVariables.PlayerInventory;
-            else
-                inventory = GetComponent<QI_Inventory>();
 
             inventoryGUI.SetActive(true);
             if (inventoryGUI.transform.GetChild(12).gameObject.activeSelf)
@@ -136,8 +133,19 @@ public class InteractWithInventory : MonoBehaviour
 
         //Reads the inventory and puts it in the corresponding positions in the inventory GUI
         //for every stack in the inventory
+
         for (int i = 0; i < inventory.Stacks.Count; i++)
         {
+
+            if (inventory.Stacks[i].Item.Name == null)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Debug.Log(inventory.Stacks[j].Item.name);
+                }
+                return;
+            }
+
             //If the item is stackable write out the name of the item and the amount
             if (itemDatabase.GetItem(inventory.Stacks[i].Item.Name).MaxStack != 1)
             {
