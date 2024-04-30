@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour
     private RaycastHit2D[] hits;
     private Transform hitT;
     private bool shooting = false;
+    private bool shot = false;
 
     [SerializeField] private List<Transform> bullets = new();
 
@@ -65,9 +66,11 @@ public class Shooting : MonoBehaviour
 
             if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null)
             {
-
-                Debug.Log("shot");
-                hits = Physics2D.CircleCastAll(t.position, 0.02f, new Vector2(0,1), 0, 256);
+                if (GlobalVariables.EquippedWeapon.weaponType == 1) ;
+            }
+            if (shot)
+            {
+                hits = Physics2D.CircleCastAll(bullets[1].position, 0.02f, new Vector2(0, 1), 0, 256);
                 int sorrtingOrder = -10;
 
                 foreach (RaycastHit2D i in hits)
@@ -81,7 +84,6 @@ public class Shooting : MonoBehaviour
                 if (hitT != null)
                 {
                     hitT.GetComponent<BaseEnemyRelay>().Hit(GlobalVariables.EquippedWeapon.weaponDamage);
-                    Debug.Log("hit");
                 }
 
                 for (int i = 0; i < battleManager.transform.childCount; i++)
@@ -93,7 +95,9 @@ public class Shooting : MonoBehaviour
                 }
                 rb.velocity = Vector2.zero;
                 transform.position = new Vector3(0, 10, 0);
+                bullets[0].position = new Vector3(0, 10, 0);
                 shooting = false;
+                shot = false;
             }
             eventSystem.SetSelectedGameObject(null);
         }

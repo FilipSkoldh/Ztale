@@ -46,7 +46,6 @@ public class BaseEnemyRelay : MonoBehaviour
                 if (spareActs[spareActs.Count - 1] == 0)
                 {
                     spareActs.RemoveAt(spareActs.Count - 1);
-        Debug.Log("hit");
                     talk.Talk(2 + acts.Count + spareActs.Count);
                 }
                 else

@@ -75,8 +75,9 @@ public class BattleManager : MonoBehaviour
         eventSystem.SetSelectedGameObject(shootButton);
     }
 
-    public void StartAttack()
+    public void StartAttack(int siblingIndex)
     {
+        enemyAttacking[siblingIndex] = true;
         bool attack = true;
         foreach(bool bol in enemyAttacking)
         {

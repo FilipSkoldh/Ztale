@@ -22,7 +22,7 @@ public class BaseEnemyTalk : MonoBehaviour
 
     public void Talk(int line)
     {
-        Debug.Log("talk");
+
         speechBubble.SetActive(true);
         speechBubble.GetComponentInChildren<TextMeshProUGUI>().text = enemyLines[line];
     }
@@ -33,7 +33,7 @@ public class BaseEnemyTalk : MonoBehaviour
         if (talking && interactProperty.action.WasPressedThisFrame())
         {
             speechBubble.SetActive(false);
-            battleManager.StartAttack();
+            battleManager.StartAttack(transform.GetSiblingIndex());
         }
         talking = speechBubble.activeSelf;
     }
