@@ -1,12 +1,10 @@
 using QuantumTek.QuantumInventory;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
-using Unity.VisualScripting;
+using System;
 
 
 
@@ -22,9 +20,7 @@ public class SaveAndLoad : MonoBehaviour
         items = itemDatabase.Getdictionary();
         LoadSave();
     }
-
-    //string savefilePath = "C:\\Users\\22skofil\\Documents\\My Games\\Ztale\\Saves\\PlayerData.json";
-    string savefilePath = "C:\\temp\\PlayerData.json";
+    string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves\\Save{GlobalVariables.savefile}";
     Savefile savefile = new();
 
 
@@ -66,8 +62,17 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadSave()
     {
-        string saveData = File.ReadAllText(savefilePath);
-        Debug.Log(saveData);
+        savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves\\Save{GlobalVariables.savefile}";
+        string saveData;
+        if (GlobalVariables.savefile == 0 && File.Exists(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json")))
+        {
+            saveData = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json"));
+        }
+        else if (File.Exists(savefilePath))
+        {
+            saveData = File.ReadAllText(savefilePath);
+        }
+        else return;
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 
         GlobalVariables.MaxHp = savefile.maxHp;
@@ -106,17 +111,17 @@ public class SaveAndLoad : MonoBehaviour
         {
             Inventories[i].Stacks.Clear();
         }
-        Inventories[0].AddItem(items["Shotgun"], 1);
-        Inventories[0].AddItem(items["Scarf"], 1);
-        Inventories[0].AddItem(items["Chainmail"], 1);
-        Inventories[0].AddItem(items["Bandage"], 10);
+        Inventories[0].AddItem(items["Bandage"], 1);
         Inventories[1].AddItem(items["Bandage"], 10);
         Inventories[1].AddItem(items["Pistol"], 1);
 
+        GlobalVariables.EquippedEquipment = (items["Scarf"] as QI_Equipment);
+        GlobalVariables.EquippedWeapon = (items["Bat"] as QI_Weapons);
+        GlobalVariables.MaxHp = 100;
+        GlobalVariables.Hp = 100;
+        GlobalVariables.LightAmmo = 0;
+        GlobalVariables.MediumAmmo = 0;
+        GlobalVariables.ShotgunAmmo = 0;
     }
 
-    public void NewSave()
-    {
-
-    }
 }

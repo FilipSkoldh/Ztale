@@ -70,27 +70,28 @@ public class InkScript: MonoBehaviour {
 			//If there is only one choice and that is a "." that is just so you have to click to further the dialoge so place the "." choice outside the screen
 			if (inkStory.currentChoices[0].text == ".")
 			{
-                buttons[0].transform.localPosition = new Vector3(-2000, 315, 0);
+                buttons[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(-590, 200, 0);
             }
-			//Else place the button at the specified location
-			else
+            //Else place the button at the specified location
+            else
 			{
-                buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
+                buttons[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(-590, -220, 0);
             }
 
         }
         else if (inkStory.currentChoices.Count == 2)
         {
 			//where to place buttons when there are two choices
-            buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
-            buttons[1].transform.localPosition = new Vector3(250, 315, 0);
+            buttons[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(-590, -220, 0);
+            buttons[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(250, -220, 0);
+
         }
         else if (inkStory.currentChoices.Count == 3)
         {
 			//where to place buttons when there are three choices
-            buttons[0].transform.localPosition = new Vector3(-590, 315, 0);
-            buttons[1].transform.localPosition = new Vector3(-150, 315, 0);
-            buttons[2].transform.localPosition = new Vector3(270, 315, 0);
+            buttons[0].GetComponent<RectTransform>().anchoredPosition = new Vector3(-590, -220, 0);
+            buttons[1].GetComponent<RectTransform>().anchoredPosition = new Vector3(-150, -220, 0);
+            buttons[2].GetComponent<RectTransform>().anchoredPosition = new Vector3(270, -220, 0);
         }
         // If we've read all the content and there's no choices, the story is finished!
     }
@@ -112,7 +113,8 @@ public class InkScript: MonoBehaviour {
     void CreateContentView (string text)
 	{
         //spawn the textbox prefab
-        GameObject storyText = Instantiate(textboxPrefab, textboxCanvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, textboxCanvas.transform);
+        GameObject storyText = Instantiate(textboxPrefab, new Vector3(0, -150, 0), Quaternion.identity, textboxCanvas.transform);
+        storyText.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -150, 0);
         //text the TextmeshproUGUI to "text"
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
     }

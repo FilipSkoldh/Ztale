@@ -271,7 +271,9 @@ public class InteractWithInventory : MonoBehaviour
     public void ItemInteracted(string text)
     {
         //spawn the textbox prefab
-        GameObject storyText = Instantiate(textboxPrefab, textboxCanvas.transform.TransformPoint(0, 384.5f, 0), Quaternion.identity, textboxCanvas.transform);
+        GameObject storyText = Instantiate(textboxPrefab, new Vector3(0, -150, 0), Quaternion.identity, textboxCanvas.transform);
+        storyText.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,-150,0);
+
         //text the TextmeshproUGUI to "text"
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
 
