@@ -22,4 +22,4 @@ MonoBehaviour:
   weaponDamage: 50
   weaponType: 3
   weaponFireRate: 1
-  weaponSpread: 4
+  weaponSpread: 10

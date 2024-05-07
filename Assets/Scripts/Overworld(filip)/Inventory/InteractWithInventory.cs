@@ -58,7 +58,8 @@ public class InteractWithInventory : MonoBehaviour
         inventory.AddItem(items["Bandage"], 10);
         inventory.AddItem(items["Chainmail"], 1);
         inventory.AddItem(items["Scarf"], 1);
-        
+        inventory.AddItem(items["Pistol"], 1);
+
     }
 
     private void Update()

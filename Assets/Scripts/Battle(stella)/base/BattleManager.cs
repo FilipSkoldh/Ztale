@@ -92,4 +92,20 @@ public class BattleManager : MonoBehaviour
             enemyAttacks.Attack();
         }
     }
+
+    public void StopAnimation()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().speed = 0;
+        }
+    }
+
+    public void StartAnimation()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().speed = 1;
+        }
+    }
 }

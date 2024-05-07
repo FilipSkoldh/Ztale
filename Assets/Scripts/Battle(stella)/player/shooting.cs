@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,9 +27,11 @@ public class Shooting : MonoBehaviour
     private Transform hitT;
     private bool shooting = false;
     private bool shot = false;
+    private int shoots;
 
     [SerializeField] private List<Transform> bullets = new();
 
+    private int[] damage;
     public void StartShooting()
     {
         if (GlobalVariables.EquippedWeapon != null)
@@ -36,6 +39,7 @@ public class Shooting : MonoBehaviour
             t.position = new Vector3(0f, 1f, 0f);
             cc.radius = 0.03f;
             shooting = true;
+            shoots = GlobalVariables.EquippedWeapon.weaponFireRate;
         }
     }
 
@@ -45,7 +49,7 @@ public class Shooting : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         t = GetComponent<Transform>();
-
+        damage = new int[battleManager.transform.childCount];
     }
 
     // Update is called once per frame
@@ -53,10 +57,12 @@ public class Shooting : MonoBehaviour
     {
         if (shooting)
         {
-            Vector2 movement = move.action.ReadValue<Vector2>();
-            rb.velocity = movement * speed;
 
-            if (back.action.WasPressedThisFrame())
+            Vector2 movement = move.action.ReadValue<Vector2>();
+            if (!shot)
+                rb.velocity = movement * speed;
+
+            if (back.action.WasPressedThisFrame() && shoots == GlobalVariables.EquippedWeapon.weaponFireRate)
             {
                 rb.velocity = Vector2.zero;
                 transform.position = new Vector3(0, 10, 0);
@@ -64,41 +70,75 @@ public class Shooting : MonoBehaviour
                 eventSystem.SetSelectedGameObject(shootButton);
             }
 
-            if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null)
+            if (shoot.action.WasPressedThisFrame() && shot)
             {
-                if (GlobalVariables.EquippedWeapon.weaponType == 1) ;
+                foreach (Transform bullet in bullets)
+                {
+                    hitT = null;
+                    hits = Physics2D.CircleCastAll(bullet.position, 0.02f, new Vector2(0, 1), 0, 256);
+                    int sorrtingOrder = -10;
+                    foreach (RaycastHit2D i in hits)
+                    {
+                        if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                        {
+                            sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                            hitT = i.transform;
+                        }
+                    }
+                    if (hitT != null)
+                    {
+                        if (hitT.GetComponent<BaseEnemyRelay>() != null)
+                        {
+                            damage[hitT.GetSiblingIndex()] += GlobalVariables.EquippedWeapon.weaponDamage;
+                        }
+                    }
+                    bullet.position = new Vector3(0, 10, 0);
+                }
+
+                Debug.Log(shoots);
+
+                if (shoots < 1)
+                {
+                    shooting = false;
+                    for (int i = 0; i < damage.Length; i++)
+                    {
+                        if (damage[i] == 0)
+                            battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
+                        else
+                            battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Hit(damage[i]);
+                        damage[i] = 0;
+                    }
+                }
+                else
+                {
+                    t.position = new Vector3(0f, 1f, 0f);
+                    shoots--;
+                }
+                battleManager.StartAnimation();
+
+                shot = false;
+
+
             }
-            if (shot)
+            else if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
             {
-                hits = Physics2D.CircleCastAll(bullets[1].position, 0.02f, new Vector2(0, 1), 0, 256);
-                int sorrtingOrder = -10;
-
-                foreach (RaycastHit2D i in hits)
+                if (GlobalVariables.EquippedWeapon.weaponType == 0)
                 {
-                    if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
-                    {
-                        sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-                        hitT = i.transform;
-                    }
+                    GlobalVariables.LightAmmo--;
+                    bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread/10;
                 }
-                if (hitT != null)
+                else if (GlobalVariables.EquippedWeapon.weaponType == 3)
                 {
-                    hitT.GetComponent<BaseEnemyRelay>().Hit(GlobalVariables.EquippedWeapon.weaponDamage);
+                    GlobalVariables.ShotgunAmmo--;
+                    foreach(Transform bullet in bullets)
+                        bullet.position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread/10;
                 }
-
-                for (int i = 0; i < battleManager.transform.childCount; i++)
-                {
-                    if (battleManager.transform.GetChild(i) != hitT)
-                    {
-                        battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
-                    }
-                }
+                shot = true;
+                battleManager.StopAnimation();
                 rb.velocity = Vector2.zero;
                 transform.position = new Vector3(0, 10, 0);
-                bullets[0].position = new Vector3(0, 10, 0);
-                shooting = false;
-                shot = false;
             }
+
             eventSystem.SetSelectedGameObject(null);
         }
     }
