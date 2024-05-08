@@ -16,7 +16,7 @@ public class Savefile
     public int saveLocation;
     public string equippedWeapon;
     public string equippedEquipment;
-
+    public string playerName;
     public Dictionary<string, int>[] inventories = new Dictionary<string, int>[2];
 
 }

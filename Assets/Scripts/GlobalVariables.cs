@@ -15,6 +15,6 @@ public static class GlobalVariables
     public static int MediumAmmo { get; set;}
     public static int ShotgunAmmo { get;set; }
     public static int Encounter { get; set ; }
-    public static int savefile { get; set; }
-
+    public static int Savefile { get; set; }
+    public static string SaveName { get; set; }
 }

@@ -1,10 +1,10 @@
-using QuantumTek.QuantumInventory;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
 using Newtonsoft.Json;
-using System.Linq;
+using QuantumTek.QuantumInventory;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEngine;
 
 
 
@@ -20,7 +20,7 @@ public class SaveAndLoad : MonoBehaviour
         items = itemDatabase.Getdictionary();
         LoadSave();
     }
-    string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves\\Save{GlobalVariables.savefile}";
+    string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves";
     Savefile savefile = new();
 
 
@@ -56,23 +56,15 @@ public class SaveAndLoad : MonoBehaviour
         string json = JsonConvert.SerializeObject(savefile);
         Debug.Log(json);
         
-
-        File.WriteAllText(savefilePath, json);
+       
+            File.WriteAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}", json);
+        
     }
 
     public void LoadSave()
-    {
-        savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves\\Save{GlobalVariables.savefile}";
-        string saveData;
-        if (GlobalVariables.savefile == 0 && File.Exists(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json")))
-        {
-            saveData = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json"));
-        }
-        else if (File.Exists(savefilePath))
-        {
-            saveData = File.ReadAllText(savefilePath);
-        }
-        else return;
+    {        
+        string saveData = File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}");
+
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 
         GlobalVariables.MaxHp = savefile.maxHp;
@@ -80,6 +72,7 @@ public class SaveAndLoad : MonoBehaviour
         GlobalVariables.LightAmmo = savefile.lightAmmo;
         GlobalVariables.MediumAmmo = savefile.mediumAmmo;
         GlobalVariables.ShotgunAmmo = savefile.shoutgunAmmo;
+        GlobalVariables.SaveName = savefile.playerName;
 
         if (savefile.equippedEquipment != null )
             GlobalVariables.EquippedEquipment = (items[savefile.equippedEquipment])as QI_Equipment;
