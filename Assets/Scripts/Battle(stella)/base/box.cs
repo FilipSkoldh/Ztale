@@ -12,6 +12,7 @@ public class Box : MonoBehaviour
     [SerializeField] private Transform BL;
     [SerializeField] private Transform BM;
     [SerializeField] private Transform BR;
+    [SerializeField] private Transform Background;
     public float height;
     public float width;
     public float speed;
@@ -87,6 +88,8 @@ public class Box : MonoBehaviour
             BM.localScale = new Vector3(currentWidth - 1.16667f, 1, 1);
 
             BR.localPosition = new Vector3((currentWidth / 2), -(currentHeight / 2), 0);
+
+            Background.localScale = new Vector3(currentWidth, currentHeight, 1);
         }
     }
 }
