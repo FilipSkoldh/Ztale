@@ -95,9 +95,8 @@ public class Shooting : MonoBehaviour
                     bullet.position = new Vector3(0, 10, 0);
                 }
 
-                Debug.Log(shoots);
 
-                if (shoots < 1)
+                if (shoots <= 1)
                 {
                     shooting = false;
                     for (int i = 0; i < damage.Length; i++)
@@ -115,6 +114,7 @@ public class Shooting : MonoBehaviour
                     shoots--;
                 }
                 battleManager.StartAnimation();
+
 
                 shot = false;
 
