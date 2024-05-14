@@ -36,10 +36,32 @@ public class Shooting : MonoBehaviour
     {
         if (GlobalVariables.EquippedWeapon != null)
         {
-            t.position = new Vector3(0f, 1f, 0f);
-            cc.radius = 0.03f;
-            shooting = true;
-            shoots = GlobalVariables.EquippedWeapon.weaponFireRate;
+            if (GlobalVariables.EquippedWeaponAmmo == 0)
+            {
+                switch (GlobalVariables.EquippedWeapon.weaponType)
+                {
+                    case 0:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+                        break;
+                    case 1:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.ShotgunAmmo);
+                        break;
+                    case 2:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.MediumAmmo);
+                        break;
+                    default:
+                        GlobalVariables.EquippedWeaponAmmo = -1;
+                        break;
+                }
+
+            }
+            else
+            {
+                t.position = new Vector3(0f, 1f, 0f);
+                cc.radius = 0.03f;
+                shooting = true;
+                shoots = GlobalVariables.EquippedWeapon.weaponFireRate;
+            }
         }
     }
 
@@ -64,82 +86,88 @@ public class Shooting : MonoBehaviour
 
             if (back.action.WasPressedThisFrame() && shoots == GlobalVariables.EquippedWeapon.weaponFireRate)
             {
+                eventSystem.SetSelectedGameObject(shootButton);
+
                 rb.velocity = Vector2.zero;
                 transform.position = new Vector3(0, 10, 0);
                 shooting = false;
-                eventSystem.SetSelectedGameObject(shootButton);
             }
-
-            if (shoot.action.WasPressedThisFrame() && shot)
+            else
             {
-                foreach (Transform bullet in bullets)
+                if (shoot.action.WasPressedThisFrame() && shot)
                 {
-                    hitT = null;
-                    hits = Physics2D.CircleCastAll(bullet.position, 0.02f, new Vector2(0, 1), 0, 256);
-                    int sorrtingOrder = -10;
-                    foreach (RaycastHit2D i in hits)
+                    foreach (Transform bullet in bullets)
                     {
-                        if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                        hitT = null;
+                        hits = Physics2D.CircleCastAll(bullet.position, 0.02f, new Vector2(0, 1), 0, 256);
+                        int sorrtingOrder = -10;
+                        foreach (RaycastHit2D i in hits)
                         {
-                            sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-                            hitT = i.transform;
+                            if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                            {
+                                sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                                hitT = i.transform;
+                            }
                         }
-                    }
-                    if (hitT != null)
-                    {
-                        if (hitT.GetComponent<BaseEnemyRelay>() != null)
+                        if (hitT != null)
                         {
-                            damage[hitT.GetSiblingIndex()] += GlobalVariables.EquippedWeapon.weaponDamage;
+                            if (hitT.GetComponent<BaseEnemyRelay>() != null)
+                            {
+                                damage[hitT.GetSiblingIndex()] += GlobalVariables.EquippedWeapon.weaponDamage;
+                            }
                         }
+                        bullet.position = new Vector3(0, 10, 0);
                     }
-                    bullet.position = new Vector3(0, 10, 0);
-                }
-
-                Debug.Log(shoots);
-
-                if (shoots < 1)
-                {
-                    shooting = false;
-                    for (int i = 0; i < damage.Length; i++)
-                    {
-                        if (damage[i] == 0)
-                            battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
-                        else
-                            battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Hit(damage[i]);
-                        damage[i] = 0;
-                    }
-                }
-                else
-                {
-                    t.position = new Vector3(0f, 1f, 0f);
                     shoots--;
+
+                    if (shoots < 1 || GlobalVariables.EquippedWeaponAmmo == 0)
+                    {
+                        shooting = false;
+                        for (int i = 0; i < damage.Length; i++)
+                        {
+                            if (damage[i] == 0)
+                                battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
+                            else
+                                battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Hit(damage[i]);
+                            damage[i] = 0;
+                        }
+                    }
+                    else
+                    {
+                        t.position = new Vector3(0f, 1f, 0f);
+                    }
+                    battleManager.StartAnimation();
+
+                    shot = false;
+
+
                 }
-                battleManager.StartAnimation();
-
-                shot = false;
-
-
-            }
-            else if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
-            {
-                if (GlobalVariables.EquippedWeapon.weaponType == 0)
+                else if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
                 {
-                    GlobalVariables.LightAmmo--;
-                    bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread/10;
+                    if (GlobalVariables.EquippedWeapon.weaponType == 0)
+                    {
+                        GlobalVariables.LightAmmo--;
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    else if (GlobalVariables.EquippedWeapon.weaponType == 1)
+                    {
+                        GlobalVariables.ShotgunAmmo--;
+                        foreach (Transform bullet in bullets)
+                            bullet.position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    if (GlobalVariables.EquippedWeapon.weaponType == 2)
+                    {
+                        GlobalVariables.MediumAmmo--;
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    shot = true;
+                    battleManager.StopAnimation();
+                    rb.velocity = Vector2.zero;
+                    transform.position = new Vector3(0, 10, 0);
                 }
-                else if (GlobalVariables.EquippedWeapon.weaponType == 3)
-                {
-                    GlobalVariables.ShotgunAmmo--;
-                    foreach(Transform bullet in bullets)
-                        bullet.position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread/10;
-                }
-                shot = true;
-                battleManager.StopAnimation();
-                rb.velocity = Vector2.zero;
-                transform.position = new Vector3(0, 10, 0);
-            }
 
-            eventSystem.SetSelectedGameObject(null);
+                eventSystem.SetSelectedGameObject(null);
+            }
         }
     }
 }

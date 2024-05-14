@@ -77,11 +77,12 @@ public class BattleManager : MonoBehaviour
 
     public void StartAttack(int siblingIndex)
     {
+
         enemyAttacking[siblingIndex] = true;
         bool attack = true;
-        foreach(bool bol in enemyAttacking)
+        for(int i = 0; i < transform.childCount;i++)
         {
-            if (!bol)
+            if (!enemyAttacking[i] && enemyStates[i] == 0)
             {
                 attack = false;
             }

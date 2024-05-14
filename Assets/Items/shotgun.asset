@@ -20,6 +20,7 @@ MonoBehaviour:
   ItemPrefab: {fileID: 0}
   MaxStack: 1
   weaponDamage: 50
-  weaponType: 3
+  weaponType: 1
   weaponFireRate: 1
   weaponSpread: 10
+  weaponMaxAmmo: 1

@@ -176,6 +176,22 @@ public class ActNItemManager : MonoBehaviour
                 }
 
                 GlobalVariables.EquippedWeapon = (item as QI_Weapons);
+                switch (GlobalVariables.EquippedWeapon.weaponType)
+                {
+                    case 0:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+                        break;
+                    case 1:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.ShotgunAmmo);
+                        break;
+                    case 2:
+                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.MediumAmmo);
+                        break;
+                    default:
+                        GlobalVariables.EquippedWeaponAmmo = -1;
+                        break;
+                }
+                GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
             }
             else if (item.GetType().ToString() == "QI_Equipment")
             {
