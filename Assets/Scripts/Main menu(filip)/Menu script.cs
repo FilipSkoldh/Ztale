@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Data;
 using System.IO;
 
 using TMPro;
@@ -10,12 +11,15 @@ using UnityEngine.SceneManagement;
 
 public class Menuscript : MonoBehaviour
 {
+    [SerializeField] private InputActionProperty x;
+    [SerializeField] private InputActionProperty ctrl;
     [SerializeField] TMP_InputField nameInputField;
     [SerializeField] GameObject[] mainMenu = new GameObject[5];
     [SerializeField] Canvas canvas;
     [SerializeField] EventSystem eventSystem;
     int page = 1;
     bool selectingSave = false;
+    bool typing = false;
     string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves";
     Savefile savefile = new();
 
@@ -24,8 +28,24 @@ public class Menuscript : MonoBehaviour
         MainMenu();
     }
 
-    private void MainMenu()
+    private void Update()
     {
+        if (eventSystem.currentSelectedGameObject == null)
+        {
+            eventSystem.SetSelectedGameObject(mainMenu[1].GetComponent<GameObject>());
+            Debug.Log("yes");
+            MainMenu();
+        }
+        
+    }
+
+    public void MainMenu()
+    {
+        foreach (var menu in mainMenu)
+            menu.gameObject.SetActive(true);
+        
+        eventSystem.SetSelectedGameObject(mainMenu[1].GetComponent<GameObject>());
+        nameInputField.gameObject.SetActive(false);
         mainMenu[1].GetComponent<TextMeshProUGUI>().text = "- New save";
         mainMenu[2].GetComponent<TextMeshProUGUI>().text = "- Load save";
         mainMenu[3].GetComponent<TextMeshProUGUI>().text = "- Settings";
@@ -42,6 +62,7 @@ public class Menuscript : MonoBehaviour
             nameInputField.gameObject.SetActive(true);
             eventSystem.SetSelectedGameObject(nameInputField.gameObject);
         }
+        typing = true;
     }
 
     public void CreateNewSave()
@@ -51,6 +72,7 @@ public class Menuscript : MonoBehaviour
         Directory.CreateDirectory(savefilePath);
         GlobalVariables.PlayerName = nameInputField.text;
         GlobalVariables.Savefile = Directory.GetFiles(savefilePath, "*", SearchOption.TopDirectoryOnly).Length;
+
         SceneManager.LoadScene("Overworld");
     }
 
@@ -83,6 +105,14 @@ public class Menuscript : MonoBehaviour
         {
             GlobalVariables.Savefile = saveslot * page;
 
+        }
+    }
+
+    public void Exit()
+    {
+        if (!selectingSave)
+        {
+            Application.Quit();
         }
     }
 }

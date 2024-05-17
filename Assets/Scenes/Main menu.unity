@@ -292,7 +292,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 521848183}
         m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
-        m_MethodName: LoadSavefile
+        m_MethodName: LoadSave
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: LoadSaveFiles
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -461,6 +473,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84de32f2215665499a8166686b32d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x:
+    m_UseReference: 1
+    m_Action:
+      m_Name: X
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9e61c619-c5ef-408e-bd37-fcfc04864ac5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  ctrl:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Ctrl
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8f9db4e5-3533-4211-80ec-43bccdde6c70
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2106455416119078774, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   nameInputField: {fileID: 961866938}
   mainMenu:
   - {fileID: 848960174}
@@ -1233,7 +1269,7 @@ MonoBehaviour:
   m_PointAction: {fileID: 0}
   m_MoveAction: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   m_SubmitAction: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  m_CancelAction: {fileID: 0}
+  m_CancelAction: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   m_LeftClickAction: {fileID: 8734092194747998470, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
@@ -1448,7 +1484,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDeselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -1703,10 +1751,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemSelected
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: LoadSave
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1920,6 +1980,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: LoadSave
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 521848183}
         m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
         m_MethodName: NewSave
@@ -2962,14 +3034,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InteractWithInventory, Assembly-CSharp
-        m_MethodName: ItemSelected
+      - m_Target: {fileID: 521848183}
+        m_TargetAssemblyTypeName: Menuscript, Assembly-CSharp
+        m_MethodName: LoadSave
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
