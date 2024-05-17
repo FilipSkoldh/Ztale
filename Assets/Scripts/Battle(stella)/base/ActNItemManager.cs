@@ -191,7 +191,7 @@ public class ActNItemManager : MonoBehaviour
                         GlobalVariables.EquippedWeaponAmmo = -1;
                         break;
                 }
-                GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+
             }
             else if (item.GetType().ToString() == "QI_Equipment")
             {

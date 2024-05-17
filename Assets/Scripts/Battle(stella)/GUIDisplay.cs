@@ -28,8 +28,13 @@ public class GUIDisplay : MonoBehaviour
         hpText.text = $" Hp: {GlobalVariables.Hp} / {GlobalVariables.MaxHp}";
         if (GlobalVariables.EquippedWeapon == null)
             weaponText.text = " Weapon:";
-        else 
-            weaponText.text = $" Weapon: {GlobalVariables.EquippedWeapon.name}";
+        else
+        {
+            if (GlobalVariables.EquippedWeapon.weaponType == 3)
+                weaponText.text = $" Weapon: {GlobalVariables.EquippedWeapon.name}";
+            else
+                weaponText.text = $" Weapon: {GlobalVariables.EquippedWeapon.name} {GlobalVariables.EquippedWeaponAmmo} / {GlobalVariables.EquippedWeapon.weaponMaxAmmo}";
+        }
         if (GlobalVariables.EquippedEquipment == null)
             equipmentText.text = " Equipment:";
         else

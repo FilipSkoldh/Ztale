@@ -23,7 +23,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         box.width = 2; 
         box.height = 2;
         bulletHell.StartBulletHell(new Vector2(0, -1));
-        timer = 5;
+        timer = 1;
     }
 
     private void Update()

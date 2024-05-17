@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,8 +12,10 @@ public class BaseEnemyRelay : MonoBehaviour
     private BattleManager battleManager;
     private InputActionProperty interactProperty;
     private BaseEnemyTalk talk;
+    private TextMeshProUGUI healthText;
 
-    public int HP;
+    public int hp;
+    [SerializeField] private int maxhp;
     public List<string> acts = new();
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
@@ -30,11 +33,14 @@ public class BaseEnemyRelay : MonoBehaviour
         interactProperty = battleManager.interactProperty;
         actingText = battleManager.actingText;
         talk = GetComponent<BaseEnemyTalk>();
+        healthText = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        healthText.text = $"{hp} / {maxhp}";
     }
     public void Hit(int damage)
     {
-        HP -= damage;
-        if (HP <= 0)
+        hp -= damage;
+        healthText.text = $"{hp} / {maxhp}";
+        if (hp <= 0)
         {
             transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 1;
 

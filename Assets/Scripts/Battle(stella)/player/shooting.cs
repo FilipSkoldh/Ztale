@@ -41,16 +41,28 @@ public class Shooting : MonoBehaviour
                 switch (GlobalVariables.EquippedWeapon.weaponType)
                 {
                     case 0:
-                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+                        if (GlobalVariables.LightAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
                         break;
                     case 1:
-                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.ShotgunAmmo);
+                        if (GlobalVariables.ShotgunAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.ShotgunAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
                         break;
                     case 2:
-                        GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.MediumAmmo);
-                        break;
-                    default:
-                        GlobalVariables.EquippedWeaponAmmo = -1;
+                        if (GlobalVariables.MediumAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.MediumAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
                         break;
                 }
 
@@ -103,7 +115,7 @@ public class Shooting : MonoBehaviour
                         int sorrtingOrder = -10;
                         foreach (RaycastHit2D i in hits)
                         {
-                            if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                            if (i.transform != null && i.transform.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
                             {
                                 sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
                                 hitT = i.transform;
@@ -111,9 +123,9 @@ public class Shooting : MonoBehaviour
                         }
                         if (hitT != null)
                         {
-                            if (hitT.GetComponent<BaseEnemyRelay>() != null)
+                            if (hitT.parent.GetComponent<BaseEnemyRelay>() != null)
                             {
-                                damage[hitT.GetSiblingIndex()] += GlobalVariables.EquippedWeapon.weaponDamage;
+                                damage[hitT.parent.GetSiblingIndex()] += (int)(GlobalVariables.EquippedWeapon.weaponDamage * hitT.GetComponent<EnemyHitbox>().damageMultiplier);
                             }
                         }
                         bullet.position = new Vector3(0, 10, 0);
@@ -147,17 +159,24 @@ public class Shooting : MonoBehaviour
                     if (GlobalVariables.EquippedWeapon.weaponType == 0)
                     {
                         GlobalVariables.LightAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
                         bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
                     }
                     else if (GlobalVariables.EquippedWeapon.weaponType == 1)
                     {
                         GlobalVariables.ShotgunAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
                         foreach (Transform bullet in bullets)
                             bullet.position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
                     }
-                    if (GlobalVariables.EquippedWeapon.weaponType == 2)
+                    else if (GlobalVariables.EquippedWeapon.weaponType == 2)
                     {
                         GlobalVariables.MediumAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    else
+                    {
                         bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
                     }
                     shot = true;
