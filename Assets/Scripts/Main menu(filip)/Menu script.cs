@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -13,8 +14,17 @@ public class Menuscript : MonoBehaviour
     [SerializeField] GameObject[] mainMenu = new GameObject[5];
     [SerializeField] Canvas canvas;
     [SerializeField] EventSystem eventSystem;
+    int page = 1;
     bool selectingSave = false;
+    string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves";
+    Savefile savefile = new();
+
     private void Start()
+    {
+        MainMenu();
+    }
+
+    private void MainMenu()
     {
         mainMenu[1].GetComponent<TextMeshProUGUI>().text = "- New save";
         mainMenu[2].GetComponent<TextMeshProUGUI>().text = "- Load save";
@@ -24,28 +34,55 @@ public class Menuscript : MonoBehaviour
     }
     public void NewSave()
     {
-        foreach (var menu in mainMenu)
-            menu.gameObject.SetActive(false);
-        
-        nameInputField.gameObject.SetActive(true);
-        eventSystem.SetSelectedGameObject(nameInputField.gameObject);
+        if (!selectingSave)
+        {
+            foreach (var menu in mainMenu)
+                menu.gameObject.SetActive(false);
+
+            nameInputField.gameObject.SetActive(true);
+            eventSystem.SetSelectedGameObject(nameInputField.gameObject);
+        }
     }
 
     public void CreateNewSave()
     {
-        GlobalVariables.SaveName = nameInputField.text;
+        Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games");
+        Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale");
+        Directory.CreateDirectory(savefilePath);
+        GlobalVariables.PlayerName = nameInputField.text;
+        GlobalVariables.Savefile = Directory.GetFiles(savefilePath, "*", SearchOption.TopDirectoryOnly).Length;
         SceneManager.LoadScene("Overworld");
     }
-    public void LoadSavefile()
+
+
+    public void LoadSaveFiles(int loadPage)
     {
         if (!selectingSave)
         {
-            mainMenu[1].GetComponent<TextMeshProUGUI>().text = "- Empty";
-            mainMenu[2].GetComponent<TextMeshProUGUI>().text = "- Empty";
-            mainMenu[3].GetComponent<TextMeshProUGUI>().text = "- Empty";
-            mainMenu[4].GetComponent<TextMeshProUGUI>().text = "- Empty";
+            for (int i = loadPage; i < 1 + 4 * loadPage; i++)
+            {
+                if (File.Exists($"{savefilePath}\\Save{i - 1}"))
+                {
+                    savefile = JsonConvert.DeserializeObject<Savefile>(File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}"));
+                    Debug.Log(savefile.playerName);
+                    mainMenu[i].GetComponent<TextMeshProUGUI>().text = $"- {savefile.playerName}";
+                }
+                else
+                {
+                    mainMenu[i].GetComponent<TextMeshProUGUI>().text = $"- Empty";
+                }
+            }
             selectingSave = true;
         }
+        page = loadPage;
     }
 
+    public void LoadSave(int saveslot)
+    {
+        if (selectingSave)
+        {
+            GlobalVariables.Savefile = saveslot * page;
+
+        }
+    }
 }

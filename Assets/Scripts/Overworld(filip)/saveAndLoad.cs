@@ -32,6 +32,7 @@ public class SaveAndLoad : MonoBehaviour
         savefile.lightAmmo = GlobalVariables.LightAmmo;
         savefile.mediumAmmo = GlobalVariables.MediumAmmo;
         savefile.shoutgunAmmo = GlobalVariables.ShotgunAmmo;
+        savefile.playerName = GlobalVariables.PlayerName;
         
         if (GlobalVariables.EquippedWeapon != null)
             savefile.equippedWeapon = GlobalVariables.EquippedWeapon.name;
@@ -62,8 +63,19 @@ public class SaveAndLoad : MonoBehaviour
     }
 
     public void LoadSave()
-    {        
-        string saveData = File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}");
+    {
+        string saveData;
+
+
+        if (File.Exists($"{savefilePath}\\Save{GlobalVariables.Savefile}"))
+        {
+            saveData = File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}");
+        }
+        else 
+        {
+            saveData = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json"));
+        }
+
 
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 
@@ -72,7 +84,7 @@ public class SaveAndLoad : MonoBehaviour
         GlobalVariables.LightAmmo = savefile.lightAmmo;
         GlobalVariables.MediumAmmo = savefile.mediumAmmo;
         GlobalVariables.ShotgunAmmo = savefile.shoutgunAmmo;
-        GlobalVariables.SaveName = savefile.playerName;
+        GlobalVariables.PlayerName = savefile.playerName;
 
         if (savefile.equippedEquipment != null )
             GlobalVariables.EquippedEquipment = (items[savefile.equippedEquipment])as QI_Equipment;
