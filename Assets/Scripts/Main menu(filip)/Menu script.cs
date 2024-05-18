@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class Menuscript : MonoBehaviour
 {
     [SerializeField] private InputActionProperty x;
     [SerializeField] private InputActionProperty ctrl;
+    [SerializeField] private InputActionProperty enter;
     [SerializeField] TMP_InputField nameInputField;
     [SerializeField] GameObject[] mainMenu = new GameObject[5];
     [SerializeField] Canvas canvas;
@@ -30,13 +32,24 @@ public class Menuscript : MonoBehaviour
 
     private void Update()
     {
-        if (eventSystem.currentSelectedGameObject == null)
+        if ((!typing && x.action.WasPressedThisFrame()) || (x.action.WasPressedThisFrame() && ctrl.action.IsPressed()))
         {
             eventSystem.SetSelectedGameObject(mainMenu[1].GetComponent<GameObject>());
             Debug.Log("yes");
             MainMenu();
         }
-        
+
+        if (enter.action.WasPressedThisFrame() && typing)
+        {
+            Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games");
+            Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale");
+            Directory.CreateDirectory(savefilePath);
+            Debug.Log(nameInputField.text);
+            GlobalVariables.PlayerName = nameInputField.text;
+            GlobalVariables.Savefile = Directory.GetFiles(savefilePath, "*", SearchOption.TopDirectoryOnly).Length;
+            SceneManager.LoadScene("Overworld");
+        }
+
     }
 
     public void MainMenu()
@@ -44,12 +57,12 @@ public class Menuscript : MonoBehaviour
         foreach (var menu in mainMenu)
             menu.gameObject.SetActive(true);
         
-        eventSystem.SetSelectedGameObject(mainMenu[1].GetComponent<GameObject>());
         nameInputField.gameObject.SetActive(false);
         mainMenu[1].GetComponent<TextMeshProUGUI>().text = "- New save";
         mainMenu[2].GetComponent<TextMeshProUGUI>().text = "- Load save";
         mainMenu[3].GetComponent<TextMeshProUGUI>().text = "- Settings";
         mainMenu[4].GetComponent<TextMeshProUGUI>().text = "- Exit game";
+        eventSystem.SetSelectedGameObject(mainMenu[1].transform.GetChild(0).gameObject);
         selectingSave = false;
     }
     public void NewSave()
@@ -65,16 +78,6 @@ public class Menuscript : MonoBehaviour
         typing = true;
     }
 
-    public void CreateNewSave()
-    {
-        Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games");
-        Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale");
-        Directory.CreateDirectory(savefilePath);
-        GlobalVariables.PlayerName = nameInputField.text;
-        GlobalVariables.Savefile = Directory.GetFiles(savefilePath, "*", SearchOption.TopDirectoryOnly).Length;
-
-        SceneManager.LoadScene("Overworld");
-    }
 
 
     public void LoadSaveFiles(int loadPage)
@@ -86,7 +89,6 @@ public class Menuscript : MonoBehaviour
                 if (File.Exists($"{savefilePath}\\Save{i - 1}"))
                 {
                     savefile = JsonConvert.DeserializeObject<Savefile>(File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}"));
-                    Debug.Log(savefile.playerName);
                     mainMenu[i].GetComponent<TextMeshProUGUI>().text = $"- {savefile.playerName}";
                 }
                 else
