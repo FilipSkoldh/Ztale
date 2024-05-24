@@ -22,15 +22,14 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] private GameObject escMenu;
 
     //Other scripts
-    private SaveAndLoad saveAndLoad;
     private InkScript inkScript;
 
     //Did i sprint last frame?
     private bool sprintedLastFrame = false;
 
     //Duhhh
-    private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
+    private Animator playerAnimator;
     private Transform playerTransform;
 
 
@@ -42,7 +41,6 @@ public class CharacterScript : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerTransform = GetComponent<Transform>();
         inkScript = GetComponent<InkScript>();
-        saveAndLoad = GetComponent<SaveAndLoad>();
 
         //for now loads the variables like hp and max hp
     }

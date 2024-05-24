@@ -21,7 +21,6 @@ public class InkScript: MonoBehaviour {
         inkStory.BindExternalFunction("OpenChest", (int chestNumber) => {chest.OpenChest(chestNumber); });
 		inkStory.BindExternalFunction("StartEncounter", (int encounter) => { StartEncounter(encounter); });
 		inkStory.BindExternalFunction("SaveGame", (int savelocation) => { saveAndLoad.Save(savelocation); });
-		inkStory.BindExternalFunction("FillInventory", () => { saveAndLoad.FillInventories();});
 		RefreshView();
 	}
 	

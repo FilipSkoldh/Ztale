@@ -1,32 +1,28 @@
 EXTERNAL OpenChest(chestNumber)
 EXTERNAL StartEncounter(encounter)
-EXTERNAL FillInventory()
 -> yo
 
 
 ==yo==
-- yo wassup do  you like pizza
-*[yes]
-*[no] -> cancer
-- good you're a human
-*.
+- Open Chest?
+*yes -> openChest
+*no -> cancer
+
+
+==openChest==
 ~OpenChest(1)
 -> DONE
 
 ==cancer==
--are you sure demon?
-*[yes] -> bruh
-*[no] -> yo
-*fuck you
-- fuck you too
-*.
+-want to fight an enemy?
+*yes -> startEncouter
+*no -> bruh
+
+==startEncouter==
 ~ StartEncounter(0)
 ->DONE
 
 ==bruh==
--go to hell
+-ok
 *.
--bitch
-*.
-~FillInventory()
 ->DONE

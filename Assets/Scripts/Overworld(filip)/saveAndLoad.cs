@@ -11,14 +11,16 @@ using UnityEngine;
 public class SaveAndLoad : MonoBehaviour
 {
     [SerializeField] private QI_ItemDatabase itemDatabase;
-    [SerializeField] private GameObject player;
+    private Animator playerAnimator;
+    private Transform playerTransform;
     public QI_Inventory[] Inventories = new QI_Inventory[2];
     public QI_Chest[] transferChests = new QI_Chest[2];
     public Dictionary<string, QI_ItemData> items = new();
-    bool loadedSave = false;
 
     private void Awake()
     {
+        playerAnimator = GetComponent<Animator>();
+        playerTransform = GetComponent<Transform>();
         items = itemDatabase.Getdictionary();
         LoadSave();
     }
@@ -33,7 +35,9 @@ public class SaveAndLoad : MonoBehaviour
             GlobalVariables.Inventories.Add(Inventories[i].Stacks);
         }
 
-        GlobalVariables.PlayerPosition = player.transform.position;
+        GlobalVariables.PlayerPosition = playerTransform.position;
+        GlobalVariables.PlayerAnimatorX = playerAnimator.GetFloat("x");
+        GlobalVariables.PlayerAnimatorY = playerAnimator.GetFloat("y");
 
     }
 
@@ -81,7 +85,9 @@ public class SaveAndLoad : MonoBehaviour
     {
         if (GlobalVariables.LoadedSave)
         {
-            player.transform.position = GlobalVariables.PlayerPosition;
+            playerTransform.position = GlobalVariables.PlayerPosition;
+            playerAnimator.SetFloat("x", GlobalVariables.PlayerAnimatorX);
+            playerAnimator.SetFloat("y", GlobalVariables.PlayerAnimatorY);
 
             for (int i = 0; i < 2; i++)
             {
@@ -139,24 +145,4 @@ public class SaveAndLoad : MonoBehaviour
         GlobalVariables.LoadedSave = true;
 
     }
-
-    public void FillInventories()
-    {
-        for (int i = 0; i < Inventories.Length; i++)
-        {
-            Inventories[i].Stacks.Clear();
-        }
-        Inventories[0].AddItem(items["Bandage"], 1);
-        Inventories[1].AddItem(items["Bandage"], 10);
-        Inventories[1].AddItem(items["Pistol"], 1);
-
-        GlobalVariables.EquippedEquipment = (items["Scarf"] as QI_Equipment);
-        GlobalVariables.EquippedWeapon = (items["Bat"] as QI_Weapons);
-        GlobalVariables.MaxHp = 100;
-        GlobalVariables.Hp = 100;
-        GlobalVariables.LightAmmo = 0;
-        GlobalVariables.MediumAmmo = 0;
-        GlobalVariables.ShotgunAmmo = 0;
-    }
-
 }

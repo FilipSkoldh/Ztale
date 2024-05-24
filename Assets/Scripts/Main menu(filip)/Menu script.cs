@@ -1,10 +1,7 @@
 using Newtonsoft.Json;
 using System;
-using System.Data;
 using System.IO;
-
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -16,7 +13,7 @@ public class Menuscript : MonoBehaviour
     [SerializeField] private InputActionProperty ctrl;
     [SerializeField] private InputActionProperty enter;
     [SerializeField] TMP_InputField nameInputField;
-    [SerializeField] GameObject[] mainMenu = new GameObject[7];
+    [SerializeField] GameObject[] mainMenu = new GameObject[8];
     [SerializeField] Canvas canvas;
     [SerializeField] EventSystem eventSystem;
     int page = 1;
@@ -62,7 +59,7 @@ public class Menuscript : MonoBehaviour
         nameInputField.gameObject.SetActive(false);
         mainMenu[1].GetComponent<TextMeshProUGUI>().text = "- New save";
         mainMenu[2].GetComponent<TextMeshProUGUI>().text = "- Load save";
-        mainMenu[3].GetComponent<TextMeshProUGUI>().text = "- Settings\n(coming soon)";
+        mainMenu[3].GetComponent<TextMeshProUGUI>().text = "- Settings";
         mainMenu[4].GetComponent<TextMeshProUGUI>().text = "- Exit game";
         eventSystem.SetSelectedGameObject(mainMenu[1].transform.GetChild(0).gameObject);
         selectingSave = false;
@@ -85,23 +82,26 @@ public class Menuscript : MonoBehaviour
 
     public void LoadSaveFiles(int loadPage)
     {
+        mainMenu[7].gameObject.SetActive(false);
         mainMenu[5].gameObject.SetActive(true);
         mainMenu[6].gameObject.SetActive(true);
         
 
         if (!selectingSave)
         {
-            for (int i = 1; i < 1 + 4 * loadPage; i++)
+            int j = 1;
+            for (int i = 4*loadPage - 3; i < 1 + 4 * loadPage; i++)
             {
                 if (File.Exists($"{savefilePath}\\Save{i - 1}"))
                 {
                     savefile = JsonConvert.DeserializeObject<Savefile>(File.ReadAllText($"{savefilePath}\\Save{i-1}"));
-                    mainMenu[i/loadPage].GetComponent<TextMeshProUGUI>().text = $"- {savefile.playerName}";
+                    mainMenu[j].GetComponent<TextMeshProUGUI>().text = $"- {savefile.playerName}";
                 }
                 else
                 {
-                    mainMenu[i/loadPage].GetComponent<TextMeshProUGUI>().text = $"- Empty";
+                    mainMenu[j].GetComponent<TextMeshProUGUI>().text = $"- Empty";
                 }
+                j++;
             }
             selectingSave = true;
         }
@@ -117,7 +117,9 @@ public class Menuscript : MonoBehaviour
     {
         selectingSave = false;
         if (page != 1)
+        {
             LoadSaveFiles(page-1);
+        }
     }
 
     public void LoadSave(int saveslot)
