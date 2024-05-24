@@ -19,6 +19,7 @@ public class CharacterScript : MonoBehaviour
     //The canvas the textbox appears in and the inventory GUI
     [SerializeField] private Canvas textboxCanvas;
     [SerializeField] private GameObject inventoryGUI;
+    [SerializeField] private GameObject escMenu;
 
     //Other scripts
     private SaveAndLoad saveAndLoad;
@@ -50,7 +51,7 @@ public class CharacterScript : MonoBehaviour
     void Update()
     {
         //Only be able to move if the textbox isn't active and you inventory isn't active
-        if (!(textboxCanvas.transform.childCount != 0 || inventoryGUI.activeSelf))
+        if (!(textboxCanvas.transform.childCount != 0 || inventoryGUI.activeSelf || escMenu.activeSelf))
         {
             //Start with resetting from eventual crouch or sprint
             playerTransform.localScale = new Vector3(1, 1, 1);

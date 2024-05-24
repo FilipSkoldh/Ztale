@@ -155,7 +155,7 @@ public class InkScript: MonoBehaviour {
 	{
 		//Tells the other scene which encounter to start and the players inventory
 		GlobalVariables.Encounter = encounter;
-        GlobalVariables.PlayerInventory = inventory.Stacks;
+		saveAndLoad.SaveScene();
 		//switches scenes
         SceneManager.LoadScene("Battle");
 	}

@@ -11,9 +11,11 @@ using UnityEngine;
 public class SaveAndLoad : MonoBehaviour
 {
     [SerializeField] private QI_ItemDatabase itemDatabase;
+    [SerializeField] private GameObject player;
     public QI_Inventory[] Inventories = new QI_Inventory[2];
     public QI_Chest[] transferChests = new QI_Chest[2];
     public Dictionary<string, QI_ItemData> items = new();
+    bool loadedSave = false;
 
     private void Awake()
     {
@@ -23,6 +25,17 @@ public class SaveAndLoad : MonoBehaviour
     string savefilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Documents\\My Games\\Ztale\\Saves";
     Savefile savefile = new();
 
+    public void SaveScene()
+    {
+        GlobalVariables.Inventories = new List<List <QI_ItemStack>>();
+        for (int i = 0; i < 2; i++)
+        {
+            GlobalVariables.Inventories.Add(Inventories[i].Stacks);
+        }
+
+        GlobalVariables.PlayerPosition = player.transform.position;
+
+    }
 
     public void Save(int saveLocation)
     {
@@ -66,6 +79,18 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadSave()
     {
+        if (GlobalVariables.LoadedSave)
+        {
+            player.transform.position = GlobalVariables.PlayerPosition;
+
+            for (int i = 0; i < 2; i++)
+            {
+                Inventories[i].Stacks = GlobalVariables.Inventories[i];
+            }
+
+            return;
+        }
+
         string saveData;
 
 
@@ -111,7 +136,7 @@ public class SaveAndLoad : MonoBehaviour
                 Inventories[i].AddItem(items[savefile.inventories[i].ElementAt(j).Key], savefile.inventories[i][savefile.inventories[i].ElementAt(j).Key]);
             }
         }
-
+        GlobalVariables.LoadedSave = true;
 
     }
 
