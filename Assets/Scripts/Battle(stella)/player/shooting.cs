@@ -9,33 +9,47 @@ using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
-    public InputActionProperty move;
-    public InputActionProperty shoot;
-    public InputActionProperty back;
+    //all needed controls
+    public InputActionProperty moveProperty;
+    public InputActionProperty shootProperty;
+    public InputActionProperty backProperty;
 
     public BattleManager battleManager;
     public EventSystem eventSystem;
     public GameObject shootButton;
 
     private Rigidbody2D rb;
-    private CircleCollider2D cc;
     private Transform t;
 
+    //the speed which the aim moves
     public float speed;
-
+    
     private RaycastHit2D[] hits;
     private Transform hitT;
+
+    //is the player shooting
     private bool shooting = false;
+
+    //did the player fire
     private bool shot = false;
+
+    //number of times the player can shoot
     private int shoots;
 
+    //bullets to show where you hit
     [SerializeField] private List<Transform> bullets = new();
 
+    //amount of damage done to each enemy
     private int[] damage;
+
+    /// <summary>
+    /// the player starts shooting or reloads
+    /// </summary>
     public void StartShooting()
     {
         if (GlobalVariables.EquippedWeapon != null)
         {
+            //does the player need to reload?
             if (GlobalVariables.EquippedWeaponAmmo == 0)
             {
                 switch (GlobalVariables.EquippedWeapon.weaponType)
@@ -70,7 +84,6 @@ public class Shooting : MonoBehaviour
             else
             {
                 t.position = new Vector3(0f, 1f, 0f);
-                cc.radius = 0.03f;
                 shooting = true;
                 shoots = GlobalVariables.EquippedWeapon.weaponFireRate;
             }
@@ -81,8 +94,9 @@ public class Shooting : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CircleCollider2D>();
         t = GetComponent<Transform>();
+
+        //sizes the damage array
         damage = new int[battleManager.transform.childCount];
     }
 
@@ -91,12 +105,12 @@ public class Shooting : MonoBehaviour
     {
         if (shooting)
         {
-
-            Vector2 movement = move.action.ReadValue<Vector2>();
+            Vector2 movement = moveProperty.action.ReadValue<Vector2>();
             if (!shot)
                 rb.velocity = movement * speed;
 
-            if (back.action.WasPressedThisFrame() && shoots == GlobalVariables.EquippedWeapon.weaponFireRate)
+            //stops shooting
+            if (backProperty.action.WasPressedThisFrame() && shoots == GlobalVariables.EquippedWeapon.weaponFireRate)
             {
                 eventSystem.SetSelectedGameObject(shootButton);
 
@@ -106,8 +120,9 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                if (shoot.action.WasPressedThisFrame() && shot)
+                if (shootProperty.action.WasPressedThisFrame() && shot)
                 {
+                    
                     foreach (Transform bullet in bullets)
                     {
                         hitT = null;
@@ -154,7 +169,7 @@ public class Shooting : MonoBehaviour
 
 
                 }
-                else if (shoot.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
+                else if (shootProperty.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
                 {
                     if (GlobalVariables.EquippedWeapon.weaponType == 0)
                     {

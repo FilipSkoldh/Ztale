@@ -719,7 +719,7 @@ Transform:
   - {fileID: 168182762272995160}
   - {fileID: 4454347906189030367}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &2138892361451487392
 Animation:
@@ -769,16 +769,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f828b0aa3beafe64db9c8689561888d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1000
-  maxhp: 1000
+  hp: 100
+  maxhp: 100
   acts:
-  - 0
+  - Check
+  - Reason with
   actDescriptions:
-  - 0
-  - spare
-  - spare1
-  - spare2
-  spareActs: 020000000200000002000000
+  - A turned human. Seems past saving
+  - It doesn't respond
+  spareActs: 02000000
+  spareable: 0
 --- !u!114 &933689659369727316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,11 +794,9 @@ MonoBehaviour:
   enemyLines:
   - grrrr
   - gar
-  - 0
+  - grru
+  - urhh
   - spare1
-  - spare2
-  - spare3
-  - spare3
 --- !u!114 &8411231377380917574
 MonoBehaviour:
   m_ObjectHideFlags: 0
