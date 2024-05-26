@@ -10,4 +10,5 @@ public class QI_Weapons : QI_ItemData
     public int weaponType;
     public int weaponFireRate;
     public int weaponSpread;
+    public int weaponMaxAmmo;
 }

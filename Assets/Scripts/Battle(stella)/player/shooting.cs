@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,92 +9,199 @@ using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
-    public InputActionProperty move;
-    public InputActionProperty shoot;
-    public InputActionProperty back;
+    //all needed controls
+    public InputActionProperty moveProperty;
+    public InputActionProperty shootProperty;
+    public InputActionProperty backProperty;
 
-    public Transform enemies;
+    public BattleManager battleManager;
     public EventSystem eventSystem;
     public GameObject shootButton;
 
     private Rigidbody2D rb;
-    private CircleCollider2D cc;
     private Transform t;
 
+    //the speed which the aim moves
     public float speed;
-
+    
     private RaycastHit2D[] hits;
     private Transform hitT;
 
-    private void OnEnable()
+    //is the player shooting
+    private bool shooting = false;
+
+    //did the player fire
+    private bool shot = false;
+
+    //number of times the player can shoot
+    private int shoots;
+
+    //bullets to show where you hit
+    [SerializeField] private List<Transform> bullets = new();
+
+    //amount of damage done to each enemy
+    private int[] damage;
+
+    /// <summary>
+    /// the player starts shooting or reloads
+    /// </summary>
+    public void StartShooting()
     {
-        t.position = new Vector3 (0f, 1f, 0f);
-        cc.radius = 0.03f;
+        if (GlobalVariables.EquippedWeapon != null)
+        {
+            //does the player need to reload?
+            if (GlobalVariables.EquippedWeaponAmmo == 0)
+            {
+                switch (GlobalVariables.EquippedWeapon.weaponType)
+                {
+                    case 0:
+                        if (GlobalVariables.LightAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.LightAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
+                        break;
+                    case 1:
+                        if (GlobalVariables.ShotgunAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.ShotgunAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
+                        break;
+                    case 2:
+                        if (GlobalVariables.MediumAmmo != 0)
+                        {
+                            GlobalVariables.EquippedWeaponAmmo = Mathf.Clamp(GlobalVariables.EquippedWeapon.weaponMaxAmmo, 0, GlobalVariables.MediumAmmo);
+                            battleManager.enemyAttacks.Attack();
+                            eventSystem.SetSelectedGameObject(null);
+                        }
+                        break;
+                }
+
+            }
+            else
+            {
+                t.position = new Vector3(0f, 1f, 0f);
+                shooting = true;
+                shoots = GlobalVariables.EquippedWeapon.weaponFireRate;
+            }
+        }
     }
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CircleCollider2D>();
         t = GetComponent<Transform>();
 
+        //sizes the damage array
+        damage = new int[battleManager.transform.childCount];
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = move.action.ReadValue<Vector2>();
-        bool shot = shoot.action.WasPressedThisFrame();
-        bool backed = back.action.WasPressedThisFrame();
-        rb.velocity = movement * speed;
-
-        if (backed)
+        if (shooting)
         {
-            rb.velocity = Vector2.zero;
-            t.position = new Vector2(-10, 0);
-            eventSystem.SetSelectedGameObject(shootButton);
-            this.enabled = false;
-        }
+            Vector2 movement = moveProperty.action.ReadValue<Vector2>();
+            if (!shot)
+                rb.velocity = movement * speed;
 
-        if (shot)
-        {
-            Debug.Log("shot");
-            hits = Physics2D.CircleCastAll(t.position, 0.02f, Vector2.zero, 0, 256);
-            int sorrtingOrder = -10;
-
-            foreach (RaycastHit2D i in hits)
+            //stops shooting
+            if (backProperty.action.WasPressedThisFrame() && shoots == GlobalVariables.EquippedWeapon.weaponFireRate)
             {
-                if (i.transform != null && i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
-                {
-                    sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-                    hitT = i.transform;
+                eventSystem.SetSelectedGameObject(shootButton);
 
-                }
-            }
-            if (hitT != null)
-            {
-
-                hitT.GetComponent<BaseEnemyRelay>().Hit(1);
-
-                for (int i = 0; i < enemies.childCount; i++)
-                {
-                    if (enemies.GetChild(i) != hitT)
-                    {
-                        enemies.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
-                    }
-                }
-
+                rb.velocity = Vector2.zero;
+                transform.position = new Vector3(0, 10, 0);
+                shooting = false;
             }
             else
             {
-                for (int i = 0; i < enemies.childCount; i++)
+                if (shootProperty.action.WasPressedThisFrame() && shot)
                 {
-                    enemies.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
+                    
+                    foreach (Transform bullet in bullets)
+                    {
+                        hitT = null;
+                        hits = Physics2D.CircleCastAll(bullet.position, 0.02f, new Vector2(0, 1), 0, 256);
+                        int sorrtingOrder = -10;
+                        foreach (RaycastHit2D i in hits)
+                        {
+                            if (i.transform != null && i.transform.GetComponent<SpriteRenderer>().sortingOrder > sorrtingOrder)
+                            {
+                                sorrtingOrder = i.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                                hitT = i.transform;
+                            }
+                        }
+                        if (hitT != null)
+                        {
+                            if (hitT.parent.GetComponent<BaseEnemyRelay>() != null)
+                            {
+                                damage[hitT.parent.GetSiblingIndex()] += (int)(GlobalVariables.EquippedWeapon.weaponDamage * hitT.GetComponent<EnemyHitbox>().damageMultiplier);
+                            }
+                        }
+                        bullet.position = new Vector3(0, 10, 0);
+                    }
+                    shoots--;
+
+                    if (shoots < 1 || GlobalVariables.EquippedWeaponAmmo == 0)
+                    {
+                        shooting = false;
+                        for (int i = 0; i < damage.Length; i++)
+                        {
+                            if (damage[i] == 0)
+                                battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Miss();
+                            else
+                                battleManager.transform.GetChild(i).GetComponent<BaseEnemyRelay>().Hit(damage[i]);
+                            damage[i] = 0;
+                        }
+                    }
+                    else
+                    {
+                        t.position = new Vector3(0f, 1f, 0f);
+                    }
+                    battleManager.StartAnimation();
+
+                    shot = false;
+
+
                 }
+                else if (shootProperty.action.WasPressedThisFrame() && eventSystem.currentSelectedGameObject == null && !shot)
+                {
+                    if (GlobalVariables.EquippedWeapon.weaponType == 0)
+                    {
+                        GlobalVariables.LightAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    else if (GlobalVariables.EquippedWeapon.weaponType == 1)
+                    {
+                        GlobalVariables.ShotgunAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
+                        foreach (Transform bullet in bullets)
+                            bullet.position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    else if (GlobalVariables.EquippedWeapon.weaponType == 2)
+                    {
+                        GlobalVariables.MediumAmmo--;
+                        GlobalVariables.EquippedWeaponAmmo--;
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    else
+                    {
+                        bullets[0].position = transform.position + Random.insideUnitSphere * GlobalVariables.EquippedWeapon.weaponSpread / 10;
+                    }
+                    shot = true;
+                    battleManager.StopAnimation();
+                    rb.velocity = Vector2.zero;
+                    transform.position = new Vector3(0, 10, 0);
+                }
+
+                eventSystem.SetSelectedGameObject(null);
             }
-            rb.velocity = Vector2.zero;
-            this.enabled = false;
         }
     }
 }

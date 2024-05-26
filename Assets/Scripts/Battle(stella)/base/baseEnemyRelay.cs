@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,49 +12,57 @@ public class BaseEnemyRelay : MonoBehaviour
     private BattleManager battleManager;
     private InputActionProperty interactProperty;
     private BaseEnemyTalk talk;
+    private TextMeshProUGUI healthText;
 
-    public int HP;
+    public int hp;
+    [SerializeField] private int maxhp;
     public List<string> acts = new();
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
     private TextMeshProUGUI actingText;
-
+    [SerializeField] private bool spareable;
 
 
     private int act;
     private bool acting;
     private bool acter;
 
-    private void Start()
+    private void Awake()
     {
         battleManager = transform.parent.GetComponent<BattleManager>();
         interactProperty = battleManager.interactProperty;
         actingText = battleManager.actingText;
         talk = GetComponent<BaseEnemyTalk>();
+        healthText = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        healthText.text = $"{hp} / {maxhp}";
     }
     public void Hit(int damage)
     {
-        HP -= damage;
-        if (HP <= 0)
+        hp -= damage;
+        healthText.text = $"{hp} / {maxhp}";
+        if (hp <= 0)
         {
             transform.parent.GetComponent<BattleManager>().enemyStates[transform.GetSiblingIndex()] = 1;
-        }
 
-        if (spareActs.Count > 0)
+        }
+        else
         {
-            if (spareActs[spareActs.Count - 1] == 0)
+            if (spareActs.Count > 0)
             {
-                spareActs.RemoveAt(spareActs.Count - 1);
-                talk.Talk(2 + acts.Count + spareActs.Count);
+                if (spareActs[spareActs.Count - 1] == 0)
+                {
+                    spareActs.RemoveAt(spareActs.Count - 1);
+                    talk.Talk(2 + acts.Count + spareActs.Count);
+                }
+                else
+                {
+                    talk.Talk(0);
+                }
             }
             else
             {
                 talk.Talk(0);
             }
-        }
-        else
-        {
-            talk.Talk(0);
         }
     }
     public void Miss()
@@ -84,7 +93,7 @@ public class BaseEnemyRelay : MonoBehaviour
         }
         else
         {
-            if (spareActs.Count != 0)
+            if (spareActs.Count != 0 && spareable)
             {
                 if (spareActs[spareActs.Count - 1] == action + 2)
                 {
@@ -100,6 +109,7 @@ public class BaseEnemyRelay : MonoBehaviour
             }
             else
             {
+                
                 act = action;
                 actingText.text = actDescriptions[action];
             }

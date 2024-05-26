@@ -1,3 +1,4 @@
+using QuantumTek.QuantumInventory;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,17 +10,49 @@ using UnityEngine.SceneManagement;
 public class BattleManager : MonoBehaviour
 {
     public List<int> enemyStates = new();
+    public List<bool> enemyAttacking = new();
 
     public InputActionProperty interactProperty;
     public InputActionProperty backProperty;
     public TextMeshProUGUI actingText;
-    public List<GameObject> buttons;
+    public GameObject shootButton;
+    public GameObject actButton;
+    public GameObject itemButton;
+    public GameObject[] buttons;
     public EventSystem eventSystem;
+    public BulletHellController bulletHell;
+    public Box box;
+    public QI_Inventory inventory;
+
+    public BaseEnemyAttacks enemyAttacks;
+
+    public int useTime;
 
     private bool winning = false;
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject zombie;
+
+    private void Awake()
     {
+        Debug.Log(GlobalVariables.Encounter);
+        switch (GlobalVariables.Encounter)
+        {
+            case 0:
+                GameObject temp = Instantiate(zombie, transform);
+                temp.transform.position = new Vector3(0,1.5f,0);
+                temp.name = "Zombie";
+                enemyAttacks = gameObject.AddComponent<SingleZombieAttacks>();
+                break;
+        }
+
+        inventory.Stacks = GlobalVariables.PlayerInventory;
+
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            enemyStates.Add(0);
+            enemyAttacking.Add(false);
+        }
     }
 
     // Update is called once per frame
@@ -31,15 +64,11 @@ public class BattleManager : MonoBehaviour
         }
         if (EnemiesDefeated())
         {
-            actingText.text = $"You win!";
+            actingText.text = "You win!";
             winning = true;
         }
     }
 
-    public void SelectNothing()
-    {
-        eventSystem.SetSelectedGameObject(null);
-    }
     private bool EnemiesDefeated()
     {
         foreach (int state in enemyStates)
@@ -50,5 +79,46 @@ public class BattleManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void EndAttack()
+    {
+        bulletHell.StopBulletHell();
+        eventSystem.SetSelectedGameObject(shootButton);
+    }
+
+    public void StartAttack(int siblingIndex)
+    {
+
+        enemyAttacking[siblingIndex] = true;
+        bool attack = true;
+        for(int i = 0; i < transform.childCount;i++)
+        {
+            if (!enemyAttacking[i] && enemyStates[i] == 0)
+            {
+                attack = false;
+            }
+        }
+
+        if (attack)
+        {
+            enemyAttacks.Attack();
+        }
+    }
+
+    public void StopAnimation()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().speed = 0;
+        }
+    }
+
+    public void StartAnimation()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().speed = 1;
+        }
     }
 }
