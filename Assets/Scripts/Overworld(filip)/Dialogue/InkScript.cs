@@ -18,8 +18,10 @@ public class InkScript: MonoBehaviour {
 		{
 			OnCreateStory(inkStory);
 		}
+
+		//binds Functions inside the inkstories to functions in unity
         inkStory.BindExternalFunction("OpenChest", (int chestNumber) => {chest.OpenChest(chestNumber); });
-		inkStory.BindExternalFunction("StartEncounter", (int encounter) => { StartEncounter(encounter); });
+		inkStory.BindExternalFunction("StartEncounter", (int encounter) => { saveAndLoad.StartEncounter(encounter); });
 		inkStory.BindExternalFunction("SaveGame", (int savelocation) => { saveAndLoad.Save(savelocation); });
 		RefreshView();
 	}
@@ -146,18 +148,6 @@ public class InkScript: MonoBehaviour {
 			Destroy (textboxCanvas.transform.GetChild (i).gameObject);
 	}
 
-	/// <summary>
-	/// Starts a battle encounter
-	/// </summary>
-	/// <param name="encounter">The encounter to be started</param>
-	void StartEncounter(int encounter)
-	{
-		//Tells the other scene which encounter to start and the players inventory
-		GlobalVariables.Encounter = encounter;
-		saveAndLoad.SaveScene();
-		//switches scenes
-        SceneManager.LoadScene("Battle");
-	}
 
 
 

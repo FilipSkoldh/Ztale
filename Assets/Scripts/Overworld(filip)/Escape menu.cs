@@ -7,20 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class Escapemenu : MonoBehaviour
 {
+    //Declaring variables
+
+    //All inputs needed in the script
     [SerializeField] private InputActionProperty esc;
+
+    //the escMenu UI
     [SerializeField] private GameObject escMenu;
+
+    //the scenes eventsystem
     [SerializeField] private EventSystem EventSystem;
 
     void Update()
     {
+        //if ESC was pressed, toggle the esc menu UI
         if (esc.action.WasPressedThisFrame())
         {
             if (!escMenu.activeSelf)
             {
-
+                //enables the esc menu and selects the first button
                 escMenu.SetActive(true);
                 EventSystem.SetSelectedGameObject(escMenu.transform.GetChild(1).GetChild(0).gameObject);
-                Debug.Log("esc pressed");
             }
             else
             {
@@ -28,10 +35,18 @@ public class Escapemenu : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Exits the game
+    /// </summary>
     public void ExitGame()
     {
         Application.Quit();
     }
+
+    /// <summary>
+    /// Goes back to the main menu
+    /// </summary>
     public void MainMenu()
     {
         SceneManager.LoadScene("Main menu");
