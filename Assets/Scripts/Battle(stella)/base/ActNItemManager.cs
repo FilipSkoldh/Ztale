@@ -22,10 +22,11 @@ public class ActNItemManager : MonoBehaviour
     private BaseEnemyAttacks attacks;
 
     private BaseEnemyRelay selectedEnemy;
-    private bool selectingEnemy;
-    private bool selectingAct;
-    private bool selectingItem;
-    private bool usingItem;
+    [SerializeField]private bool selectingEnemy;
+    [SerializeField] private bool selectingAct;
+    [SerializeField] private bool selectingItem;
+    [SerializeField] private bool usingItem;
+    private bool usingItems;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,9 +70,10 @@ public class ActNItemManager : MonoBehaviour
             selectingAct = false;
             EnemySelect();
         }
-        if(usingItem && interactProperty.action.WasPressedThisFrame())
+        if(usingItems && usingItem && interactProperty.action.WasPressedThisFrame())
         {
             actingText.text = "";
+            usingItems = false;
             attacks.Attack();
         }
         usingItem = actingText.text != "";
@@ -206,6 +208,7 @@ public class ActNItemManager : MonoBehaviour
             {
                 buttons[i].SetActive(false);
             }
+            usingItems = true;
         }
     }
 }

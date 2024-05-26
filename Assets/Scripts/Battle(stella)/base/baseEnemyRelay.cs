@@ -20,7 +20,7 @@ public class BaseEnemyRelay : MonoBehaviour
     public List<string> actDescriptions = new();
     public List<int> spareActs = new();
     private TextMeshProUGUI actingText;
-
+    [SerializeField] private bool spareable;
 
 
     private int act;
@@ -93,7 +93,7 @@ public class BaseEnemyRelay : MonoBehaviour
         }
         else
         {
-            if (spareActs.Count != 0)
+            if (spareActs.Count != 0 && spareable)
             {
                 if (spareActs[spareActs.Count - 1] == action + 2)
                 {
@@ -109,6 +109,7 @@ public class BaseEnemyRelay : MonoBehaviour
             }
             else
             {
+                
                 act = action;
                 actingText.text = actDescriptions[action];
             }

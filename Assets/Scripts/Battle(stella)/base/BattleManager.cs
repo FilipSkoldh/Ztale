@@ -30,11 +30,23 @@ public class BattleManager : MonoBehaviour
 
     private bool winning = false;
 
+    public GameObject zombie;
+
     private void Awake()
     {
+        Debug.Log(GlobalVariables.Encounter);
+        switch (GlobalVariables.Encounter)
+        {
+            case 0:
+                GameObject temp = Instantiate(zombie, transform);
+                temp.transform.position = new Vector3(0,1.5f,0);
+                temp.name = "Zombie";
+                enemyAttacks = gameObject.AddComponent<SingleZombieAttacks>();
+                break;
+        }
+
         inventory.Stacks = GlobalVariables.PlayerInventory;
 
-        enemyAttacks = gameObject.AddComponent<BaseEnemyAttacks>();
 
         for (int i = 0; i < transform.childCount; i++)
         {

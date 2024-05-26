@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class BaseEnemyAttacks : MonoBehaviour
 {
-    private BattleManager battleManager;
-    private BulletHellController bulletHell;
-    private Box box;
+    protected BattleManager battleManager;
+    protected BulletHellController bulletHell;
+    protected Box box;
 
-    private float timer;
+    protected float timer;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         box = battleManager.box;
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         box.width = 2; 
         box.height = 2;
@@ -31,7 +31,7 @@ public class BaseEnemyAttacks : MonoBehaviour
         Timer(Time.deltaTime);
     }
 
-    private void Timer(float deltaTime)
+    protected void Timer(float deltaTime)
     {
         if (timer > 0)
         {
@@ -40,9 +40,14 @@ public class BaseEnemyAttacks : MonoBehaviour
         else if (timer < 0)
         {
             timer = 0;
-            battleManager.EndAttack();
+            EndAttack();
             box.width = 6;
             box.height = 2;
         }
+    }
+
+    public virtual void EndAttack()
+    {
+        battleManager.EndAttack();
     }
 }

@@ -14,6 +14,8 @@ public class BulletHellController : MonoBehaviour
 
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameObject shootbutton;
+    [SerializeField] private Transform camera;
+    [SerializeField] private GameObject enemies;
 
     private bool moveable = false;
     
@@ -56,6 +58,15 @@ public class BulletHellController : MonoBehaviour
             {
                 Destroy(collision.gameObject);
             }
+        }
+        if(GlobalVariables.Hp <= 0)
+        {
+            GetComponent<Animator>().SetTrigger("dead");
+            camera.position += new Vector3(-10, 0, 0);
+            transform.position += new Vector3(-10, 0, 0);
+            enemies.SetActive(false);
+            moveable = false;
+            rb.velocity = Vector2.zero;
         }
     }
 }
