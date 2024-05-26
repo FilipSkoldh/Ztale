@@ -1036,23 +1036,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8ff089c03d7b2479ea94cbcf962247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move:
-    m_UseReference: 1
+  moveProperty:
+    m_UseReference: 0
     m_Action:
-      m_Name: Move
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 687f3150-6e0d-43ac-89e7-f74e205898c9
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+    m_Reference: {fileID: 0}
   speed: 2
   eventSystem: {fileID: 1193810440}
   shootbutton: {fileID: 620511206}
   camera: {fileID: 1715990797}
   enemies: {fileID: 73999534}
+  canvas: {fileID: 606183549}
 --- !u!114 &346056815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,42 +1066,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4cbd535a028904493dee39f3e52c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move:
-    m_UseReference: 1
+  moveProperty:
+    m_UseReference: 0
     m_Action:
-      m_Name: Move
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 9c639b12-dcb3-4ff0-8b92-7cbe1d564878
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  shoot:
-    m_UseReference: 1
+    m_Reference: {fileID: 0}
+  shootProperty:
+    m_UseReference: 0
     m_Action:
-      m_Name: Shoot
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 2245a23d-5a45-419e-a24b-18f2f192587a
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
-  back:
-    m_UseReference: 1
+    m_Reference: {fileID: 0}
+  backProperty:
+    m_UseReference: 0
     m_Action:
-      m_Name: Back
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 414f1e0b-1baa-4b0c-9520-8ffb4d79e9cc
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+    m_Reference: {fileID: 0}
   battleManager: {fileID: 73999540}
   eventSystem: {fileID: 1193810440}
   shootButton: {fileID: 620511206}
