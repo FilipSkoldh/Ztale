@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BulletHellController : MonoBehaviour
 {
     //the move controls
     public InputActionProperty moveProperty;
+    public InputActionProperty interactProperty;
 
 
     private Rigidbody2D rb;
@@ -39,6 +41,11 @@ public class BulletHellController : MonoBehaviour
         Vector2 movement = moveProperty.action.ReadValue<Vector2>();
         if (moveable)
             rb.velocity = movement * speed;
+
+        if (GlobalVariables.Playerdead && interactProperty.action.WasPressedThisFrame())
+        {
+            SceneManager.LoadScene("Overworld");
+        }
     }
 
     /// <summary>
@@ -86,6 +93,7 @@ public class BulletHellController : MonoBehaviour
             canvas.SetActive(false);
             moveable = false;
             rb.velocity = Vector2.zero;
+            GlobalVariables.Playerdead = true;
         }
     }
 }

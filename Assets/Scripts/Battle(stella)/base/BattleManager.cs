@@ -45,7 +45,7 @@ public class BattleManager : MonoBehaviour
                 break;
         }
 
-        inventory.Stacks = GlobalVariables.PlayerInventory;
+        inventory.Stacks = GlobalVariables.Inventories[0];
 
 
         for (int i = 0; i < transform.childCount; i++)

@@ -1037,17 +1037,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveProperty:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Move Property
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: a61a8d0e-9afd-4d58-ab87-856faadbfb98
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
+  interactProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Interact Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 0f7207c6-c6cd-49d6-ba8a-0a92b61db0e5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   speed: 2
   eventSystem: {fileID: 1193810440}
   shootbutton: {fileID: 620511206}
@@ -1067,41 +1079,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveProperty:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Move Property
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: e323ba4e-3ccb-4d0f-9dbd-5b538e0bba3c
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 5328118660235796369, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   shootProperty:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Shoot Property
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: c2f4de6d-c393-4ce3-ac03-b53d989c6964
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -1194387993112293422, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   backProperty:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Back Property
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: bd09a91a-7ea5-4048-a380-52c7a11077d2
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -4499835334923966893, guid: 6c6487f6aac397542a37fe428723a04a, type: 3}
   battleManager: {fileID: 73999540}
   eventSystem: {fileID: 1193810440}
   shootButton: {fileID: 620511206}
@@ -17280,6 +17292,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 313181733955081784, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652584891614106628, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2235788921117310535, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -17324,9 +17344,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2971934531403218246, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476029070799531150, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479064737563072282, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156856843861971807, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425858741424269468, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583357055137191919, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 5729523492294938359, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
       propertyPath: m_Name
       value: box
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865011414949015925, guid: b5c2963c4450c544d9f85113c481fdba, type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

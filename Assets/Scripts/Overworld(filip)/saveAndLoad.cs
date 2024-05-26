@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,7 @@ public class SaveAndLoad : MonoBehaviour
     //Dictionary with item names and itemdata
     public Dictionary<string, QI_ItemData> items = new();
 
+
     private void Awake()
     {
         //get components from the player
@@ -37,6 +39,7 @@ public class SaveAndLoad : MonoBehaviour
         items = itemDatabase.Getdictionary();
         LoadSave();
     }
+
 
 
     /// <summary>
@@ -55,7 +58,6 @@ public class SaveAndLoad : MonoBehaviour
     public void StartEncounter(int encounter)
     {
         //resets the "GlobalVariables.inventories"
-        GlobalVariables.Inventories.Clear();
         GlobalVariables.Inventories = new List<List <QI_ItemStack>>();
 
         //saves all inventories
@@ -63,6 +65,10 @@ public class SaveAndLoad : MonoBehaviour
         {
             GlobalVariables.Inventories.Add(Inventories[i].Stacks);
         }
+
+        //if the equipped weapon is meele set EquippedWeaponAmmo to -1
+        if (GlobalVariables.EquippedWeapon.weaponMaxAmmo < 0)
+            GlobalVariables.EquippedWeaponAmmo = -1;
 
         //saving rest of data to "GlobalVariables"
         GlobalVariables.Encounter = encounter;
@@ -80,7 +86,9 @@ public class SaveAndLoad : MonoBehaviour
     public void Save(int saveLocation)
     {
         //saves current data from "GlobalVariables" to "savefile"
-        savefile.saveLocation = saveLocation;
+        savefile.playerPosition = playerTransform.position;
+        savefile.animatorX = playerAnimator.GetFloat("x");
+        savefile.animatorY = playerAnimator.GetFloat("y");
         savefile.maxHp = GlobalVariables.MaxHp;
         savefile.hp = GlobalVariables.Hp;
         savefile.lightAmmo = GlobalVariables.LightAmmo;
@@ -127,7 +135,7 @@ public class SaveAndLoad : MonoBehaviour
     {
 
         //if the savefile is already loaded instad load the data from "GlobalVariables"
-        if (GlobalVariables.LoadedSave)
+        if (GlobalVariables.LoadedSave && !GlobalVariables.Playerdead)
         {
             //loads position and which direction to face
             playerTransform.position = GlobalVariables.PlayerPosition;
@@ -139,23 +147,26 @@ public class SaveAndLoad : MonoBehaviour
             {
                 Inventories[i].Stacks = GlobalVariables.Inventories[i];
             }
-
             return;
         }
 
         //the filename to deserialze
         string saveData;
-
         //if the saveslot selected has a savefile load it otherwise load a new savefile
         if (File.Exists($"{savefilePath}\\Save{GlobalVariables.Savefile}"))
         {
             saveData = File.ReadAllText($"{savefilePath}\\Save{GlobalVariables.Savefile}");
         }
-        else 
+        else
         {
-            saveData = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Assets\NewSaveData.json"));
+            saveData = File.ReadAllText($"{Environment.CurrentDirectory}/NewSaveData.json");
         }
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
+
+
+        playerTransform.position = savefile.playerPosition;
+        playerAnimator.SetFloat("x", savefile.animatorX);
+        playerAnimator.SetFloat("y", savefile.animatorY);
 
         //load data from "savefile" into "GlobalVariables"
         GlobalVariables.MaxHp = savefile.maxHp;
@@ -191,6 +202,15 @@ public class SaveAndLoad : MonoBehaviour
             }
         }
         GlobalVariables.LoadedSave = true;
+        GlobalVariables.Playerdead = false;
+    }
 
+    /// <summary>
+    /// Gives the player some ammo
+    /// </summary>
+    public void GiveAmmo()
+    {
+        GlobalVariables.ShotgunAmmo = 10;
+        GlobalVariables.LightAmmo = 20;
     }
 }

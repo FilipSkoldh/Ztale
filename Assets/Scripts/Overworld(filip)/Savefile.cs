@@ -34,11 +34,6 @@ public class Savefile
     public int shoutgunAmmo;
 
     /// <summary>
-    /// The location the player saved at
-    /// </summary>
-    public int saveLocation;
-
-    /// <summary>
     /// The current equipped Weapon
     /// </summary>
     public string equippedWeapon;
@@ -58,4 +53,18 @@ public class Savefile
     /// </summary>
     public Dictionary<string, int>[] inventories = new Dictionary<string, int>[2];
 
+    /// <summary>
+    /// Players position
+    /// </summary>
+    public Vector3 playerPosition;
+
+    /// <summary>
+    /// animators X value
+    /// </summary>
+    public float animatorX;
+
+    /// <summary>
+    /// animators Y value
+    /// </summary>
+    public float animatorY;
 }

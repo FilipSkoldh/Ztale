@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class ActNItemManager : MonoBehaviour
 {
@@ -103,7 +102,7 @@ public class ActNItemManager : MonoBehaviour
         {
             selectingItem = true;
 
-            int numStacks = GlobalVariables.PlayerInventory.Count;
+            int numStacks = GlobalVariables.Inventories[0].Count;
             for (int i = 0; i < buttons.Length; i++)
             {
                 if (i < numStacks)

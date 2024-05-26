@@ -91,6 +91,7 @@ public class Menuscript : MonoBehaviour
         //resets "CurrentlySelectingSavefile" and "GlobalVariables.LoadedSave"
         currentlySelectingSavefile = false;
         GlobalVariables.LoadedSave = false;
+        GlobalVariables.Playerdead = false;
     }
 
     /// <summary>
@@ -129,8 +130,8 @@ public class Menuscript : MonoBehaviour
         {
             //j is the menu button which is going to be changed
             int j = 1;
-            //i = 0 for page 1 and goes to 4, i = 5 for page 2 goes to 8 and so on
-            for (int i = 4 * loadPage - 4; i < 4 * loadPage; i++)
+            //i = 0 for page 1 and goes to 3, i = 4 for page 2 goes to 7 and so on
+            for (int i = 4 * loadPage; i < 4 + 4*loadPage; i++)
             {
                 //display the name of the savefile if it exists otherwise display "Empty"
                 if (File.Exists($"{savefilePath}\\Save{i}"))
@@ -168,7 +169,7 @@ public class Menuscript : MonoBehaviour
     {
         currentlySelectingSavefile = false;
         //don't go back if we're on page 1
-        if (curretlySelectedPage != 1)
+        if (curretlySelectedPage != 0)
         {
             LoadSaveFiles(curretlySelectedPage - 1);
         }

@@ -81,4 +81,14 @@ public static class GlobalVariables
     /// The players name
     /// </summary>
     public static string PlayerName { get; set; }
+
+    /// <summary>
+    /// AmmoCount of Equipped Weapon
+    /// </summary>
+    public static int EquippedWeaponAmmo { get; set; }
+
+    /// <summary>
+    /// Did the player die in the encounter
+    /// </summary>
+    public static bool Playerdead { get; set; }
 }

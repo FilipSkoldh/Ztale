@@ -21,3 +21,4 @@ MonoBehaviour:
   weaponType: 0
   weaponFireRate: 1
   weaponSpread: 0
+  weaponMaxAmmo: -1
