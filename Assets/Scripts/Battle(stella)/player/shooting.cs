@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+/// <summary>
+/// the script to manage shooting
+/// </summary>
 public class Shooting : MonoBehaviour
 {
     //all needed controls

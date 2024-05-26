@@ -1,1 +1,35 @@
-{"maxHp":100,"hp":100,"lightAmmo":0,"mediumAmmo":0,"shoutgunAmmo":0,"equippedWeapon":"Bat","equippedEquipment":"Scarf","inventories":[[{"Key":"Bandage","Value":1}],[{"Key":"Bandage","Value":10},{"Key":"Pistol","Value":1}]],
+{
+    "maxHp": 100,
+    "hp": 100,
+    "lightAmmo": 0,
+    "mediumAmmo": 0,
+    "shoutgunAmmo": 0,
+    "equippedWeapon": "Bat",
+    "equippedEquipment": null,
+    "playerName": "",
+    "inventories": [
+        [
+            {
+                "Key": "Bandage",
+                "Value": 10
+            }
+        ],
+        [
+            {
+                "Key": "Shotgun",
+                "Value": 1
+            },
+            {
+                "Key": "Pistol",
+                "Value": 1
+            }
+        ]
+    ],
+    "playerPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0.0
+    },
+    "animatorX": 0.0,
+    "animatorY": 0.0
+}

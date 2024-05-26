@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// script to resize box 
+/// </summary>
 public class Box : MonoBehaviour
 {
+    //parts of the box
     [SerializeField] private Transform TL;
     [SerializeField] private Transform TM;
     [SerializeField] private Transform TR;
@@ -13,20 +17,19 @@ public class Box : MonoBehaviour
     [SerializeField] private Transform BM;
     [SerializeField] private Transform BR;
     [SerializeField] private Transform Background;
+
+
     public float height;
     public float width;
+
     public float speed;
+
     float currentHeight = 2;
     float currentWidth = 2;
+
     bool doneH = false;
     bool doneW = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentWidth != width)

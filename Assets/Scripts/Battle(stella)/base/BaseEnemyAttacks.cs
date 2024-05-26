@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// a base for enemy attacks
+/// </summary>
 public class BaseEnemyAttacks : MonoBehaviour
 {
     protected BattleManager battleManager;

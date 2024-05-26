@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// the attack script for a single zombie
+/// </summary>
 public class SingleZombieAttacks : BaseEnemyAttacks
 {
 

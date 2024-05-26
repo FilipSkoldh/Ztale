@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// a script to manage most basic things about a enemy
+/// </summary>
 public class BaseEnemyRelay : MonoBehaviour
 {
     private BattleManager battleManager;

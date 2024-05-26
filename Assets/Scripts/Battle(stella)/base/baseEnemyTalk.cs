@@ -4,8 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+/// <summary>
+/// a script to make the enemes talk
+/// </summary>
 public class BaseEnemyTalk : MonoBehaviour
 {
+    // what the enemy says 
     [SerializeField] private List<string> enemyLines = new List<string>();
 
     private BattleManager battleManager;

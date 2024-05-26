@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// a script that updates the gui
+/// </summary>
 public class GUIDisplay : MonoBehaviour
 {
     private TextMeshProUGUI hpText;

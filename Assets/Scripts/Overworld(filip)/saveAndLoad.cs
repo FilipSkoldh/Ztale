@@ -67,6 +67,7 @@ public class SaveAndLoad : MonoBehaviour
         }
 
         //if the equipped weapon is meele set EquippedWeaponAmmo to -1
+        if(GlobalVariables.EquippedWeapon != null)
         if (GlobalVariables.EquippedWeapon.weaponMaxAmmo < 0)
             GlobalVariables.EquippedWeaponAmmo = -1;
 

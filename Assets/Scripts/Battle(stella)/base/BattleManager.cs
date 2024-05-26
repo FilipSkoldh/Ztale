@@ -7,13 +7,19 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// a script that manages most parts of the battle system
+/// </summary>
 public class BattleManager : MonoBehaviour
 {
+    // states of the diffrent enemies 0 is fighting 1 is dead 2 is spared
     public List<int> enemyStates = new();
     public List<bool> enemyAttacking = new();
 
+    //controls
     public InputActionProperty interactProperty;
     public InputActionProperty backProperty;
+
     public TextMeshProUGUI actingText;
     public GameObject shootButton;
     public GameObject actButton;
@@ -34,7 +40,7 @@ public class BattleManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(GlobalVariables.Encounter);
+        
         switch (GlobalVariables.Encounter)
         {
             case 0:
@@ -60,6 +66,13 @@ public class BattleManager : MonoBehaviour
     {
         if (winning && interactProperty.action.WasPressedThisFrame())
         {
+            switch(GlobalVariables.Encounter)
+            {
+                case 0:
+                    GlobalVariables.ZombieDead = true;
+                    break;
+            }
+
             SceneManager.LoadScene("Overworld");
         }
         if (EnemiesDefeated())

@@ -18,7 +18,7 @@ MonoBehaviour:
   Price: 5
   MaxStack: 1
   weaponDamage: 2
-  weaponType: 0
+  weaponType: 3
   weaponFireRate: 1
   weaponSpread: 0
   weaponMaxAmmo: -1

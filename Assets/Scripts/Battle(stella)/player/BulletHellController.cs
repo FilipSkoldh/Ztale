@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// script to control the bullethell part of battles
+/// </summary>
 public class BulletHellController : MonoBehaviour
 {
     //the move controls

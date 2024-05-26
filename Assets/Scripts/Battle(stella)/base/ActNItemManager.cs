@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+/// <summary>
+/// a script to act and use items in battle
+/// </summary>
 public class ActNItemManager : MonoBehaviour
 {
     private BattleManager battleManager;

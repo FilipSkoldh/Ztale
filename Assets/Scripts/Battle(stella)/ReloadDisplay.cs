@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// script that show reload if you're out of ammo
+/// </summary>
 public class ReloadDisplay : MonoBehaviour
 {
     private TextMeshProUGUI text;

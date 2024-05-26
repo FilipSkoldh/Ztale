@@ -1,0 +1,37 @@
+A quick guide to use Stellas Totally Great Battle System
+
+this guide will teach how to make new encounters and enemies for STGBS
+
+to make a new enemy start by copying the baseEnemy prefab 
+
+in base enemy relay change 
+ * hp and max hp to suitable numbers
+ * add acts (acts are what the options in the acing menu are called)
+ * add the act descriptions
+ * in the act descripting list add the descriptions for when you do something that progresses the spare acts starting with the last one
+ * add the acts that are needed to be done starting with the last one 0 = hit 1 = miss 2+ = acts
+ * chose if the enemy will spare the player (if not do still add one spare act)
+
+in base enemy lines
+ * add what the enemy will say starting with hit, then miss, then all acts, then spare acts (last first)
+
+ after that add a child empty (always keep canvas first) this will be a bodypart of the enemy 
+ add the sprite for the body part 
+ add a enemy hitbox 
+ add a suitable collider make it trigger
+ do this for all body parts
+
+ add idle animtion and attack animations
+ make a script with methods for attacks animations
+ 
+ make a attack script that inheirets from BaseEnemyAttacks that plays the right animations for the encounter
+
+ to make a new encounter add all needed enemy prefabs to battle manager 
+ make a new case for the awake switch that spawns all enemies and adds the attackscript
+ make a new case for the win switch in update probably somethings based on enemy states
+
+ done :3
+
+ see zombie for exemple and encounter 0
+
+ if you need help plz don't contact me

@@ -91,4 +91,9 @@ public static class GlobalVariables
     /// Did the player die in the encounter
     /// </summary>
     public static bool Playerdead { get; set; }
+
+    /// <summary>
+    /// is the zombie dead
+    /// </summary>
+    public static bool ZombieDead { get; set; }
 }
