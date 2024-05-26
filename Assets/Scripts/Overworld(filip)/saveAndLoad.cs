@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using Newtonsoft.Json;
 using QuantumTek.QuantumInventory;
 using System;
@@ -16,7 +17,7 @@ public class SaveAndLoad : MonoBehaviour
 
     //item database with all itemdata
     [SerializeField] private QI_ItemDatabase itemDatabase;
-
+    [SerializeField] private TextAsset NewSave;
     //players animator and transform
     private Animator playerAnimator;
     private Transform playerTransform;
@@ -151,7 +152,7 @@ public class SaveAndLoad : MonoBehaviour
             return;
         }
 
-        //the filename to deserialze
+        //the Json data to deserialze
         string saveData;
         //if the saveslot selected has a savefile load it otherwise load a new savefile
         if (File.Exists($"{savefilePath}\\Save{GlobalVariables.Savefile}"))
@@ -160,7 +161,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         else
         {
-            saveData = File.ReadAllText($"{Environment.CurrentDirectory}/NewSaveData.json");
+            saveData = NewSave.text;
         }
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 

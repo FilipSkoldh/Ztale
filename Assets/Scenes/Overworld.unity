@@ -1594,8 +1594,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252219823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.248, y: -2.024, z: 0}
-  m_LocalScale: {x: -1.732094, y: -1.7952592, z: 6.904844}
+  m_LocalPosition: {x: -0.2865, y: -1.7089, z: 0}
+  m_LocalScale: {x: -0.7268219, y: -0.7533273, z: 2.897413}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7841,6 +7841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 24abf1da77af1ed4499d1d69408cb421, type: 2}
+  NewSave: {fileID: 4900000, guid: c950d2c273996b142b8715f4b0269e7d, type: 3}
   Inventories:
   - {fileID: 1627807986}
   - {fileID: 477761557}
@@ -8513,8 +8514,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732610765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.652, y: -0.345, z: 0}
-  m_LocalScale: {x: 2.0635755, y: 2.0635755, z: 0}
+  m_LocalPosition: {x: -1.641, y: -0.434, z: 0}
+  m_LocalScale: {x: 1.2833377, y: 1.2833377, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
