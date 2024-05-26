@@ -5,8 +5,8 @@
     "mediumAmmo": 0,
     "shoutgunAmmo": 0,
     "equippedWeapon": "Bat",
-    "equippedEquipment": null,
-    "playerName": "",
+    "equippedEquipment": "Scarf",
+    "playerName": null,
     "inventories": [
         [
             {
