@@ -1,6 +1,5 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
-using QuantumTek.QuantumInventory;
 
 public class CharacterScript : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class CharacterScript : MonoBehaviour
     private InkScript inkScript;
 
     //Did i sprint last frame?
-    private bool sprintedLastFrame = false;
+    private bool sprintedLastFrame;
 
     //Duhhh
     private Rigidbody2D playerRigidbody;
@@ -112,7 +111,7 @@ public class CharacterScript : MonoBehaviour
             if (interact.action.WasPressedThisFrame())
             {
                 //Boxcasting infront of the player and checks if it's empty
-                Transform cast = Physics2D.BoxCast(base.transform.position, new Vector2(0.5f, 0.5f), 0, new Vector2(playerAnimator.GetFloat("x"), playerAnimator.GetFloat("y")), 0.4f, 8).transform;
+                Transform cast = Physics2D.BoxCast(transform.position, new Vector2(0.5f, 0.5f), 0, new Vector2(playerAnimator.GetFloat("x"), playerAnimator.GetFloat("y")), 0.4f, 8).transform;
                 if (cast != null)
                 {
                     //if the GameObject had a Ink asset give it to the InkScript and tells it to start displaying it

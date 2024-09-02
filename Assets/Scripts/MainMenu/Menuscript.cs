@@ -19,7 +19,6 @@ public class Menuscript : MonoBehaviour
     //Parts of the UI
     [SerializeField] TMP_InputField nameInputField;
     [SerializeField] GameObject[] mainMenu = new GameObject[8];
-    [SerializeField] Canvas canvas;
 
     //The scenes EventSystem
     [SerializeField] EventSystem eventSystem;

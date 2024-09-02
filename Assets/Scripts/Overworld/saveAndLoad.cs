@@ -1,11 +1,9 @@
-using Ink.Runtime;
 using Newtonsoft.Json;
 using QuantumTek.QuantumInventory;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,13 +15,13 @@ public class SaveAndLoad : MonoBehaviour
 
     //item database with all itemdata
     [SerializeField] private QI_ItemDatabase itemDatabase;
-    [SerializeField] private TextAsset NewSave;
+    [SerializeField] private TextAsset newSave;
     //players animator and transform
     private Animator playerAnimator;
     private Transform playerTransform;
 
     //all inventories and chest scripts
-    public QI_Inventory[] Inventories = new QI_Inventory[2];
+    public QI_Inventory[] inventories = new QI_Inventory[2];
     public QI_Chest[] transferChests = new QI_Chest[2];
 
     //Dictionary with item names and itemdata
@@ -64,13 +62,13 @@ public class SaveAndLoad : MonoBehaviour
         //saves all inventories
         for (int i = 0; i < 2; i++)
         {
-            GlobalVariables.Inventories.Add(Inventories[i].Stacks);
+            GlobalVariables.Inventories.Add(inventories[i].Stacks);
         }
 
         //if the equipped weapon is meele set EquippedWeaponAmmo to -1
-        if(GlobalVariables.EquippedWeapon != null)
-        if (GlobalVariables.EquippedWeapon.weaponMaxAmmo < 0)
-            GlobalVariables.EquippedWeaponAmmo = -1;
+        if(GlobalVariables.EquippedWeapon != null) 
+            if (GlobalVariables.EquippedWeapon.weaponMaxAmmo < 0) 
+                GlobalVariables.EquippedWeaponAmmo = -1;
 
         //saving rest of data to "GlobalVariables"
         GlobalVariables.Encounter = encounter;
@@ -106,18 +104,18 @@ public class SaveAndLoad : MonoBehaviour
             savefile.equippedEquipment = GlobalVariables.EquippedEquipment.name;
 
         //saving all inventories
-        for (int i = 0; i < Inventories.Length; i++)
+        for (int i = 0; i < inventories.Length; i++)
         {
             //return if the inventory it's currently trying to save is null
-            if (Inventories[i] == null)
+            if (inventories[i] == null)
                 return;
 
             //creates the inventory dictionary in the list "savefile.inventories" which hold amount of item and which item
             savefile.inventories[i] = new Dictionary<string, int>();
             //for every stackin the inventory add the itemname and amount as an entry in the dictionary
-            for (int j = 0; j < Inventories[i].Stacks.Count; j++)
+            for (int j = 0; j < inventories[i].Stacks.Count; j++)
             {       
-                savefile.inventories[i].Add(Inventories[i].Stacks[j].Item.name, Inventories[i].Stacks[j].Amount);
+                savefile.inventories[i].Add(inventories[i].Stacks[j].Item.name, inventories[i].Stacks[j].Amount);
             }
         }
 
@@ -147,7 +145,7 @@ public class SaveAndLoad : MonoBehaviour
             //loads all inventories
             for (int i = 0; i < 2; i++)
             {
-                Inventories[i].Stacks = GlobalVariables.Inventories[i];
+                inventories[i].Stacks = GlobalVariables.Inventories[i];
             }
             return;
         }
@@ -161,7 +159,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         else
         {
-            saveData = NewSave.text;
+            saveData = newSave.text;
         }
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 
@@ -195,12 +193,12 @@ public class SaveAndLoad : MonoBehaviour
                 return;
 
             //clear the inventory to be loaded into
-            Inventories[i].Stacks.Clear();
+            inventories[i].Stacks.Clear();
             //for every itemstack in the "savefiles.inventories[i]" dictinary add it's item and amount to "Inventory"
             for (int j = 0; j < savefile.inventories[i].Count; j++)
             {
                 //gets item name and amount from "savefile.inventories[i] dictorionary and uses the name in "items" dictonary to get the itemdata
-                Inventories[i].AddItem(items[savefile.inventories[i].ElementAt(j).Key], savefile.inventories[i][savefile.inventories[i].ElementAt(j).Key]);
+                inventories[i].AddItem(items[savefile.inventories[i].ElementAt(j).Key], savefile.inventories[i][savefile.inventories[i].ElementAt(j).Key]);
             }
         }
         GlobalVariables.LoadedSave = true;

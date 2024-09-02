@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 
 /// <summary>
@@ -24,8 +25,7 @@ public class BulletHellController : MonoBehaviour
     public float speed;
 
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private GameObject shootbutton;
-    [SerializeField] private Transform camera;
+    [SerializeField] private Transform cameraTransform;
     [SerializeField] private GameObject enemies;
     [SerializeField] private GameObject canvas;
 
@@ -91,7 +91,7 @@ public class BulletHellController : MonoBehaviour
         if(GlobalVariables.Hp <= 0)
         {
             GetComponent<Animator>().SetTrigger("dead");
-            camera.position += new Vector3(-10, 0, 0);
+            cameraTransform.position += new Vector3(-10, 0, 0);
             transform.position += new Vector3(-10, 0, 0);
             enemies.SetActive(false);
             canvas.SetActive(false);

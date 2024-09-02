@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -16,7 +14,7 @@ public class Escapemenu : MonoBehaviour
     [SerializeField] private GameObject escMenu;
 
     //the scenes eventsystem
-    [SerializeField] private EventSystem EventSystem;
+    [SerializeField] private EventSystem eventSystem;
 
     void Update()
     {
@@ -27,7 +25,7 @@ public class Escapemenu : MonoBehaviour
             {
                 //enables the esc menu and selects the first button
                 escMenu.SetActive(true);
-                EventSystem.SetSelectedGameObject(escMenu.transform.GetChild(1).GetChild(0).gameObject);
+                eventSystem.SetSelectedGameObject(escMenu.transform.GetChild(1).GetChild(0).gameObject);
             }
             else
             {
