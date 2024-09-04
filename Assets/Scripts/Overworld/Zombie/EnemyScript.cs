@@ -12,9 +12,9 @@ public class EnemyScript : MonoBehaviour
     public int encounter;
     
     //animator parameters
-    private int animx = 1;
-    private int animy = 2;
-    private int animwalk = 3;
+    private static int _animx = Animator.StringToHash("x");
+    private static int _animy = Animator.StringToHash("y");
+    private static int _animwalk = Animator.StringToHash("moving");
 
     //the enemies FOV angle and range
     public float fovAngle = 60;
@@ -32,7 +32,6 @@ public class EnemyScript : MonoBehaviour
     private int walkingStage;
     private bool playerFound;
     private float timeWaited;
-    private Vector3 startingPosition = new Vector3 (4, 2, 0);
 
     //if the enemy is returning to it's partolroute
     private bool returning;
@@ -43,8 +42,9 @@ public class EnemyScript : MonoBehaviour
         zombieRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+
         //sets the animator to face left
-        animator.SetFloat(animx, -1);
+        animator.SetFloat(_animx, -1);
     }
 
     private void Update()
@@ -54,6 +54,7 @@ public class EnemyScript : MonoBehaviour
         {
             playerFound = true;
         }
+        
 
         //if player isn't found continue patrolling
         if (!playerFound)
@@ -63,27 +64,27 @@ public class EnemyScript : MonoBehaviour
             {
                 //set velocity to 0 and stop the animator
                 zombieRigidbody.velocity = Vector3.zero;
-                animator.SetBool(animwalk, false);
+                animator.SetBool(_animwalk, false);
             }
             else if (walkingStage == 1)
             {
                 //move left and set animator to walk left
                 zombieRigidbody.velocity = new Vector3(-1, 0, 0) * speed;
-                animator.SetBool(animwalk, true);
-                animator.SetFloat(animx, -1);
+                animator.SetBool(_animwalk, true);
+                animator.SetFloat(_animx, -1);
             }
             else if (walkingStage == 2)
             {
                 //set velocity to 0 and stop the animator
                 zombieRigidbody.velocity = Vector3.zero;
-                animator.SetBool(animwalk, false);
+                animator.SetBool(_animwalk, false);
             }
             else if (walkingStage == 3)
             {
                 //move right and set animator to walk right
                 zombieRigidbody.velocity = new Vector3(1, 0, 0) * speed;
-                animator.SetBool(animwalk, true);
-                animator.SetFloat(animx, 1);
+                animator.SetBool(_animwalk, true);
+                animator.SetFloat(_animx, 1);
             }
             else
             {
@@ -128,9 +129,9 @@ public class EnemyScript : MonoBehaviour
             {
                 //Go towards target and make animator walk towards target
                 zombieRigidbody.velocity = directionToTarget * speed;
-                animator.SetBool(animwalk, true);
-                animator.SetFloat(animx, directionToTarget.x);
-                animator.SetFloat(animy, directionToTarget.y);
+                animator.SetBool(_animwalk, true);
+                animator.SetFloat(_animx, directionToTarget.x);
+                animator.SetFloat(_animy, directionToTarget.y);
             }
             //if the enemy has returned to it's startingPosition
             else if (returning && timeWaited > 2)
@@ -149,7 +150,7 @@ public class EnemyScript : MonoBehaviour
             {
                 //set velocity and animtaor to stand still
                 zombieRigidbody.velocity = Vector3.zero;
-                animator.SetBool(animwalk, false);
+                animator.SetBool(_animwalk, false);
             }
         }
     }
@@ -164,7 +165,7 @@ public class EnemyScript : MonoBehaviour
     public bool IsTargetInsideFOV(Transform target, float range)
     {
         //the direction the enemy is looking
-        Vector2 lookDirection = new Vector2(animator.GetFloat(animx), animator.GetFloat(animy));
+        Vector2 lookDirection = new Vector2(animator.GetFloat(_animx), animator.GetFloat(_animy));
 
         //the direction to the target
         Vector2 directionToTarget = (target.position - transform.position).normalized;
