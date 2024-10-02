@@ -2028,7 +2028,7 @@ MonoBehaviour:
   playerTransform: {fileID: 1627807971}
   saveAndLoad: {fileID: 1627807985}
   encounter: 0
-  fovAngle: 60
+  fovAngle: 90
   fovRange: 2.6
   waitingTime: 5
   speed: 1
@@ -3998,8 +3998,6 @@ GameObject:
   m_Component:
   - component: {fileID: 643772782}
   - component: {fileID: 643772783}
-  - component: {fileID: 643772785}
-  - component: {fileID: 643772784}
   m_Layer: 0
   m_Name: Zombie eye
   m_TagString: Untagged
@@ -4074,42 +4072,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &643772784
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 643772781}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!95 &643772785
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 643772781}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 859c2e4efe21b1b4c981e3088aa0cb23, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &682847403
 GameObject:
   m_ObjectHideFlags: 0
@@ -6627,8 +6589,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1244671072}
   - component: {fileID: 1244671075}
-  - component: {fileID: 1244671074}
-  - component: {fileID: 1244671073}
   m_Layer: 0
   m_Name: Zombie eye2
   m_TagString: Untagged
@@ -6651,42 +6611,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 346946614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!111 &1244671073
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244671071}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!95 &1244671074
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244671071}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 859c2e4efe21b1b4c981e3088aa0cb23, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1244671075
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7091,8 +7015,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1299053912}
   - component: {fileID: 1299053915}
-  - component: {fileID: 1299053914}
-  - component: {fileID: 1299053913}
   m_Layer: 0
   m_Name: Zombie mouth
   m_TagString: Untagged
@@ -7115,42 +7037,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 346946614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1299053913
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299053911}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!95 &1299053914
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299053911}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 859c2e4efe21b1b4c981e3088aa0cb23, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1299053915
 SpriteRenderer:
   m_ObjectHideFlags: 0

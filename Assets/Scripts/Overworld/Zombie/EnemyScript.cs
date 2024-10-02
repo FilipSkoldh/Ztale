@@ -17,7 +17,7 @@ public class EnemyScript : MonoBehaviour
     private static int _animwalk = Animator.StringToHash("moving");
 
     //the enemies FOV angle and range
-    public float fovAngle = 60;
+    public float fovAngle = 120;
     public float fovRange = 2.6f;
 
     //The enemies speed and lenght of walking cycle
@@ -36,6 +36,8 @@ public class EnemyScript : MonoBehaviour
     //if the enemy is returning to it's partolroute
     private bool returning;
 
+    
+    
     private void Awake()
     {
         //gets components from zombie
@@ -130,8 +132,15 @@ public class EnemyScript : MonoBehaviour
                 //Go towards target and make animator walk towards target
                 zombieRigidbody.velocity = directionToTarget * speed;
                 animator.SetBool(_animwalk, true);
-                animator.SetFloat(_animx, directionToTarget.x);
-                animator.SetFloat(_animy, directionToTarget.y);
+                if (!(Mathf.Round(directionToTarget.x) == 0) || !(Mathf.Round(directionToTarget.y) == 0))
+                {
+                    if (Mathf.Round(directionToTarget.x) > directionToTarget.y)
+                    {
+                        
+                    }
+                }
+                animator.SetFloat(_animx, Mathf.Round(directionToTarget.x));
+                animator.SetFloat(_animy, Mathf.Round(directionToTarget.y));
             }
             //if the enemy has returned to it's startingPosition
             else if (returning && timeWaited > 2)
