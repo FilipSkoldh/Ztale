@@ -16,10 +16,8 @@ MonoBehaviour:
   Description: A sawed off hillbilly looking shotgun
   useMessage: You equipped the shotgun
   Price: 200
-  Icon: {fileID: 0}
-  ItemPrefab: {fileID: 0}
   MaxStack: 1
-  weaponDamage: 10
+  weaponDamage: 8
   weaponType: 1
   weaponFireRate: 1
   weaponSpread: 10

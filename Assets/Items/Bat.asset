@@ -17,7 +17,7 @@ MonoBehaviour:
   useMessage: You equipped the bat
   Price: 5
   MaxStack: 1
-  weaponDamage: 10
+  weaponDamage: 15
   weaponType: 3
   weaponFireRate: 1
   weaponSpread: 0

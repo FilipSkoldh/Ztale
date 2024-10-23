@@ -16,10 +16,8 @@ MonoBehaviour:
   Description: A small handgun
   useMessage: You equipped the pistol
   Price: 100
-  Icon: {fileID: 0}
-  ItemPrefab: {fileID: 0}
   MaxStack: 1
-  weaponDamage: 5
+  weaponDamage: 20
   weaponType: 0
   weaponFireRate: 2
   weaponSpread: 1
