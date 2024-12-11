@@ -55,6 +55,8 @@ public class EnemyScript : MonoBehaviour
         if (IsTargetInsideFOV(playerTransform, fovRange))
         {
             playerFound = true;
+            
+            saveAndLoad.StartEncounter(encounter);  
         }
         
 
@@ -132,13 +134,6 @@ public class EnemyScript : MonoBehaviour
                 //Go towards target and make animator walk towards target
                 zombieRigidbody.velocity = directionToTarget * speed;
                 animator.SetBool(_animwalk, true);
-                if (!(Mathf.Round(directionToTarget.x) == 0) || !(Mathf.Round(directionToTarget.y) == 0))
-                {
-                    if (Mathf.Round(directionToTarget.x) > directionToTarget.y)
-                    {
-                        
-                    }
-                }
                 animator.SetFloat(_animx, Mathf.Round(directionToTarget.x));
                 animator.SetFloat(_animy, Mathf.Round(directionToTarget.y));
             }

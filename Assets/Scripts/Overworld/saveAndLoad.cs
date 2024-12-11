@@ -60,7 +60,7 @@ public class SaveAndLoad : MonoBehaviour
         GlobalVariables.Inventories = new List<List <QI_ItemStack>>();
 
         //saves all inventories
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < inventories.Length; i++)
         {
             GlobalVariables.Inventories.Add(inventories[i].Stacks);
         }
@@ -163,7 +163,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         savefile = JsonConvert.DeserializeObject<Savefile>(saveData);
 
-
+    
         playerTransform.position = savefile.playerPosition;
         playerAnimator.SetFloat("x", savefile.animatorX);
         playerAnimator.SetFloat("y", savefile.animatorY);

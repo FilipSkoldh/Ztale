@@ -9,7 +9,7 @@ in base enemy relay change
  * add acts (acts are what the options in the acing menu are called)
  * add the act descriptions
  * in the act descripting list add the descriptions for when you do something that progresses the spare acts starting with the last one
- * add the acts that are needed to be done starting with the last one 0 = hit 1 = miss 2+ = acts
+ * add the acts that are needed to be done starting with the last one 0 = hit 1 = miss 2 = acts
  * chose if the enemy will spare the player (if not do still add one spare act)
 
 in base enemy lines
