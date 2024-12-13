@@ -9927,10 +9927,8 @@ MonoBehaviour:
   newSave: {fileID: 4900000, guid: c950d2c273996b142b8715f4b0269e7d, type: 3}
   inventories:
   - {fileID: 1627807986}
-  - {fileID: 0}
   transferChests:
   - {fileID: 1627807980}
-  - {fileID: 0}
 --- !u!114 &1627807986
 MonoBehaviour:
   m_ObjectHideFlags: 0

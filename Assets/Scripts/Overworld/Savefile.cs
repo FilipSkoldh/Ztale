@@ -49,7 +49,7 @@ public class Savefile
     /// <summary>
     /// All inventories
     /// </summary>
-    public Dictionary<string, int>[] inventories = new Dictionary<string, int>[2];
+    public Dictionary<string, int>[] inventories = new Dictionary<string, int>[1];
 
     /// <summary>
     /// Players position
