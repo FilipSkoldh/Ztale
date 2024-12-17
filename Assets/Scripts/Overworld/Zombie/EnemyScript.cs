@@ -55,8 +55,6 @@ public class EnemyScript : MonoBehaviour
         if (IsTargetInsideFOV(playerTransform, fovRange))
         {
             playerFound = true;
-            
-            saveAndLoad.StartEncounter(encounter);  
         }
         
 
