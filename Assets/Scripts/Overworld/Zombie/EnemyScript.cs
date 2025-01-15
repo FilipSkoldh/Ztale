@@ -51,12 +51,13 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(timeWaited);
         //checks if player is inside the enemies fov
         if (IsTargetInsideFOV(playerTransform, fovRange))
         {
             playerFound = true;
         }
-        
+
 
         //if player isn't found continue patrolling
         if (!playerFound)
@@ -127,7 +128,7 @@ public class EnemyScript : MonoBehaviour
             }
 
             //if the enemy is further than 0.5 units away from it's target and it's not returning or it's gone 2 seconds since it lost the player
-            if (distance > 0.5f && (!returning || timeWaited > 2))
+            if (distance > 0.5f && (!returning || !(timeWaited > 2)))
             {
                 //Go towards target and make animator walk towards target
                 zombieRigidbody.velocity = directionToTarget * speed;
